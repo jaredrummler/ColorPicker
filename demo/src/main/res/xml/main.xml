@@ -1,0 +1,46 @@
+<!--
+  ~ Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory android:title="Demo">
+    <com.jrummyapps.android.colorpicker.preference.ColorPreference
+        android:defaultValue="0xFF000000"
+        android:key="color"
+        android:summary="Show our color picker using the custom ColorPreference class."
+        android:title="Show Dialog"/>
+
+    <Preference
+        android:summary="Show how the custom color picker can be used in a standard activity."
+        android:title="Show Activity">
+      <intent
+          android:action="android.intent.action.VIEW"
+          android:targetClass="com.jrummyapps.android.colorpicker.demo.ColorPickerActivity"
+          android:targetPackage="com.jrummyapps.android.colorpicker.demo"/>
+    </Preference>
+  </PreferenceCategory>
+  <PreferenceCategory android:title="Library">
+    <Preference
+        android:summary="https://github.com/jaredrummler/AndroidColorPicker"
+        android:title="GitHub">
+      <intent
+          android:action="android.intent.action.VIEW"
+          android:data="https://github.com/jaredrummler/AndroidColorPicker"/>
+    </Preference>
+  </PreferenceCategory>
+
+</PreferenceScreen>

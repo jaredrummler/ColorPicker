@@ -1,0 +1,57 @@
+<!--
+  ~ Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+  </style>
+
+  <!-- Styling the color picker dialog fragment. -->
+  <eat-comment/>
+  <!-- Below are some styles that show you how to change the apperance of the color picker dialog. -->
+  <eat-comment/>
+
+  <style name="LightPickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+    <item name="android:colorAccent">#0277BD</item>
+    <item name="android:windowTitleStyle">@style/LightPickerDialogTitleStyle</item>
+  </style>
+
+  <style name="DarkPickerDialogTheme" parent="android:Theme.Material.Dialog">
+    <item name="android:colorAccent">#B3E5FC</item>
+    <item name="android:windowTitleStyle">@style/DarkPickerDialogTitleStyle</item>
+  </style>
+
+  <style name="LightPickerDialogTitleStyle">
+    <item name="android:maxLines">1</item>
+    <item name="android:scrollHorizontally">true</item>
+    <item name="android:textAppearance">@android:style/TextAppearance.Material.DialogWindowTitle</item>
+    <item name="android:textColor">#545454</item>
+  </style>
+
+  <style name="DarkPickerDialogTitleStyle">
+    <item name="android:maxLines">1</item>
+    <item name="android:scrollHorizontally">true</item>
+    <item name="android:textAppearance">@android:style/TextAppearance.Material.DialogWindowTitle</item>
+    <item name="android:textColor">#AAAAAA</item>
+  </style>
+
+</resources>
