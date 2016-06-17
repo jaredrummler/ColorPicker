@@ -67,6 +67,10 @@ artifactory {
 task androidJavadocs(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.javadocDeps
+    if (JavaVersion.current().isJava8Compatible()) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
     failOnError false
 }
 
@@ -80,4 +84,11 @@ task androidSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
-artifactoryPublish.dependsOn('androidSourcesJar', 'androidJavadocsJar', 'androidJavadocs')
+artifactoryPublish.dependsOn('clean',
+    'assembleRelease',
+    'generatePomFileForAarPublication',
+    'androidSourcesJar',
+    'androidJavadocsJar',
+    'androidJavadocs')
+
+artifactoryPublish.mustRunAfter('clean')
