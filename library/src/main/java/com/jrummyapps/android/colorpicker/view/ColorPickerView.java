@@ -14,6 +14,7 @@
  * limitations under the License.
  *
  */
+
 package com.jrummyapps.android.colorpicker.view;
 
 import android.content.Context;
@@ -194,13 +195,10 @@ public class ColorPickerView extends View {
 
   private void init(Context context, AttributeSet attrs) {
     //Load those if set in xml resource file.
-    TypedArray a =
-        getContext().obtainStyledAttributes(attrs, R.styleable.colorpickerview__ColorPickerView);
-    showAlphaPanel =
-        a.getBoolean(R.styleable.colorpickerview__ColorPickerView_alphaChannelVisible, false);
+    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.colorpickerview__ColorPickerView);
+    showAlphaPanel = a.getBoolean(R.styleable.colorpickerview__ColorPickerView_alphaChannelVisible, false);
     alphaSliderText = a.getString(R.styleable.colorpickerview__ColorPickerView_alphaChannelText);
-    sliderTrackerColor =
-        a.getColor(R.styleable.colorpickerview__ColorPickerView_sliderColor, 0xFFBDBDBD);
+    sliderTrackerColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_sliderColor, 0xFFBDBDBD);
     borderColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_borderColor, 0xFF6E6E6E);
     a.recycle();
 
@@ -229,8 +227,7 @@ public class ColorPickerView extends View {
     // to theme changes automatically.
 
     final TypedValue value = new TypedValue();
-    TypedArray a =
-        c.obtainStyledAttributes(value.data, new int[]{android.R.attr.textColorSecondary});
+    TypedArray a = c.obtainStyledAttributes(value.data, new int[]{android.R.attr.textColorSecondary});
 
     if (borderColor == DEFAULT_BORDER_COLOR) {
       borderColor = a.getColor(0, DEFAULT_BORDER_COLOR);
@@ -291,9 +288,7 @@ public class ColorPickerView extends View {
 
     if (valShader == null) {
       //Black gradient has either not been created or the view has been resized.
-      valShader = new LinearGradient(
-          rect.left, rect.top, rect.left, rect.bottom,
-          0xffffffff, 0xff000000, TileMode.CLAMP);
+      valShader = new LinearGradient(rect.left, rect.top, rect.left, rect.bottom, 0xffffffff, 0xff000000, TileMode.CLAMP);
     }
 
     //If the hue has changed we need to recreate the cache.
@@ -316,9 +311,7 @@ public class ColorPickerView extends View {
 
       int rgb = Color.HSVToColor(new float[]{hue, 1f, 1f});
 
-      satShader = new LinearGradient(
-          rect.left, rect.top, rect.right, rect.top,
-          0xffffffff, rgb, TileMode.CLAMP);
+      satShader = new LinearGradient(rect.left, rect.top, rect.right, rect.top, 0xffffffff, rgb, TileMode.CLAMP);
 
       ComposeShader mShader = new ComposeShader(
           valShader, satShader, PorterDuff.Mode.MULTIPLY);
@@ -350,13 +343,10 @@ public class ColorPickerView extends View {
     Point p = satValToPoint(sat, val);
 
     satValTrackerPaint.setColor(0xff000000);
-    canvas.drawCircle(p.x, p.y,
-        circleTrackerRadiusPx - DrawingUtils.dpToPx(getContext(), 1),
-        satValTrackerPaint);
+    canvas.drawCircle(p.x, p.y, circleTrackerRadiusPx - DrawingUtils.dpToPx(getContext(), 1), satValTrackerPaint);
 
     satValTrackerPaint.setColor(0xffdddddd);
-    canvas.drawCircle(p.x, p.y,
-        circleTrackerRadiusPx, satValTrackerPaint);
+    canvas.drawCircle(p.x, p.y, circleTrackerRadiusPx, satValTrackerPaint);
 
   }
 

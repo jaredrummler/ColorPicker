@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (C) 2015 Jared Rummler <jared.rummler@gmail.com>
+  ~ Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,11 +15,13 @@
   ~
   -->
 
-<resources>
-
-  <style name="colorpickerview__ColorPickerViewStyle">
-    <item name="android:layout_width">270dp</item>
-    <item name="android:layout_height">wrap_content</item>
-  </style>
-
-</resources>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportHeight="24.0"
+    android:viewportWidth="24.0">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M22,12l-4,-4v3H3v2h15v3z"/>
+</vector>

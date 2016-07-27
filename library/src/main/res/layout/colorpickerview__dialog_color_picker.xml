@@ -16,80 +16,85 @@
   ~
   -->
 
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-  <TextView
-      android:id="@android:id/title"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:paddingLeft="16dp"
-      android:paddingTop="16dp"
-      android:textAppearance="?android:textAppearanceMedium"
-      android:textStyle="bold"/>
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
   <LinearLayout
-      android:layout_width="wrap_content"
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:gravity="center_horizontal"
-      android:orientation="horizontal">
+      android:orientation="vertical">
 
     <com.jrummyapps.android.colorpicker.view.ColorPickerView
         android:id="@id/colorpickerview__color_picker_view"
-        style="@style/colorpickerview__ColorPickerViewStyle"
-        android:padding="16dp"/>
-
-    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:paddingEnd="16dp"
-        android:paddingLeft="2dp"
-        android:paddingRight="16dp"
-        android:paddingStart="2dp"
-        android:paddingTop="16dp">
+        android:padding="16dp"/>
 
-      <Button
-          android:id="@android:id/button1"
-          style="@style/colorpickerview__PickerDialogButtonStyle"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+      <com.jrummyapps.android.colorpicker.view.ColorPanelView
+          android:id="@id/colorpickerview__color_panel_old"
           android:layout_width="@dimen/colorpickerview__dialog_preview_width"
+          android:layout_height="@dimen/colorpickerview__dialog_preview_height"/>
+
+      <ImageView
+          android:id="@+id/colorpickerview__arrow_right"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_gravity="bottom"
-          android:text="@android:string/ok"/>
+          android:layout_gravity="center_vertical"
+          android:paddingLeft="4dp"
+          android:paddingRight="4dp"
+          android:src="@drawable/colorpickerview__ic_arrow_right_black_24dp"/>
+
+      <com.jrummyapps.android.colorpicker.view.ColorPanelView
+          android:id="@id/colorpickerview__color_panel_new"
+          android:layout_width="@dimen/colorpickerview__dialog_preview_width"
+          android:layout_height="@dimen/colorpickerview__dialog_preview_height"/>
+
+      <Space
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_weight="1"/>
 
       <LinearLayout
-          android:layout_width="@dimen/colorpickerview__dialog_preview_width"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_gravity="top"
-          android:orientation="vertical">
-
-        <com.jrummyapps.android.colorpicker.view.ColorPanelView
-            android:id="@id/colorpickerview__color_panel_old"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/colorpickerview__dialog_preview_height"/>
+          android:descendantFocusability="beforeDescendants"
+          android:focusableInTouchMode="true"
+          android:gravity="right"
+          android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:includeFontPadding="false"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text="↓"
-            android:textSize="16sp"
+            android:text="#"
+            android:typeface="monospace"
             tools:ignore="HardcodedText"/>
 
-        <com.jrummyapps.android.colorpicker.view.ColorPanelView
-            android:id="@id/colorpickerview__color_panel_new"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/colorpickerview__dialog_preview_height"/>
-      </LinearLayout>
-    </FrameLayout>
-  </LinearLayout>
+        <EditText
+            android:id="@+id/colorpickerview__hex"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:digits="0123456789ABCDEFabcdef"
+            android:imeOptions="actionGo"
+            android:inputType="textNoSuggestions"
+            android:maxLength="8"
+            android:singleLine="true"
+            android:typeface="monospace"/>
 
-</LinearLayout>
+      </LinearLayout>
+
+
+    </LinearLayout>
+
+  </LinearLayout>
+</ScrollView>

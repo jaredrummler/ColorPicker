@@ -15,9 +15,9 @@
   ~
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-  <declare-styleable name="colorpickerview__ColorPickerView">
+  <declare-styleable name="colorpickerview__ColorPickerView" tools:ignore="ResourceName">
     <attr name="alphaChannelVisible" format="boolean|reference"/>
     <attr name="alphaChannelText" format="string|reference"/>
     <attr name="sliderColor" format="color|reference"/>

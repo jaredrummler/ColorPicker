@@ -73,8 +73,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     // The color picker menu item has been clicked.
     // Show a dialog using the custom ColorPickerDialogFragment class.
 
-    ColorPickerDialogFragment f = ColorPickerDialogFragment
-        .newInstance(DIALOG_ID, null, null, Color.BLACK, true);
+    ColorPickerDialogFragment f = ColorPickerDialogFragment.newInstance(DIALOG_ID, Color.BLACK, true);
 
     f.setStyle(DialogFragment.STYLE_NORMAL, R.style.LightPickerDialogTheme);
     f.show(getFragmentManager(), "d");
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         // We got result from the other dialog, the one that is
         // shown when clicking on the icon in the action bar.
 
-        Toast.makeText(MainActivity.this, "Selected Color: " + colorToHexString(color), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Selected Color: #" + Integer.toHexString(color), Toast.LENGTH_SHORT).show();
         break;
     }
 
@@ -111,10 +110,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
 
         break;
     }
-  }
-
-  private static String colorToHexString(int color) {
-    return String.format("#%06X", 0xFFFFFFFF & color);
   }
 
   public static class ExamplePreferenceFragment extends PreferenceFragment
@@ -134,8 +129,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         public void onShowColorPickerDialog(String title, int currentColor) {
 
           // Preference was clicked, we need to show the dialog.
-          ColorPickerDialogFragment dialog = ColorPickerDialogFragment
-              .newInstance(PREFERENCE_DIALOG_ID, "Color Picker", null, currentColor, false);
+          ColorPickerDialogFragment dialog = ColorPickerDialogFragment.newInstance(PREFERENCE_DIALOG_ID, currentColor, false);
 
           dialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.LightPickerDialogTheme);
 
