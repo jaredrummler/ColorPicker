@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2015 Daniel Nilsson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +43,9 @@ import com.jrummyapps.android.colorpicker.view.ColorPanelView;
 import com.jrummyapps.android.colorpicker.view.ColorPickerView;
 import com.jrummyapps.android.colorpicker.view.ColorPickerView.OnColorChangedListener;
 
+/**
+ * A dialog to pick a color
+ */
 public class ColorPickerDialogFragment extends DialogFragment implements TextWatcher, OnTouchListener, OnColorChangedListener {
 
   private static final String ARG_ID = "id";
@@ -56,10 +60,25 @@ public class ColorPickerDialogFragment extends DialogFragment implements TextWat
   private boolean fromEditText;
   private int dialogId;
 
-  public static ColorPickerDialogFragment newInstance(int dialogId, int initialColor) {
-    return newInstance(dialogId, initialColor, false);
+  /**
+   * Create a new {@link ColorPickerDialogFragment}. By default, the alpha slider will not be shown.
+   *
+   * @param dialogId The ID sent to the {@link OnColorChangedListener}
+   * @param color The initial color
+   * @return The {@link ColorPickerDialogFragment}
+   */
+  public static ColorPickerDialogFragment newInstance(int dialogId, int color) {
+    return newInstance(dialogId, color, false);
   }
 
+  /**
+   * Create a new {@link ColorPickerDialogFragment}.
+   *
+   * @param dialogId The ID sent to the {@link OnColorChangedListener}
+   * @param color The initial color
+   * @param showAlpha {@code true} to show the alpha sliding
+   * @return The {@link ColorPickerDialogFragment}
+   */
   public static ColorPickerDialogFragment newInstance(int dialogId, int color, boolean showAlpha) {
     ColorPickerDialogFragment fragment = new ColorPickerDialogFragment();
     Bundle args = new Bundle();

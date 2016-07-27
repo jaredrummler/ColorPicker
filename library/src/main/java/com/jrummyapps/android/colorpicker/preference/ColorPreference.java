@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2015 Daniel Nilsson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +27,9 @@ import android.view.View;
 import com.jrummyapps.android.colorpicker.R;
 import com.jrummyapps.android.colorpicker.view.ColorPanelView;
 
+/**
+ * A Preference to select a color
+ */
 public class ColorPreference extends Preference {
 
   private OnShowDialogListener onShowDialogListener;

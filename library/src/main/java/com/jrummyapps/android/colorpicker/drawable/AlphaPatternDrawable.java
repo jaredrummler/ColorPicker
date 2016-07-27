@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2015 Daniel Nilsson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +28,7 @@ import android.graphics.drawable.Drawable;
 
 /**
  * This drawable will draw a simple white and gray chessboard pattern.
- * It's pattern you will often see as a background behind a
- * partly transparent image in many applications.
+ * It's the pattern you will often see as a background behind a partly transparent image in many applications.
  */
 public class AlphaPatternDrawable extends Drawable {
 
@@ -44,15 +44,14 @@ public class AlphaPatternDrawable extends Drawable {
   /**
    * Bitmap in which the pattern will be cached.
    * This is so the pattern will not have to be recreated each time draw() gets called.
-   * Because recreating the pattern i rather expensive. I will only be recreated if the
-   * size changes.
+   * Because recreating the pattern i rather expensive. I will only be recreated if the size changes.
    */
   private Bitmap bitmap;
 
   public AlphaPatternDrawable(int rectangleSize) {
     this.rectangleSize = rectangleSize;
-    paintWhite.setColor(0xffffffff);
-    paintGray.setColor(0xffcbcbcb);
+    paintWhite.setColor(0xFFFFFFFF);
+    paintGray.setColor(0xFFCBCBCB);
   }
 
   @Override public void draw(Canvas canvas) {
@@ -83,11 +82,8 @@ public class AlphaPatternDrawable extends Drawable {
   }
 
   /**
-   * This will generate a bitmap with the pattern
-   * as big as the rectangle we were allow to draw on.
-   * We do this to chache the bitmap so we don't need to
-   * recreate it each time draw() is called since it
-   * takes a few milliseconds.
+   * This will generate a bitmap with the pattern as big as the rectangle we were allow to draw on.
+   * We do this to chache the bitmap so we don't need to recreate it each time draw() is called since it takes a few milliseconds
    */
   private void generatePatternBitmap() {
     if (getBounds().width() <= 0 || getBounds().height() <= 0) {

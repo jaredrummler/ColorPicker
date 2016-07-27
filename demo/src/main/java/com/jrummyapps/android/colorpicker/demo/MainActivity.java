@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2015 Daniel Nilsson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -115,8 +116,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
   public static class ExamplePreferenceFragment extends PreferenceFragment
       implements ColorPickerDialogFragment.ColorPickerDialogListener {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    @Override public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       addPreferencesFromResource(R.xml.main);
 

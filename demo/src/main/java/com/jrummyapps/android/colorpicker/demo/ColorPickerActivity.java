@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2015 Daniel Nilsson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,9 +50,8 @@ public class ColorPickerActivity extends Activity implements ColorPickerView.OnC
     Button btnOK = (Button) findViewById(R.id.okButton);
     Button btnCancel = (Button) findViewById(R.id.cancelButton);
 
-    ((LinearLayout) colorPanelView.getParent()).setPadding(
-        colorPickerView.getPaddingLeft(), 0,
-        colorPickerView.getPaddingRight(), 0);
+    ((LinearLayout) colorPanelView.getParent())
+        .setPadding(colorPickerView.getPaddingLeft(), 0, colorPickerView.getPaddingRight(), 0);
 
     colorPickerView.setOnColorChangedListener(this);
     colorPickerView.setColor(initialColor, true);

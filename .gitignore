@@ -21,9 +21,6 @@ out/
 *.jks
 *.dex
 
-### Intellij
-
-
 ### Java
 *.class
 *.jar

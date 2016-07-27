@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2015 Daniel Nilsson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,8 +47,8 @@ import com.jrummyapps.android.colorpicker.R;
 import com.jrummyapps.android.colorpicker.drawable.AlphaPatternDrawable;
 
 /**
- * Displays a color picker to the user and allow them to select a color. A slider for the alpha
- * channel is also available. Enable it by setting setAlphaSliderVisible(boolean) to true.
+ * Displays a color picker to the user and allow them to select a color. A slider for the alpha channel is also available.
+ * Enable it by setting setAlphaSliderVisible(boolean) to true.
  */
 public class ColorPickerView extends View {
 

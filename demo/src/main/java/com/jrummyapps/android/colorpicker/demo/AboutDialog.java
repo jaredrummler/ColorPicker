@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2015 Daniel Nilsson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +18,11 @@
 
 package com.jrummyapps.android.colorpicker.demo;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,6 @@ public class AboutDialog extends AlertDialog {
 
   public AboutDialog(Context context) {
     super(context);
-
     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     View layout = inflater.inflate(R.layout.dialog_about, null);
 
@@ -44,18 +44,14 @@ public class AboutDialog extends AlertDialog {
     mAppNameText = (TextView) layout.findViewById(android.R.id.title);
 
     setView(layout);
-
     loadAbout();
-
     setTitle("About");
-
     setButton(DialogInterface.BUTTON_POSITIVE, getContext().getString(android.R.string.ok), new OnClickListener() {
 
       @Override public void onClick(DialogInterface dialog, int which) {
         dialog.dismiss();
       }
     });
-
   }
 
   private void loadAbout() {
@@ -63,7 +59,7 @@ public class AboutDialog extends AlertDialog {
       PackageInfo pi = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
       mAppNameText.setText(R.string.app_name);
       mVersionText.setText(pi.versionName);
-      String html = "<p><strong>Developed by:</strong></p>Daniel Nilsson<br />Jared Rummler";
+      String html = "<p><strong>Developed by:</strong></p>Daniel Nilsson<br>Jared Rummler";
       mAboutText.setText(Html.fromHtml(html));
     } catch (NameNotFoundException ignored) {
       // WTF

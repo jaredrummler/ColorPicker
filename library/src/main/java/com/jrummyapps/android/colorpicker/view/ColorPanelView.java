@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2015 Daniel Nilsson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +33,8 @@ import com.jrummyapps.android.colorpicker.R;
 import com.jrummyapps.android.colorpicker.drawable.AlphaPatternDrawable;
 
 /**
- * This class draws a panel which which will be filled with a color which can be set. It can be
- * used to show the currently selected color which you will get from the {@link ColorPickerView}.
+ * This class draws a panel which which will be filled with a color which can be set. It can be used to show the currently
+ * selected color which you will get from the {@link ColorPickerView}.
  */
 public class ColorPanelView extends View {
 
