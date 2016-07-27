@@ -38,7 +38,6 @@ import android.graphics.Shader.TileMode;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -537,7 +536,6 @@ public class ColorPickerView extends View {
     }
 
     float hue = 360f - (y * 360f / height);
-    Log.d("color-picker-view", "Hue: " + hue);
 
     return hue;
   }
