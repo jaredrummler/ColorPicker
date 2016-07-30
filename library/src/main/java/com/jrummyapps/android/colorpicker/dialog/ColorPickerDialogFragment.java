@@ -122,6 +122,7 @@ public class ColorPickerDialogFragment extends DialogFragment implements TextWat
       int initColor = getArguments().getInt(ARG_COLOR);
       oldColorPanel.setColor(initColor);
       colorPicker.setColor(initColor, true);
+      newColorPanel.setColor(initColor);
       setHex(initColor);
     }
 
