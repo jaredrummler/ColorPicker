@@ -46,13 +46,13 @@ publishing {
 }
 
 artifactory {
-  contextUrl = "${JRUMMYAPPS_ARTIFACTORY_CONTEXT_URL}"
+  contextUrl = "${artifactory_context_url}"
   publish {
     repository {
       repoKey = 'libs-release-local'
 
-      username = "${JRUMMYAPPS_ARTIFACTORY_USERNAME}"
-      password = "${JRUMMYAPPS_ARTIFACTORY_PASSWORD}"
+      username = "${artifactory_username}"
+      password = "${artifactory_password}"
     }
     defaults {
       publications('aar')
