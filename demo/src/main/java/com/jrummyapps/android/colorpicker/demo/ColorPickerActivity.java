@@ -38,6 +38,12 @@ public class ColorPickerActivity extends Activity implements ColorPickerView.OnC
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getWindow().setFormat(PixelFormat.RGBA_8888);
+
+    if (true) {
+      setContentView(R.layout.colorpickerview__dialog_color_picker);
+      return;
+    }
+
     setContentView(R.layout.activity_color_picker);
 
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);

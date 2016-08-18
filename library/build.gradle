@@ -16,8 +16,8 @@ configurations {
 }
 
 dependencies {
-  compile 'com.android.support:appcompat-v7:24.1.1'
-  javadocDeps 'com.android.support:appcompat-v7:24.1.1'
+  compile 'com.android.support:appcompat-v7:24.2.0'
+  javadocDeps 'com.android.support:appcompat-v7:24.2.0'
 }
 
 apply from: 'publication.gradle'

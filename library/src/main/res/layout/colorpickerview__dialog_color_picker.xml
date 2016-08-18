@@ -14,8 +14,7 @@
 
     <com.jrummyapps.android.colorpicker.view.ColorPickerView
         android:id="@id/colorpickerview__color_picker_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        style="@style/colorpickerview__ColorPickerViewStyle"
         android:padding="16dp"/>
 
     <LinearLayout
@@ -52,6 +51,7 @@
       <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_marginLeft="16dp"
           android:descendantFocusability="beforeDescendants"
           android:focusableInTouchMode="true"
           android:gravity="right"
