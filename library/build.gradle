@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 24
+  compileSdkVersion 25
   buildToolsVersion "24.0.3"
   resourcePrefix "colorpickerview__"
 
   defaultConfig {
     minSdkVersion 14
-    targetSdkVersion 24
+    targetSdkVersion 25
   }
 }
 
@@ -16,8 +16,8 @@ configurations {
 }
 
 dependencies {
-  compile 'com.android.support:appcompat-v7:24.2.1'
-  javadocDeps 'com.android.support:appcompat-v7:24.2.1'
+  compile 'com.android.support:appcompat-v7:25.0.0'
+  javadocDeps 'com.android.support:appcompat-v7:25.0.0'
 }
 
 apply from: 'publication.gradle'
