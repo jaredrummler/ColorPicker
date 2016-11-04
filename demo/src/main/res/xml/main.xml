@@ -35,11 +35,11 @@
   </PreferenceCategory>
   <PreferenceCategory android:title="Library">
     <Preference
-        android:summary="https://github.com/jaredrummler/AndroidColorPicker"
+        android:summary="https://github.com/jrummyapps/AndroidColorPicker"
         android:title="GitHub">
       <intent
           android:action="android.intent.action.VIEW"
-          android:data="https://github.com/jaredrummler/AndroidColorPicker"/>
+          android:data="https://github.com/jrummyapps/AndroidColorPicker"/>
     </Preference>
   </PreferenceCategory>
 
