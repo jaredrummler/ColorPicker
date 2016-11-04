@@ -9,6 +9,10 @@ android {
     minSdkVersion 14
     targetSdkVersion 25
   }
+
+  lintOptions {
+    abortOnError false
+  }
 }
 
 configurations {
@@ -20,4 +24,5 @@ dependencies {
   javadocDeps 'com.android.support:appcompat-v7:25.0.0'
 }
 
-apply from: 'publication.gradle'
+//apply from: 'gradle-mvn-push.gradle'
+//apply from: 'publication.gradle'
