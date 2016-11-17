@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
   compileSdkVersion 25
-  buildToolsVersion "24.0.3"
+  buildToolsVersion "25.0.0"
   resourcePrefix "colorpickerview__"
 
   defaultConfig {
@@ -20,8 +20,8 @@ configurations {
 }
 
 dependencies {
-  compile 'com.android.support:appcompat-v7:25.0.0'
-  javadocDeps 'com.android.support:appcompat-v7:25.0.0'
+  compile 'com.android.support:appcompat-v7:25.0.1'
+  javadocDeps 'com.android.support:appcompat-v7:25.0.1'
 }
 
 //apply from: 'gradle-mvn-push.gradle'
