@@ -2,27 +2,18 @@ apply plugin: 'com.android.library'
 
 android {
   compileSdkVersion 25
-  buildToolsVersion "25.0.0"
+  buildToolsVersion "25.0.2"
   resourcePrefix "colorpickerview__"
 
   defaultConfig {
     minSdkVersion 14
     targetSdkVersion 25
   }
-
-  lintOptions {
-    abortOnError false
-  }
-}
-
-configurations {
-  javadocDeps
 }
 
 dependencies {
-  compile 'com.android.support:appcompat-v7:25.0.1'
-  javadocDeps 'com.android.support:appcompat-v7:25.0.1'
+  compile 'com.android.support:appcompat-v7:25.1.0'
 }
 
-//apply from: 'gradle-mvn-push.gradle'
-//apply from: 'publication.gradle'
+//apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/artifactory/publication.gradle'
+//apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/maven/gradle-mvn-push
