@@ -32,8 +32,8 @@ import com.jrummyapps.android.colorpicker.view.ColorPanelView;
  */
 public class ColorPreference extends Preference {
 
-  private OnShowDialogListener onShowDialogListener;
-  private int color = 0xFF000000;
+  /*package*/ OnShowDialogListener onShowDialogListener;
+  /*package*/ int color = 0xFF000000;
 
   public ColorPreference(Context context, AttributeSet attrs) {
     super(context, attrs);

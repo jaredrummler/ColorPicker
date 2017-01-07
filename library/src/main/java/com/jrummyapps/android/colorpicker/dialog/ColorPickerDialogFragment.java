@@ -52,13 +52,13 @@ public class ColorPickerDialogFragment extends DialogFragment implements TextWat
   private static final String ARG_COLOR = "color";
   private static final String ARG_ALPHA = "alpha";
 
-  private ColorPickerDialogListener colorPickerDialogListener;
-  private ColorPickerView colorPicker;
+  /*package*/ ColorPickerDialogListener colorPickerDialogListener;
+  /*package*/ ColorPickerView colorPicker;
   private ColorPanelView newColorPanel;
   private EditText hexEditText;
   private boolean showAlphaSlider;
   private boolean fromEditText;
-  private int dialogId;
+  /*package*/ int dialogId;
 
   /**
    * Create a new {@link ColorPickerDialogFragment}. By default, the alpha slider will not be shown.
