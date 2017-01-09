@@ -818,7 +818,7 @@ public class ColorPickerView extends View {
 
     alphaRect = new Rect(left, top, right, bottom);
 
-    alphaPatternDrawable = new AlphaPatternDrawable(DrawingUtils.dpToPx(getContext(), 5));
+    alphaPatternDrawable = new AlphaPatternDrawable(DrawingUtils.dpToPx(getContext(), 4));
     alphaPatternDrawable.setBounds(Math.round(alphaRect.left), Math
         .round(alphaRect.top), Math.round(alphaRect.right), Math
         .round(alphaRect.bottom));
