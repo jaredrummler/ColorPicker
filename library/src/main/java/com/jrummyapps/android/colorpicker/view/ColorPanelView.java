@@ -28,21 +28,16 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-
 import com.jrummyapps.android.colorpicker.R;
 import com.jrummyapps.android.colorpicker.drawable.AlphaPatternDrawable;
 
 /**
- * This class draws a panel which which will be filled with a color which can be set. It can be used to show the currently
+ * This class draws a panel which which will be filled with a color which can be set. It can be used to show the
+ * currently
  * selected color which you will get from the {@link ColorPickerView}.
  */
 public class ColorPanelView extends View {
 
-  /**
-   * The width in pixels of the border
-   * surrounding the color panel.
-   */
-  private final static int BORDER_WIDTH_PX = 1;
   private final static int DEFAULT_BORDER_COLOR = 0xFF6E6E6E;
 
   private AlphaPatternDrawable alphaPattern;
@@ -51,8 +46,10 @@ public class ColorPanelView extends View {
   private Rect drawingRect;
   private Rect colorRect;
 
+  /* The width in pixels of the border surrounding the color panel. */
+  private int borderWidthPx;
   private int borderColor = DEFAULT_BORDER_COLOR;
-  private int color = 0xff000000;
+  private int color = 0xFF000000;
 
   public ColorPanelView(Context context) {
     this(context, null);
@@ -84,32 +81,25 @@ public class ColorPanelView extends View {
   }
 
   private void init(Context context, AttributeSet attrs) {
-    TypedArray a =
-        getContext().obtainStyledAttributes(attrs, R.styleable.colorpickerview__ColorPickerView);
-    borderColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_borderColor, 0xFF6E6E6E);
+    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.colorpickerview__ColorPickerView);
+    borderColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_borderColor, DEFAULT_BORDER_COLOR);
     a.recycle();
-    applyThemeColors(context);
+    if (borderColor == DEFAULT_BORDER_COLOR) {
+      // If no specific border color has been set we take the default secondary text color as border/slider color.
+      // Thus it will adopt to theme changes automatically.
+      final TypedValue value = new TypedValue();
+      TypedArray typedArray = context.obtainStyledAttributes(value.data, new int[]{android.R.attr.textColorSecondary});
+      borderColor = typedArray.getColor(0, borderColor);
+      typedArray.recycle();
+    }
+    borderWidthPx = DrawingUtils.dpToPx(context, 1);
     borderPaint = new Paint();
     colorPaint = new Paint();
   }
 
-  private void applyThemeColors(Context c) {
-    // If no specific border color has been
-    // set we take the default secondary text color
-    // as border/slider color. Thus it will adopt
-    // to theme changes automatically.
-    final TypedValue value = new TypedValue();
-    TypedArray a =
-        c.obtainStyledAttributes(value.data, new int[]{android.R.attr.textColorSecondary});
-    if (borderColor == DEFAULT_BORDER_COLOR) {
-      borderColor = a.getColor(0, DEFAULT_BORDER_COLOR);
-    }
-    a.recycle();
-  }
-
   @Override protected void onDraw(Canvas canvas) {
     final Rect rect = colorRect;
-    if (BORDER_WIDTH_PX > 0) {
+    if (borderWidthPx > 0) {
       borderPaint.setColor(borderColor);
       canvas.drawRect(drawingRect, borderPaint);
     }
@@ -138,10 +128,10 @@ public class ColorPanelView extends View {
 
   private void setUpColorRect() {
     final Rect dRect = drawingRect;
-    int left = dRect.left + BORDER_WIDTH_PX;
-    int top = dRect.top + BORDER_WIDTH_PX;
-    int bottom = dRect.bottom - BORDER_WIDTH_PX;
-    int right = dRect.right - BORDER_WIDTH_PX;
+    int left = dRect.left + borderWidthPx;
+    int top = dRect.top + borderWidthPx;
+    int bottom = dRect.bottom - borderWidthPx;
+    int right = dRect.right - borderWidthPx;
     colorRect = new Rect(left, top, right, bottom);
     alphaPattern = new AlphaPatternDrawable(DrawingUtils.dpToPx(getContext(), 2));
     alphaPattern.setBounds(Math.round(colorRect.left),
