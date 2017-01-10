@@ -37,7 +37,6 @@ import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.jrummyapps.android.colorpicker.R;
 import com.jrummyapps.android.colorpicker.view.ColorPanelView;
 import com.jrummyapps.android.colorpicker.view.ColorPickerView;
@@ -46,7 +45,8 @@ import com.jrummyapps.android.colorpicker.view.ColorPickerView.OnColorChangedLis
 /**
  * A dialog to pick a color
  */
-public class ColorPickerDialogFragment extends DialogFragment implements TextWatcher, OnTouchListener, OnColorChangedListener {
+public class ColorPickerDialogFragment extends DialogFragment
+    implements TextWatcher, OnTouchListener, OnColorChangedListener {
 
   private static final String ARG_ID = "id";
   private static final String ARG_COLOR = "color";
@@ -63,8 +63,10 @@ public class ColorPickerDialogFragment extends DialogFragment implements TextWat
   /**
    * Create a new {@link ColorPickerDialogFragment}. By default, the alpha slider will not be shown.
    *
-   * @param dialogId The ID sent to the {@link OnColorChangedListener}
-   * @param color The initial color
+   * @param dialogId
+   *     The ID sent to the {@link OnColorChangedListener}
+   * @param color
+   *     The initial color
    * @return The {@link ColorPickerDialogFragment}
    */
   public static ColorPickerDialogFragment newInstance(int dialogId, int color) {
@@ -74,9 +76,12 @@ public class ColorPickerDialogFragment extends DialogFragment implements TextWat
   /**
    * Create a new {@link ColorPickerDialogFragment}.
    *
-   * @param dialogId The ID sent to the {@link OnColorChangedListener}
-   * @param color The initial color
-   * @param showAlpha {@code true} to show the alpha sliding
+   * @param dialogId
+   *     The ID sent to the {@link OnColorChangedListener}
+   * @param color
+   *     The initial color
+   * @param showAlpha
+   *     {@code true} to show the alpha sliding
    * @return The {@link ColorPickerDialogFragment}
    */
   public static ColorPickerDialogFragment newInstance(int dialogId, int color, boolean showAlpha) {
@@ -136,6 +141,12 @@ public class ColorPickerDialogFragment extends DialogFragment implements TextWat
 
     return new AlertDialog.Builder(getActivity())
         .setView(contentView)
+        .setNeutralButton("Presets", new DialogInterface.OnClickListener() {
+          @Override public void onClick(DialogInterface dialog, int which) {
+            ColorPresetsDialogFragment.newInstance(dialogId, colorPicker.getColor())
+                .show(getFragmentManager(), "color-presets");
+          }
+        })
         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 
           @Override public void onClick(DialogInterface dialog, int which) {

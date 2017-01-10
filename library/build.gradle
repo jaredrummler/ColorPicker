@@ -13,6 +13,7 @@ android {
 
 dependencies {
   compile 'com.android.support:appcompat-v7:25.1.0'
+  compile 'com.jrummyapps:android-animations:1.0.0'
 }
 
 //apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/artifactory/publication.gradle'
