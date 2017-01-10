@@ -117,7 +117,7 @@ public class ColorPresetsDialogFragment extends DialogFragment {
     return Color.rgb(red, green, blue);
   }
 
-  /*package*/ ColorPickerDialogFragment.ColorPickerDialogListener colorPickerDialogListener;
+  /*package*/ ColorPickerDialogListener colorPickerDialogListener;
   /*package*/ ColorPaletteAdapter adapter;
   /*package*/ View view;
   /*package*/ int[] colors;
@@ -127,7 +127,7 @@ public class ColorPresetsDialogFragment extends DialogFragment {
   @Override public void onAttach(Activity activity) {
     super.onAttach(activity);
     try {
-      colorPickerDialogListener = (ColorPickerDialogFragment.ColorPickerDialogListener) activity;
+      colorPickerDialogListener = (ColorPickerDialogListener) activity;
     } catch (ClassCastException e) {
       throw new ClassCastException("Parent activity must implement ColorPickerDialogListener to receive result.");
     }

@@ -264,12 +264,4 @@ public class ColorPickerDialogFragment extends DialogFragment
     return Color.argb(a, r, g, b);
   }
 
-  public interface ColorPickerDialogListener {
-
-    void onColorSelected(int dialogId, int color);
-
-    void onDialogDismissed(int dialogId);
-
-  }
-
 }
