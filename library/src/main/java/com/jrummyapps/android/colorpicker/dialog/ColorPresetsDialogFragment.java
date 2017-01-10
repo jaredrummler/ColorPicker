@@ -220,7 +220,7 @@ public class ColorPresetsDialogFragment extends DialogFragment {
           adapter.selectNone();
           for (int i = 0; i < shadesLayout.getChildCount(); i++) {
             ColorPanelView cpv = (ColorPanelView) shadesLayout.getChildAt(i);
-            ImageView imageView = (ImageView) shadesLayout.getChildAt(0);
+            ImageView imageView = (ImageView) cpv.getChildAt(0);
             imageView.setImageResource(cpv == v ? R.drawable.colorpickerview__preset_checked : 0);
             cpv.setTag(cpv == v);
           }
