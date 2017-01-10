@@ -20,9 +20,15 @@ package com.jrummyapps.android.colorpicker.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.IntDef;
@@ -40,7 +46,11 @@ public class ColorPanelView extends View {
 
   private final static int DEFAULT_BORDER_COLOR = 0xFF6E6E6E;
 
-  private AlphaPatternDrawable alphaPattern;
+  private Paint alphaPaint;
+  private BitmapShader shader;
+
+
+  private Drawable alphaPattern;
   private Paint borderPaint;
   private Paint colorPaint;
   private Rect drawingRect;
@@ -97,6 +107,12 @@ public class ColorPanelView extends View {
     borderWidthPx = DrawingUtils.dpToPx(context, 1);
     borderPaint = new Paint();
     colorPaint = new Paint();
+
+    Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.colorpickerview__alpha)).getBitmap();
+    alphaPaint = new Paint();
+    alphaPaint.setAntiAlias(true);
+    shader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+    alphaPaint.setShader(shader);
   }
 
   @Override protected void onDraw(Canvas canvas) {
@@ -117,6 +133,11 @@ public class ColorPanelView extends View {
             getMeasuredHeight() / 2,
             outerRadius,
             borderPaint);
+      }
+      if (Color.alpha(color) < 255) {
+        canvas.drawCircle(getMeasuredWidth() / 2,
+            getMeasuredHeight() / 2,
+            outerRadius - borderWidthPx, alphaPaint);
       }
       canvas.drawCircle(getMeasuredWidth() / 2,
           getMeasuredHeight() / 2,
