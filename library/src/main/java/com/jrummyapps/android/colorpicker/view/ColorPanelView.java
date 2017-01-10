@@ -26,11 +26,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -50,13 +52,17 @@ public class ColorPanelView extends View {
   private Paint borderPaint;
   private Paint colorPaint;
   private Paint alphaPaint;
+  private Paint originalPaint;
   private Rect drawingRect;
   private Rect colorRect;
+  private RectF centerRect = new RectF();
+  private boolean showOldColor;
 
   /* The width in pixels of the border surrounding the color panel. */
   private int borderWidthPx;
   private int borderColor = DEFAULT_BORDER_COLOR;
   private int color = 0xFF000000;
+  private int originalColor;
   private int shape;
 
   public ColorPanelView(Context context) {
@@ -91,6 +97,10 @@ public class ColorPanelView extends View {
   private void init(Context context, AttributeSet attrs) {
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.colorpickerview__ColorPickerView);
     shape = a.getInt(R.styleable.colorpickerview__ColorPickerView_shape, Shape.CIRCLE);
+    showOldColor = a.getBoolean(R.styleable.colorpickerview__ColorPickerView_showOldColor, false);
+    if (showOldColor && shape != Shape.CIRCLE) {
+      throw new IllegalStateException("Color preview is only available in circle mode");
+    }
     borderColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_borderColor, DEFAULT_BORDER_COLOR);
     a.recycle();
     if (borderColor == DEFAULT_BORDER_COLOR) {
@@ -104,6 +114,9 @@ public class ColorPanelView extends View {
     borderWidthPx = DrawingUtils.dpToPx(context, 1);
     borderPaint = new Paint();
     colorPaint = new Paint();
+    if (showOldColor) {
+      originalPaint = new Paint();
+    }
     if (shape == Shape.CIRCLE) {
       Bitmap bitmap =
           ((BitmapDrawable) context.getResources().getDrawable(R.drawable.colorpickerview__alpha)).getBitmap();
@@ -138,10 +151,15 @@ public class ColorPanelView extends View {
             getMeasuredHeight() / 2,
             outerRadius - borderWidthPx, alphaPaint);
       }
-      canvas.drawCircle(getMeasuredWidth() / 2,
-          getMeasuredHeight() / 2,
-          outerRadius - borderWidthPx,
-          colorPaint);
+      if (showOldColor) {
+        canvas.drawArc(centerRect, 90, 180, true, originalPaint);
+        canvas.drawArc(centerRect, 270, 180, true, colorPaint);
+      } else {
+        canvas.drawCircle(getMeasuredWidth() / 2,
+            getMeasuredHeight() / 2,
+            outerRadius - borderWidthPx,
+            colorPaint);
+      }
     }
   }
 
@@ -160,14 +178,27 @@ public class ColorPanelView extends View {
 
   @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
-    if (shape == Shape.RECT) {
+    if (shape == Shape.RECT || showOldColor) {
       drawingRect = new Rect();
       drawingRect.left = getPaddingLeft();
       drawingRect.right = w - getPaddingRight();
       drawingRect.top = getPaddingTop();
       drawingRect.bottom = h - getPaddingBottom();
-      setUpColorRect();
+      if (showOldColor) {
+        setUpCenterRect();
+      } else {
+        setUpColorRect();
+      }
     }
+  }
+
+  private void setUpCenterRect() {
+    final Rect dRect = drawingRect;
+    int left = dRect.left + borderWidthPx;
+    int top = dRect.top + borderWidthPx;
+    int bottom = dRect.bottom - borderWidthPx;
+    int right = dRect.right - borderWidthPx;
+    centerRect = new RectF(left, top, right, bottom);
   }
 
   private void setUpColorRect() {
@@ -202,6 +233,12 @@ public class ColorPanelView extends View {
    */
   public int getColor() {
     return color;
+  }
+
+  public void setOriginalColor(@ColorInt int color) {
+    if (originalPaint != null) {
+      originalPaint.setColor(color);
+    }
   }
 
   /**

@@ -9,6 +9,7 @@
       <enum name="rect" value="0"/>
       <enum name="circle" value="1"/>
     </attr>
+    <attr name="showOldColor" format="boolean"/>
   </declare-styleable>
 
 </resources>
