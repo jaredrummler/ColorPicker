@@ -46,13 +46,10 @@ public class ColorPanelView extends View {
 
   private final static int DEFAULT_BORDER_COLOR = 0xFF6E6E6E;
 
-  private Paint alphaPaint;
-  private BitmapShader shader;
-
-
   private Drawable alphaPattern;
   private Paint borderPaint;
   private Paint colorPaint;
+  private Paint alphaPaint;
   private Rect drawingRect;
   private Rect colorRect;
 
@@ -111,7 +108,7 @@ public class ColorPanelView extends View {
     Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.colorpickerview__alpha)).getBitmap();
     alphaPaint = new Paint();
     alphaPaint.setAntiAlias(true);
-    shader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+    BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
     alphaPaint.setShader(shader);
   }
 
