@@ -47,11 +47,9 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import com.jrummyapps.android.animations.Rebound;
 import com.jrummyapps.android.colorpicker.R;
 import com.jrummyapps.android.colorpicker.adapter.ColorPaletteAdapter;
 import com.jrummyapps.android.colorpicker.view.ColorPanelView;
-import com.jrummyapps.android.listeners.TouchReleaseListener;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class ColorPresetsDialogFragment extends DialogFragment {
@@ -202,45 +200,29 @@ public class ColorPresetsDialogFragment extends DialogFragment {
 
     int[] shades = getColorShades(color);
     for (final int shade : shades) {
-      FrameLayout layout = new FrameLayout(shadesLayout.getContext());
-      layout.setForegroundGravity(Gravity.CENTER);
-
       ColorPanelView colorPanelView = new ColorPanelView(shadesLayout.getContext());
       int size = shadesLayout.getResources().getDimensionPixelSize(R.dimen.colorpickerview__item_size);
-      colorPanelView.setLayoutParams(new FrameLayout.LayoutParams(size, size, Gravity.CENTER));
-      layout.setPadding(horizontalPadding, 0, horizontalPadding, 0);
+      FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(size, size, Gravity.CENTER);
+      layoutParams.leftMargin = layoutParams.rightMargin = horizontalPadding;
+      colorPanelView.setLayoutParams(layoutParams);
       colorPanelView.setClickable(true);
       colorPanelView.setColor(shade);
-
       final ImageView iv = new ImageView(shadesLayout.getContext());
-
-      layout.addView(colorPanelView);
-      layout.addView(iv, new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER));
-
-      shadesLayout.addView(layout);
-
-      colorPanelView.setOnTouchListener(new TouchReleaseListener() {
-        @Override public void onTouched(View v) {
-          Rebound.animate(0.35, v);
-        }
-
-        @Override public void onReleased(View v, boolean clicked) {
-          Rebound.animate(0, v);
-          if (clicked) {
-            if (v.getTag() instanceof Boolean && (Boolean) v.getTag()) {
-              return; // already selected
-            }
-
-            ColorPresetsDialogFragment.this.color = shade;
-
-            adapter.selectNone();
-            for (int i = 0; i < shadesLayout.getChildCount(); i++) {
-              FrameLayout layout = (FrameLayout) shadesLayout.getChildAt(i);
-              ColorPanelView cpv = (ColorPanelView) layout.getChildAt(0);
-              ImageView imageView = (ImageView) layout.getChildAt(1);
-              imageView.setImageResource(cpv == v ? R.drawable.colorpickerview__preset_checked : 0);
-              cpv.setTag(cpv == v);
-            }
+      iv.setLayoutParams(new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER));
+      colorPanelView.addView(iv);
+      shadesLayout.addView(colorPanelView);
+      colorPanelView.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+          if (v.getTag() instanceof Boolean && (Boolean) v.getTag()) {
+            return; // already selected
+          }
+          ColorPresetsDialogFragment.this.color = shade;
+          adapter.selectNone();
+          for (int i = 0; i < shadesLayout.getChildCount(); i++) {
+            ColorPanelView cpv = (ColorPanelView) shadesLayout.getChildAt(i);
+            ImageView imageView = (ImageView) shadesLayout.getChildAt(0);
+            imageView.setImageResource(cpv == v ? R.drawable.colorpickerview__preset_checked : 0);
+            cpv.setTag(cpv == v);
           }
         }
       });

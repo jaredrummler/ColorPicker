@@ -38,10 +38,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import com.jrummyapps.android.animations.Rebound;
 import com.jrummyapps.android.colorpicker.R;
 import com.jrummyapps.android.colorpicker.view.ColorPanelView;
-import com.jrummyapps.android.listeners.TouchReleaseListener;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class ColorPaletteAdapter extends BaseAdapter {
@@ -72,7 +70,7 @@ public class ColorPaletteAdapter extends BaseAdapter {
     final ViewHolder holder;
     if (convertView == null) {
       holder = new ViewHolder(parent.getContext());
-      convertView = holder.layout;
+      convertView = holder.colorPanelView;
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
@@ -94,45 +92,27 @@ public class ColorPaletteAdapter extends BaseAdapter {
 
   private final class ViewHolder {
 
-    FrameLayout layout;
     ColorPanelView colorPanelView;
     ImageView imageView;
 
     ViewHolder(Context context) {
-      layout = new FrameLayout(context);
-      layout.setForegroundGravity(Gravity.CENTER);
-
       colorPanelView = new ColorPanelView(context);
       int size = context.getResources().getDimensionPixelSize(R.dimen.colorpickerview__item_size);
       colorPanelView.setLayoutParams(new FrameLayout.LayoutParams(size, size, Gravity.CENTER));
       colorPanelView.setClickable(true);
-      layout.addView(colorPanelView);
-
       imageView = new ImageView(context);
       imageView.setLayoutParams(new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER));
-      layout.addView(imageView);
-
-      layout.setTag(this);
+      colorPanelView.addView(imageView);
+      colorPanelView.setTag(this);
     }
 
     void setOnClickListener(final int position) {
-      colorPanelView.setOnTouchListener(new TouchReleaseListener() {
-        @Override public void onTouched(View v) {
-          Rebound.animate(0.25, v);
-        }
-
-        @Override public void onReleased(View v, boolean clicked) {
-          Rebound.animate(0, v);
-          if (clicked) {
-            if (selectedPosition != position) {
-              selectedPosition = position;
-              layout.postDelayed(new Runnable() {
-                @Override public void run() {
-                  notifyDataSetChanged();
-                  listener.onColorSelected(colors[position]);
-                }
-              }, 10);
-            }
+      colorPanelView.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+          if (selectedPosition != position) {
+            selectedPosition = position;
+            notifyDataSetChanged();
+            listener.onColorSelected(colors[position]);
           }
         }
       });
