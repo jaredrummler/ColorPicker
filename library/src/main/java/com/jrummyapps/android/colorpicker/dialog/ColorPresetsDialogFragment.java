@@ -200,7 +200,7 @@ public class ColorPresetsDialogFragment extends DialogFragment {
 
     int[] shades = getColorShades(color);
     for (final int shade : shades) {
-      ColorPanelView colorPanelView = new ColorPanelView(shadesLayout.getContext());
+      final ColorPanelView colorPanelView = new ColorPanelView(shadesLayout.getContext());
       int size = shadesLayout.getResources().getDimensionPixelSize(R.dimen.colorpickerview__item_size);
       FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(size, size, Gravity.CENTER);
       layoutParams.leftMargin = layoutParams.rightMargin = horizontalPadding;
@@ -224,6 +224,12 @@ public class ColorPresetsDialogFragment extends DialogFragment {
             imageView.setImageResource(cpv == v ? R.drawable.colorpickerview__preset_checked : 0);
             cpv.setTag(cpv == v);
           }
+        }
+      });
+      colorPanelView.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override public boolean onLongClick(View v) {
+          colorPanelView.showHint();
+          return true;
         }
       });
     }

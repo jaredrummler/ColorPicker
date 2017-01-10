@@ -116,6 +116,12 @@ public class ColorPaletteAdapter extends BaseAdapter {
           }
         }
       });
+      colorPanelView.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override public boolean onLongClick(View v) {
+          colorPanelView.showHint();
+          return true;
+        }
+      });
     }
 
   }

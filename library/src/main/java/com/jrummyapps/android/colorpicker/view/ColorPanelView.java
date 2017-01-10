@@ -41,9 +41,13 @@ import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntDef;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 import com.jrummyapps.android.colorpicker.R;
 import com.jrummyapps.android.colorpicker.drawable.AlphaPatternDrawable;
 
@@ -283,6 +287,32 @@ public class ColorPanelView extends FrameLayout {
 
   @Shape public int getShape() {
     return shape;
+  }
+
+  public void showHint() {
+    final int[] screenPos = new int[2];
+    final Rect displayFrame = new Rect();
+    getLocationOnScreen(screenPos);
+    getWindowVisibleDisplayFrame(displayFrame);
+    final Context context = getContext();
+    final int width = getWidth();
+    final int height = getHeight();
+    final int midy = screenPos[1] + height / 2;
+    int referenceX = screenPos[0] + width / 2;
+    if (ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+      final int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+      referenceX = screenWidth - referenceX; // mirror
+    }
+    Toast cheatSheet = Toast.makeText(context, String.format("#%06X", 0xFFFFFF & color), Toast.LENGTH_SHORT);
+    if (midy < displayFrame.height()) {
+      // Show along the top; follow action buttons
+      cheatSheet.setGravity(Gravity.TOP | GravityCompat.END, referenceX,
+          screenPos[1] + height - displayFrame.top);
+    } else {
+      // Show along the bottom center
+      cheatSheet.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, height);
+    }
+    cheatSheet.show();
   }
 
   private Drawable createSelector(int color) {
