@@ -25,6 +25,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -33,8 +34,7 @@ import com.jrummyapps.android.colorpicker.drawable.AlphaPatternDrawable;
 
 /**
  * This class draws a panel which which will be filled with a color which can be set. It can be used to show the
- * currently
- * selected color which you will get from the {@link ColorPickerView}.
+ * currently selected color which you will get from the {@link ColorPickerView}.
  */
 public class ColorPanelView extends View {
 
@@ -50,6 +50,7 @@ public class ColorPanelView extends View {
   private int borderWidthPx;
   private int borderColor = DEFAULT_BORDER_COLOR;
   private int color = 0xFF000000;
+  private int shape;
 
   public ColorPanelView(Context context) {
     this(context, null);
@@ -82,6 +83,7 @@ public class ColorPanelView extends View {
 
   private void init(Context context, AttributeSet attrs) {
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.colorpickerview__ColorPickerView);
+    shape = a.getInt(R.styleable.colorpickerview__ColorPickerView_shape, Shape.RECT);
     borderColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_borderColor, DEFAULT_BORDER_COLOR);
     a.recycle();
     if (borderColor == DEFAULT_BORDER_COLOR) {
@@ -98,32 +100,54 @@ public class ColorPanelView extends View {
   }
 
   @Override protected void onDraw(Canvas canvas) {
-    final Rect rect = colorRect;
-    if (borderWidthPx > 0) {
-      borderPaint.setColor(borderColor);
-      canvas.drawRect(drawingRect, borderPaint);
-    }
-    if (alphaPattern != null) {
-      alphaPattern.draw(canvas);
-    }
+    borderPaint.setColor(borderColor);
     colorPaint.setColor(color);
-    canvas.drawRect(rect, colorPaint);
+    if (shape == Shape.RECT) {
+      if (borderWidthPx > 0) {
+        canvas.drawRect(drawingRect, borderPaint);
+      }
+      if (alphaPattern != null) {
+        alphaPattern.draw(canvas);
+      }
+      canvas.drawRect(colorRect, colorPaint);
+    } else if (shape == Shape.CIRCLE) {
+      final int outerRadius = getMeasuredWidth() / 2;
+      if (borderWidthPx > 0) {
+        canvas.drawCircle(getMeasuredWidth() / 2,
+            getMeasuredHeight() / 2,
+            outerRadius,
+            borderPaint);
+      }
+      canvas.drawCircle(getMeasuredWidth() / 2,
+          getMeasuredHeight() / 2,
+          outerRadius - borderWidthPx,
+          colorPaint);
+    }
   }
 
   @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    int width = MeasureSpec.getSize(widthMeasureSpec);
-    int height = MeasureSpec.getSize(heightMeasureSpec);
-    setMeasuredDimension(width, height);
+    if (shape == Shape.RECT) {
+      int width = MeasureSpec.getSize(widthMeasureSpec);
+      int height = MeasureSpec.getSize(heightMeasureSpec);
+      setMeasuredDimension(width, height);
+    } else if (shape == Shape.CIRCLE) {
+      super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+      setMeasuredDimension(getMeasuredWidth(), getMeasuredWidth());
+    } else {
+      super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
   }
 
   @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
-    drawingRect = new Rect();
-    drawingRect.left = getPaddingLeft();
-    drawingRect.right = w - getPaddingRight();
-    drawingRect.top = getPaddingTop();
-    drawingRect.bottom = h - getPaddingBottom();
-    setUpColorRect();
+    if (shape == Shape.RECT) {
+      drawingRect = new Rect();
+      drawingRect.left = getPaddingLeft();
+      drawingRect.right = w - getPaddingRight();
+      drawingRect.top = getPaddingTop();
+      drawingRect.bottom = h - getPaddingBottom();
+      setUpColorRect();
+    }
   }
 
   private void setUpColorRect() {
@@ -176,6 +200,22 @@ public class ColorPanelView extends View {
    */
   public int getBorderColor() {
     return borderColor;
+  }
+
+  public void setShape(@Shape int shape) {
+    this.shape = shape;
+    invalidate();
+  }
+
+  @Shape public int getShape() {
+    return shape;
+  }
+
+  @IntDef({Shape.RECT, Shape.CIRCLE})
+  public @interface Shape {
+    int RECT = 0;
+
+    int CIRCLE = 1;
   }
 
 }

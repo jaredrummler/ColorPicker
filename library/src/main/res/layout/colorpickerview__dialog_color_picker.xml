@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -26,7 +27,8 @@
       <com.jrummyapps.android.colorpicker.view.ColorPanelView
           android:id="@id/colorpickerview__color_panel_old"
           android:layout_width="@dimen/colorpickerview__dialog_preview_width"
-          android:layout_height="@dimen/colorpickerview__dialog_preview_height"/>
+          android:layout_height="@dimen/colorpickerview__dialog_preview_height"
+          app:shape="rect"/>
 
       <ImageView
           android:id="@+id/colorpickerview__arrow_right"
@@ -41,7 +43,8 @@
       <com.jrummyapps.android.colorpicker.view.ColorPanelView
           android:id="@id/colorpickerview__color_panel_new"
           android:layout_width="@dimen/colorpickerview__dialog_preview_width"
-          android:layout_height="@dimen/colorpickerview__dialog_preview_height"/>
+          android:layout_height="@dimen/colorpickerview__dialog_preview_height"
+          app:shape="rect"/>
 
       <Space
           android:layout_width="0dp"
