@@ -15,12 +15,14 @@
  * Raw
  */
 
-package com.jrummyapps.android.colorpicker.view;
+package com.jrummyapps.android.colorpicker;
 
 import android.content.Context;
+import android.support.annotation.RestrictTo;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class NestedGridView extends GridView {
 
   public NestedGridView(Context context) {

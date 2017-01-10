@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
- * Copyright (C) 2015 Daniel Nilsson
+ * Copyright (C) 2017 JRummy Apps Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +12,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * Raw
  */
 
-package com.jrummyapps.android.colorpicker.preference;
+package com.jrummyapps.android.colorpicker;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
-
-import com.jrummyapps.android.colorpicker.R;
-import com.jrummyapps.android.colorpicker.view.ColorPanelView;
 
 /**
  * A Preference to select a color

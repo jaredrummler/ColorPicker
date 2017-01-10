@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
- * Copyright (C) 2015 Daniel Nilsson
+ * Copyright (C) 2017 JRummy Apps Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * Raw
  */
 
-package com.jrummyapps.android.colorpicker.drawable;
+package com.jrummyapps.android.colorpicker;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -30,7 +29,7 @@ import android.graphics.drawable.Drawable;
  * This drawable will draw a simple white and gray chessboard pattern.
  * It's the pattern you will often see as a background behind a partly transparent image in many applications.
  */
-public class AlphaPatternDrawable extends Drawable {
+class AlphaPatternDrawable extends Drawable {
 
   private int rectangleSize = 10;
 

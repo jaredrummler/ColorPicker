@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
- * Copyright (C) 2015 Daniel Nilsson
+ * Copyright (C) 2017 JRummy Apps Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * Raw
  */
 
-package com.jrummyapps.android.colorpicker.dialog;
+package com.jrummyapps.android.colorpicker;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -37,10 +36,7 @@ import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import com.jrummyapps.android.colorpicker.R;
-import com.jrummyapps.android.colorpicker.view.ColorPanelView;
-import com.jrummyapps.android.colorpicker.view.ColorPickerView;
-import com.jrummyapps.android.colorpicker.view.ColorPickerView.OnColorChangedListener;
+import com.jrummyapps.android.colorpicker.ColorPickerView.OnColorChangedListener;
 
 /**
  * A dialog to pick a color

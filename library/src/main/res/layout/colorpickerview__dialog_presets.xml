@@ -10,7 +10,7 @@
       android:orientation="vertical"
       android:padding="16dp">
 
-    <com.jrummyapps.android.colorpicker.view.NestedGridView
+    <com.jrummyapps.android.colorpicker.NestedGridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -27,8 +27,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.jrummyapps.android.colorpicker.dialog.ColorPickerDialogFragment;
-import com.jrummyapps.android.colorpicker.preference.ColorPreference;
+import com.jrummyapps.android.colorpicker.ColorPickerDialogFragment;
+import com.jrummyapps.android.colorpicker.ColorPreference;
 
 public class MainActivity extends AppCompatActivity implements ColorPickerDialogFragment.ColorPickerDialogListener {
 

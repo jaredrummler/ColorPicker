@@ -1,4 +1,4 @@
-<com.jrummyapps.android.colorpicker.view.ColorPanelView
+<com.jrummyapps.android.colorpicker.ColorPanelView
     android:id="@id/colorpickerview__preference_preview_color_panel"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="28dp"

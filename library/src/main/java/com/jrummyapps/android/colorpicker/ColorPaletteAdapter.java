@@ -29,7 +29,7 @@
  * limitations under the License.
  */
 
-package com.jrummyapps.android.colorpicker.adapter;
+package com.jrummyapps.android.colorpicker;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -38,17 +38,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import com.jrummyapps.android.colorpicker.R;
-import com.jrummyapps.android.colorpicker.view.ColorPanelView;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-public class ColorPaletteAdapter extends BaseAdapter {
+class ColorPaletteAdapter extends BaseAdapter {
 
   /*package*/ final OnColorSelectedListener listener;
   /*package*/ final int[] colors;
   /*package*/ int selectedPosition;
 
-  public ColorPaletteAdapter(OnColorSelectedListener listener, int[] colors, int selectedPosition) {
+  ColorPaletteAdapter(OnColorSelectedListener listener, int[] colors, int selectedPosition) {
     this.listener = listener;
     this.colors = colors;
     this.selectedPosition = selectedPosition;
@@ -80,12 +78,12 @@ public class ColorPaletteAdapter extends BaseAdapter {
     return convertView;
   }
 
-  public void selectNone() {
+  void selectNone() {
     selectedPosition = -1;
     notifyDataSetChanged();
   }
 
-  public interface OnColorSelectedListener {
+  interface OnColorSelectedListener {
 
     void onColorSelected(int color);
   }

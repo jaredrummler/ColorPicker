@@ -29,7 +29,7 @@
  * limitations under the License.
  */
 
-package com.jrummyapps.android.colorpicker.dialog;
+package com.jrummyapps.android.colorpicker;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -47,9 +47,6 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import com.jrummyapps.android.colorpicker.R;
-import com.jrummyapps.android.colorpicker.adapter.ColorPaletteAdapter;
-import com.jrummyapps.android.colorpicker.view.ColorPanelView;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class ColorPresetsDialogFragment extends DialogFragment {

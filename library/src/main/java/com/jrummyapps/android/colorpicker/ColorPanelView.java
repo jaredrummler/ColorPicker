@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
- * Copyright (C) 2015 Daniel Nilsson
+ * Copyright (C) 2017 JRummy Apps Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * Raw
  */
 
-package com.jrummyapps.android.colorpicker.view;
+package com.jrummyapps.android.colorpicker;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -48,8 +47,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.Toast;
-import com.jrummyapps.android.colorpicker.R;
-import com.jrummyapps.android.colorpicker.drawable.AlphaPatternDrawable;
 
 /**
  * This class draws a panel which which will be filled with a color which can be set. It can be used to show the
@@ -256,6 +253,12 @@ public class ColorPanelView extends FrameLayout {
     return color;
   }
 
+  /**
+   * Set the original color. This is only used for previewing colors.
+   *
+   * @param color
+   *     The original color
+   */
   public void setOriginalColor(@ColorInt int color) {
     if (originalPaint != null) {
       originalPaint.setColor(color);
@@ -280,15 +283,28 @@ public class ColorPanelView extends FrameLayout {
     return borderColor;
   }
 
+  /**
+   * Set the shape.
+   *
+   * @param shape Either {@link Shape#RECT} or {@link Shape#CIRCLE}.
+   */
   public void setShape(@Shape int shape) {
     this.shape = shape;
     invalidate();
   }
 
+  /**
+   * Get the shape
+   *
+   * @return Either {@link Shape#RECT} or {@link Shape#CIRCLE}.
+   */
   @Shape public int getShape() {
     return shape;
   }
 
+  /**
+   * Show a toast message with the hex color code below the view.
+   */
   public void showHint() {
     final int[] screenPos = new int[2];
     final Rect displayFrame = new Rect();

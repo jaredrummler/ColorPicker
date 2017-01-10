@@ -13,7 +13,7 @@
       android:layout_height="wrap_content"
       android:orientation="vertical">
 
-    <com.jrummyapps.android.colorpicker.view.ColorPickerView
+    <com.jrummyapps.android.colorpicker.ColorPickerView
         android:id="@id/colorpickerview__color_picker_view"
         style="@style/colorpickerview__ColorPickerViewStyle"
         android:padding="16dp"/>
@@ -24,7 +24,7 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-      <com.jrummyapps.android.colorpicker.view.ColorPanelView
+      <com.jrummyapps.android.colorpicker.ColorPanelView
           android:id="@id/colorpickerview__color_panel_old"
           android:layout_width="@dimen/colorpickerview__dialog_preview_width"
           android:layout_height="@dimen/colorpickerview__dialog_preview_height"
@@ -40,7 +40,7 @@
           android:src="@drawable/colorpickerview__ic_arrow_right_black_24dp"
           tools:ignore="ContentDescription"/>
 
-      <com.jrummyapps.android.colorpicker.view.ColorPanelView
+      <com.jrummyapps.android.colorpicker.ColorPanelView
           android:id="@id/colorpickerview__color_panel_new"
           android:layout_width="@dimen/colorpickerview__dialog_preview_width"
           android:layout_height="@dimen/colorpickerview__dialog_preview_height"

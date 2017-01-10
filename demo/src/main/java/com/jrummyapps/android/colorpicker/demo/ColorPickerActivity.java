@@ -27,8 +27,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.jrummyapps.android.colorpicker.view.ColorPanelView;
-import com.jrummyapps.android.colorpicker.view.ColorPickerView;
+import com.jrummyapps.android.colorpicker.ColorPanelView;
+import com.jrummyapps.android.colorpicker.ColorPickerView;
 
 public class ColorPickerActivity extends Activity implements ColorPickerView.OnColorChangedListener, View.OnClickListener {
 
