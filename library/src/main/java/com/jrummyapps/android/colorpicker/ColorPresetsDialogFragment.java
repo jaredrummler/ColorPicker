@@ -43,6 +43,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -190,30 +191,47 @@ public class ColorPresetsDialogFragment extends DialogFragment {
 
   /*package*/ void createColorShades(@ColorInt int color) {
     final LinearLayout shadesLayout = (LinearLayout) view.findViewById(R.id.shades_layout);
-    shadesLayout.removeAllViews();
+    final int[] colorShades = getColorShades(color);
+
+    if (shadesLayout.getChildCount() != 0) {
+      for (int i = 0; i < shadesLayout.getChildCount(); i++) {
+        ColorPanelView colorPanelView = (ColorPanelView) shadesLayout.getChildAt(i);
+        colorPanelView.setColor(colorShades[i]);
+      }
+      return;
+    }
 
     final int horizontalPadding =
-        shadesLayout.getResources().getDimensionPixelSize(R.dimen.colorpickerview__item_horizontal_padding);
+        getResources().getDimensionPixelSize(R.dimen.colorpickerview__item_horizontal_padding);
 
-    int[] shades = getColorShades(color);
-    for (final int shade : shades) {
+    for (int colorShade : colorShades) {
       final ColorPanelView colorPanelView = new ColorPanelView(shadesLayout.getContext());
       int size = shadesLayout.getResources().getDimensionPixelSize(R.dimen.colorpickerview__item_size);
       FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(size, size, Gravity.CENTER);
       layoutParams.leftMargin = layoutParams.rightMargin = horizontalPadding;
+      layoutParams.setMargins(horizontalPadding, 0, horizontalPadding, 0);
       colorPanelView.setLayoutParams(layoutParams);
       colorPanelView.setClickable(true);
-      colorPanelView.setColor(shade);
+      colorPanelView.setColor(colorShade);
       final ImageView iv = new ImageView(shadesLayout.getContext());
       iv.setLayoutParams(new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER));
       colorPanelView.addView(iv);
       shadesLayout.addView(colorPanelView);
+      colorPanelView.post(new Runnable() {
+        @Override public void run() {
+          // Some versions of android won't update the params until after the view is displayed
+          ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) colorPanelView.getLayoutParams();
+          params.leftMargin = params.rightMargin = horizontalPadding;
+          colorPanelView.setLayoutParams(params);
+        }
+      });
+      colorPanelView.setPadding(horizontalPadding, 0, horizontalPadding, 0);
       colorPanelView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
           if (v.getTag() instanceof Boolean && (Boolean) v.getTag()) {
             return; // already selected
           }
-          ColorPresetsDialogFragment.this.color = shade;
+          ColorPresetsDialogFragment.this.color = colorPanelView.getColor();
           adapter.selectNone();
           for (int i = 0; i < shadesLayout.getChildCount(); i++) {
             ColorPanelView cpv = (ColorPanelView) shadesLayout.getChildAt(i);

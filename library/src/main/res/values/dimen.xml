@@ -5,7 +5,7 @@
   <dimen name="colorpickerview__dialog_preview_width">66dp</dimen>
   <dimen name="colorpickerview__dialog_preview_height">34dp</dimen>
 
-  <dimen name="colorpickerview__column_width">56dp</dimen>
-  <dimen name="colorpickerview__item_size">48dp</dimen>
+  <dimen name="colorpickerview__column_width">58dp</dimen>
+  <dimen name="colorpickerview__item_size">50dp</dimen>
   <dimen name="colorpickerview__item_horizontal_padding">8dp</dimen>
 </resources>

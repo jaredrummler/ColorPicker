@@ -47,7 +47,7 @@ class AlphaPatternDrawable extends Drawable {
    */
   private Bitmap bitmap;
 
-  public AlphaPatternDrawable(int rectangleSize) {
+  AlphaPatternDrawable(int rectangleSize) {
     this.rectangleSize = rectangleSize;
     paintWhite.setColor(0xFFFFFFFF);
     paintGray.setColor(0xFFCBCBCB);

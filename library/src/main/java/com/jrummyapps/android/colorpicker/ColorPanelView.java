@@ -69,7 +69,7 @@ public class ColorPanelView extends FrameLayout {
   /* The width in pixels of the border surrounding the color panel. */
   private int borderWidthPx;
   private int borderColor = DEFAULT_BORDER_COLOR;
-  private int color = 0xFF000000;
+  private int color = Color.BLACK;
   private int shape;
 
   public ColorPanelView(Context context) {
