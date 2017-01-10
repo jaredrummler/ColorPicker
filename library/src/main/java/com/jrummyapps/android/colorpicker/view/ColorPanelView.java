@@ -90,7 +90,7 @@ public class ColorPanelView extends View {
 
   private void init(Context context, AttributeSet attrs) {
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.colorpickerview__ColorPickerView);
-    shape = a.getInt(R.styleable.colorpickerview__ColorPickerView_shape, Shape.RECT);
+    shape = a.getInt(R.styleable.colorpickerview__ColorPickerView_shape, Shape.CIRCLE);
     borderColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_borderColor, DEFAULT_BORDER_COLOR);
     a.recycle();
     if (borderColor == DEFAULT_BORDER_COLOR) {
@@ -104,12 +104,14 @@ public class ColorPanelView extends View {
     borderWidthPx = DrawingUtils.dpToPx(context, 1);
     borderPaint = new Paint();
     colorPaint = new Paint();
-
-    Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.colorpickerview__alpha)).getBitmap();
-    alphaPaint = new Paint();
-    alphaPaint.setAntiAlias(true);
-    BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-    alphaPaint.setShader(shader);
+    if (shape == Shape.CIRCLE) {
+      Bitmap bitmap =
+          ((BitmapDrawable) context.getResources().getDrawable(R.drawable.colorpickerview__alpha)).getBitmap();
+      alphaPaint = new Paint();
+      alphaPaint.setAntiAlias(true);
+      BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+      alphaPaint.setShader(shader);
+    }
   }
 
   @Override protected void onDraw(Canvas canvas) {
