@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/activity_main"
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-  <GridView
-      android:id="@+id/gridView"
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:columnWidth="@dimen/colorpickerview__column_width"
-      android:horizontalSpacing="4dp"
-      android:numColumns="auto_fit"
-      android:stretchMode="spacingWidthUniform"
-      android:verticalSpacing="8dp"/>
+      android:orientation="vertical"
+      android:padding="16dp">
 
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:layout_marginBottom="8dp"
-      android:layout_marginTop="8dp"
-      android:background="?android:attr/dividerVertical"/>
-
-  <HorizontalScrollView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:overScrollMode="never"
-      android:scrollbars="none">
-
-    <LinearLayout
-        android:id="@+id/shades_layout"
-        android:layout_width="wrap_content"
+    <com.jrummyapps.android.colorpicker.view.NestedGridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:columnWidth="@dimen/colorpickerview__column_width"
+        android:horizontalSpacing="4dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="8dp"/>
 
-      <!-- views added dynamically -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/dividerVertical"/>
 
-    </LinearLayout>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
-  </HorizontalScrollView>
+      <LinearLayout
+          android:id="@+id/shades_layout"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
 
-</LinearLayout>
+        <!-- views added dynamically -->
+
+      </LinearLayout>
+
+    </HorizontalScrollView>
+
+  </LinearLayout>
+</ScrollView>
