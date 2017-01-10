@@ -56,7 +56,7 @@ public class ColorPickerDialogFragment extends DialogFragment
   /*package*/ ColorPickerView colorPicker;
   private ColorPanelView newColorPanel;
   private EditText hexEditText;
-  private boolean showAlphaSlider;
+  /*package*/ boolean showAlphaSlider;
   private boolean fromEditText;
   /*package*/ int dialogId;
 
@@ -143,8 +143,11 @@ public class ColorPickerDialogFragment extends DialogFragment
         .setView(contentView)
         .setNeutralButton("Presets", new DialogInterface.OnClickListener() {
           @Override public void onClick(DialogInterface dialog, int which) {
-            ColorPresetsDialogFragment.newInstance(dialogId, colorPicker.getColor())
-                .show(getFragmentManager(), "color-presets");
+            ColorPresetsDialogFragment.newInstance(dialogId,
+                colorPicker.getColor(),
+                ColorPresetsDialogFragment.DEFAULT_PRESET,
+                showAlphaSlider
+            ).show(getFragmentManager(), "color-presets");
           }
         })
         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

@@ -38,6 +38,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -61,7 +62,7 @@ public class ColorPresetsDialogFragment extends DialogFragment {
   private static final String ARG_ALPHA = "alpha";
 
   /* material design colors */
-  private static final int[] DEFAULT_PRESET = {
+  static final int[] DEFAULT_PRESET = {
       0xFFF44336, // RED 500
       0xFFE91E63, // PINK 500
       0xFF9C27B0, // PURPLE 500
@@ -82,16 +83,27 @@ public class ColorPresetsDialogFragment extends DialogFragment {
       0xFF607D8B  // BLUE GREY 500
   };
 
-  public static ColorPresetsDialogFragment newInstance(int dialogId, int color) {
+  public static ColorPresetsDialogFragment newInstance(int dialogId,
+                                                       @ColorInt int color) {
     return newInstance(dialogId, color, DEFAULT_PRESET);
   }
 
-  public static ColorPresetsDialogFragment newInstance(int dialogId, int color, int[] colors) {
+  public static ColorPresetsDialogFragment newInstance(int dialogId,
+                                                       @ColorInt int color,
+                                                       @NonNull int[] colors) {
+    return newInstance(dialogId, color, colors, false);
+  }
+
+  public static ColorPresetsDialogFragment newInstance(int dialogId,
+                                                       @ColorInt int color,
+                                                       @NonNull int[] colors,
+                                                       boolean showAlpha) {
     ColorPresetsDialogFragment fragment = new ColorPresetsDialogFragment();
     Bundle args = new Bundle();
     args.putInt(ARG_ID, dialogId);
     args.putIntArray(ARG_COLORS, colors);
     args.putInt(ARG_COLOR, color);
+    args.putBoolean(ARG_ALPHA, showAlpha);
     fragment.setArguments(args);
     return fragment;
   }
@@ -116,7 +128,6 @@ public class ColorPresetsDialogFragment extends DialogFragment {
   /*package*/ int[] colors;
   /*package*/ int color;
   /*package*/ int dialogId;
-  /*package*/ boolean showAlpha;
 
   @Override public void onAttach(Activity activity) {
     super.onAttach(activity);
@@ -128,7 +139,6 @@ public class ColorPresetsDialogFragment extends DialogFragment {
   }
 
   @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
-    showAlpha = getArguments().getBoolean(ARG_ALPHA, false);
     colors = getArguments().getIntArray(ARG_COLORS);
 
     if (savedInstanceState == null) {
@@ -160,6 +170,7 @@ public class ColorPresetsDialogFragment extends DialogFragment {
         .setView(view)
         .setNeutralButton("Custom", new DialogInterface.OnClickListener() {
           @Override public void onClick(DialogInterface dialog, int which) {
+            boolean showAlpha = getArguments().getBoolean(ARG_ALPHA, false);
             ColorPickerDialogFragment.newInstance(dialogId, color, showAlpha)
                 .show(getFragmentManager(), "color-picker");
           }
