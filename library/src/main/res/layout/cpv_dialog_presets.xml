@@ -22,6 +22,7 @@
         android:verticalSpacing="8dp"/>
 
     <View
+        android:id="@+id/shades_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="12dp"

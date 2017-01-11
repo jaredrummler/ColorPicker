@@ -72,6 +72,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   private static final String ARG_ALLOW_PRESETS = "allowPresets";
   private static final String ARG_ALLOW_CUSTOM = "allowCustom";
   private static final String ARG_DIALOG_TITLE = "dialogTitle";
+  private static final String ARG_SHOW_COLOR_SHADES = "showColorShades";
 
   public static final int TYPE_CUSTOM = 0;
   public static final int TYPE_PRESETS = 1;
@@ -116,6 +117,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   @ColorInt int color;
   int dialogType;
   int dialogId;
+  boolean showColorShades;
 
   // -- PRESETS --------------------------
   ColorPaletteAdapter adapter;
@@ -140,6 +142,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
     dialogId = getArguments().getInt(ARG_ID);
     showAlphaSlider = getArguments().getBoolean(ARG_ALPHA);
+    showColorShades = getArguments().getBoolean(ARG_SHOW_COLOR_SHADES);
     if (savedInstanceState == null) {
       color = getArguments().getInt(ARG_COLOR);
       dialogType = getArguments().getInt(ARG_TYPE);
@@ -393,11 +396,18 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     if (presets == MATERIAL_COLORS) {
       presets = pushIfNotExists(presets, Color.BLACK);
     }
-    createColorShades(color);
+    if (showColorShades) {
+      createColorShades(color);
+    } else {
+      shadesLayout.setVisibility(View.GONE);
+      contentView.findViewById(R.id.shades_divider).setVisibility(View.GONE);
+    }
     adapter = new ColorPaletteAdapter(new ColorPaletteAdapter.OnColorSelectedListener() {
       @Override public void onColorSelected(int color) {
         ColorPickerDialog.this.color = color;
-        createColorShades(color);
+        if (showColorShades) {
+          createColorShades(color);
+        }
       }
     }, presets, getSelectedItemPosition());
     gridView.setAdapter(adapter);
@@ -558,6 +568,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     boolean showAlphaSlider = false;
     boolean allowPresets = true;
     boolean allowCustom = true;
+    boolean showColorShades = true;
 
     /*package*/ Builder() {
 
@@ -660,6 +671,17 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     }
 
     /**
+     * Show/Hide the color shades in the presets picker
+     *
+     * @param showColorShades {@code false} to hide the color shades.
+     * @return This builder object for chaining method calls
+     */
+    public Builder setShowColorShades(boolean showColorShades) {
+      this.showColorShades = showColorShades;
+      return this;
+    }
+
+    /**
      * Create the {@link ColorPickerDialog} instance.
      *
      * @return A new {@link ColorPickerDialog}.
@@ -676,6 +698,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       args.putBoolean(ARG_ALLOW_CUSTOM, allowCustom);
       args.putBoolean(ARG_ALLOW_PRESETS, allowPresets);
       args.putInt(ARG_DIALOG_TITLE, dialogTitle);
+      args.putBoolean(ARG_SHOW_COLOR_SHADES, showColorShades);
       dialog.setArguments(args);
       return dialog;
     }

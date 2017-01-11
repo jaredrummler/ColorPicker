@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
               .setDialogType(ColorPickerDialog.TYPE_PRESETS)
               .setDialogId(PREFERENCE_DIALOG_ID)
               .setColor(currentColor)
+//              .setShowColorShades(false)
               .setShowAlphaSlider(false)
               .create();
 
