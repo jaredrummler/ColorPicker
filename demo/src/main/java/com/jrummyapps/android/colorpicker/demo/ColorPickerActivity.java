@@ -27,10 +27,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.jrummyapps.android.colorpicker.view.ColorPanelView;
-import com.jrummyapps.android.colorpicker.view.ColorPickerView;
+import com.jrummyapps.android.colorpicker.ColorPanelView;
+import com.jrummyapps.android.colorpicker.ColorPickerView;
+import com.jrummyapps.android.colorpicker.ColorPickerView.OnColorChangedListener;
 
-public class ColorPickerActivity extends Activity implements ColorPickerView.OnColorChangedListener, View.OnClickListener {
+public class ColorPickerActivity extends Activity implements OnColorChangedListener, View.OnClickListener {
 
   private ColorPickerView colorPickerView;
   private ColorPanelView newColorPanelView;
@@ -44,9 +45,9 @@ public class ColorPickerActivity extends Activity implements ColorPickerView.OnC
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
     int initialColor = prefs.getInt("color_3", 0xFF000000);
 
-    colorPickerView = (ColorPickerView) findViewById(R.id.colorpickerview__color_picker_view);
-    ColorPanelView colorPanelView = (ColorPanelView) findViewById(R.id.colorpickerview__color_panel_old);
-    newColorPanelView = (ColorPanelView) findViewById(R.id.colorpickerview__color_panel_new);
+    colorPickerView = (ColorPickerView) findViewById(R.id.cpv_color_picker_view);
+    ColorPanelView colorPanelView = (ColorPanelView) findViewById(R.id.cpv_color_panel_old);
+    newColorPanelView = (ColorPanelView) findViewById(R.id.cpv_color_panel_new);
 
     Button btnOK = (Button) findViewById(R.id.okButton);
     Button btnCancel = (Button) findViewById(R.id.cancelButton);
@@ -57,6 +58,10 @@ public class ColorPickerActivity extends Activity implements ColorPickerView.OnC
     colorPickerView.setOnColorChangedListener(this);
     colorPickerView.setColor(initialColor, true);
     colorPanelView.setColor(initialColor);
+
+    // TODO: fix attributes not applying when inflating layout
+    colorPanelView.setShape(ColorPanelView.Shape.RECT);
+    newColorPanelView.setShape(ColorPanelView.Shape.RECT);
 
     btnOK.setOnClickListener(this);
     btnCancel.setOnClickListener(this);

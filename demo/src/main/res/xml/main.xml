@@ -18,7 +18,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
   <PreferenceCategory android:title="Demo">
-    <com.jrummyapps.android.colorpicker.preference.ColorPreference
+    <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="0xFF000000"
         android:key="color"
         android:summary="Show our color picker using the custom ColorPreference class."
@@ -31,15 +31,6 @@
           android:action="android.intent.action.VIEW"
           android:targetClass="com.jrummyapps.android.colorpicker.demo.ColorPickerActivity"
           android:targetPackage="com.jrummyapps.android.colorpicker.demo"/>
-    </Preference>
-  </PreferenceCategory>
-  <PreferenceCategory android:title="Library">
-    <Preference
-        android:summary="https://github.com/jrummyapps/AndroidColorPicker"
-        android:title="GitHub">
-      <intent
-          android:action="android.intent.action.VIEW"
-          android:data="https://github.com/jrummyapps/AndroidColorPicker"/>
     </Preference>
   </PreferenceCategory>
 

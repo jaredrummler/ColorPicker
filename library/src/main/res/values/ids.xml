@@ -1,8 +1,8 @@
 <resources>
 
-  <item name="colorpickerview__color_picker_view" type="id"/>
-  <item name="colorpickerview__color_panel_old" type="id"/>
-  <item name="colorpickerview__color_panel_new" type="id"/>
-  <item name="colorpickerview__preference_preview_color_panel" type="id"/>
+  <item name="cpv_color_picker_view" type="id"/>
+  <item name="cpv_color_panel_old" type="id"/>
+  <item name="cpv_color_panel_new" type="id"/>
+  <item name="cpv_preference_preview_color_panel" type="id"/>
 
 </resources>

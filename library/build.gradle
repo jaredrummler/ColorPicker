@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
   compileSdkVersion 25
   buildToolsVersion "25.0.2"
-  resourcePrefix "colorpickerview__"
+  resourcePrefix "cpv_"
 
   defaultConfig {
     minSdkVersion 14
