@@ -1,5 +1,4 @@
 # color-picker-dialog
-##### A color picker for Android
 
 A color picker is something that has always been missing from the standard set of components which developers can build their user interface in Android with. This is a color picker which Daniel Nilsson wrote and we improved on. It includes a simple dialog for choosing a color as well as a `ColorPreference` for usage in a `PreferenceFragment`.
 

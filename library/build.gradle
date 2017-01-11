@@ -9,6 +9,10 @@ android {
     minSdkVersion 14
     targetSdkVersion 25
   }
+
+  lintOptions {
+    abortOnError false
+  }
 }
 
 dependencies {
@@ -16,4 +20,4 @@ dependencies {
 }
 
 //apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/artifactory/publication.gradle'
-//apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/maven/gradle-mvn-push
+//apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/maven/gradle-mvn-push.gradle'
