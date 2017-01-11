@@ -26,7 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.jrummyapps.android.colorpicker.ColorPickerDialogFragment;
+import com.jrummyapps.android.colorpicker.ColorPickerDialog;
 import com.jrummyapps.android.colorpicker.ColorPickerDialogListener;
 import com.jrummyapps.android.colorpicker.ColorPreference;
 
@@ -74,7 +74,13 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     // The color picker menu item has been clicked.
     // Show a dialog using the custom ColorPickerDialogFragment class.
 
-    ColorPickerDialogFragment f = ColorPickerDialogFragment.newInstance(DIALOG_ID, Color.BLACK, true);
+    ColorPickerDialog f = ColorPickerDialog.newBuilder()
+        .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
+        .setAllowPresets(false)
+        .setDialogId(DIALOG_ID)
+        .setColor(Color.BLACK)
+        .setShowAlphaSlider(true)
+        .create();
 
     f.setStyle(DialogFragment.STYLE_NORMAL, R.style.LightPickerDialogTheme);
     f.show(getFragmentManager(), "d");
@@ -127,9 +133,12 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         @Override
         public void onShowColorPickerDialog(String title, int currentColor) {
 
-          // Preference was clicked, we need to show the dialog.
-          ColorPickerDialogFragment dialog =
-              ColorPickerDialogFragment.newInstance(PREFERENCE_DIALOG_ID, currentColor, false);
+          ColorPickerDialog dialog = ColorPickerDialog.newBuilder()
+              .setDialogType(ColorPickerDialog.TYPE_PRESETS)
+              .setDialogId(PREFERENCE_DIALOG_ID)
+              .setColor(currentColor)
+              .setShowAlphaSlider(false)
+              .create();
 
           dialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.LightPickerDialogTheme);
 

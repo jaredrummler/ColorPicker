@@ -16,4 +16,6 @@
 <resources>
   <!-- Default title for color picker dialog [CHAR LIMIT=30] -->
   <string name="colorpickerview__default_title">Select a Color</string>
+  <string name="colorpickerview__presets">Presets</string>
+  <string name="colorpickerview__custom">Custom</string>
 </resources>

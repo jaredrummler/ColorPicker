@@ -73,14 +73,14 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:digits="0123456789ABCDEFabcdef"
+            android:focusable="true"
             android:imeOptions="actionGo"
             android:inputType="textNoSuggestions"
             android:maxLength="8"
-            android:singleLine="true"
+            android:maxLines="1"
             android:typeface="monospace"/>
 
       </LinearLayout>
-
 
     </LinearLayout>
 

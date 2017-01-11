@@ -18,7 +18,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:picker="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:divider="?android:attr/dividerHorizontal"
@@ -35,7 +35,7 @@
         android:id="@id/colorpickerview__color_picker_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        picker:alphaChannelVisible="true"/>
+        app:alphaChannelVisible="true"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,7 +50,9 @@
           android:id="@id/colorpickerview__color_panel_old"
           android:layout_width="0px"
           android:layout_height="fill_parent"
-          android:layout_weight="0.5"/>
+          android:layout_weight="0.5"
+          app:borderColor="#0099cc"
+          app:shape="rect"/>
 
       <TextView
           android:layout_width="wrap_content"
@@ -65,7 +67,8 @@
           android:id="@id/colorpickerview__color_panel_new"
           android:layout_width="0px"
           android:layout_height="fill_parent"
-          android:layout_weight="0.5"/>
+          android:layout_weight="0.5"
+          app:shape="rect"/>
     </LinearLayout>
   </RelativeLayout>
 
