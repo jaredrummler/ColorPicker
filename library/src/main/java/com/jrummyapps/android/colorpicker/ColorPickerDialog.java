@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -235,9 +236,11 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     hexEditText = (EditText) contentView.findViewById(R.id.cpv_hex);
 
     try {
-      TypedValue typedValue = new TypedValue();
-      getActivity().getTheme().resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
-      int arrowColor = typedValue.data;
+      final TypedValue value = new TypedValue();
+      TypedArray typedArray =
+          getActivity().obtainStyledAttributes(value.data, new int[]{android.R.attr.textColorPrimary});
+      int arrowColor = typedArray.getColor(0, Color.BLACK);
+      typedArray.recycle();
       arrowRight.setColorFilter(arrowColor);
     } catch (Exception ignored) {
     }
@@ -385,7 +388,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     shadesLayout = (LinearLayout) contentView.findViewById(R.id.shades_layout);
     GridView gridView = (GridView) contentView.findViewById(R.id.gridView);
     presets = unshiftIfNotExists(getArguments().getIntArray(ARG_PRESETS), color);
-    if(presets==MATERIAL_COLORS) {
+    if (presets == MATERIAL_COLORS) {
       presets = pushIfNotExists(presets, Color.BLACK);
     }
     createColorShades(color);
