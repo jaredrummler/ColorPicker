@@ -19,7 +19,10 @@
 package com.jrummyapps.android.colorpicker.demo;
 
 import android.app.DialogFragment;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -62,8 +65,11 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
       case R.id.menu_color_picker_dialog:
         onClickColorPickerDialog(item);
         return true;
-      case R.id.menu_about:
-        new AboutDialog(this).show();
+      case R.id.menu_github:
+        try {
+          startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jrummyapps/color-picker-dialog")));
+        } catch (ActivityNotFoundException ignored) {
+        }
         return true;
     }
     return super.onOptionsItemSelected(item);

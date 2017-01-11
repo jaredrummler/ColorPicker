@@ -33,14 +33,5 @@
           android:targetPackage="com.jrummyapps.android.colorpicker.demo"/>
     </Preference>
   </PreferenceCategory>
-  <PreferenceCategory android:title="Library">
-    <Preference
-        android:summary="https://github.com/jrummyapps/AndroidColorPicker"
-        android:title="GitHub">
-      <intent
-          android:action="android.intent.action.VIEW"
-          android:data="https://github.com/jrummyapps/AndroidColorPicker"/>
-    </Preference>
-  </PreferenceCategory>
 
 </PreferenceScreen>
