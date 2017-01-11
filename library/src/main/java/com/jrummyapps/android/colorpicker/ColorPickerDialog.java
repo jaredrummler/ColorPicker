@@ -78,6 +78,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
    */
   public static final int[] MATERIAL_COLORS = {
       0xFFF44336, // RED 500
+      0xFFF759F7, // BRIGHT PINK
       0xFFE91E63, // PINK 500
       0xFF9C27B0, // PURPLE 500
       0xFF673AB7, // DEEP PURPLE 500
@@ -95,7 +96,6 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       0xFF795548, // BROWN 500
       0xFF607D8B, // BLUE GREY 500
       0xFF9E9E9E, // GREY 500
-      0xFF000000  // BLACK
   };
 
   /**
@@ -385,6 +385,9 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     shadesLayout = (LinearLayout) contentView.findViewById(R.id.shades_layout);
     GridView gridView = (GridView) contentView.findViewById(R.id.gridView);
     presets = unshiftIfNotExists(getArguments().getIntArray(ARG_PRESETS), color);
+    if(presets==MATERIAL_COLORS) {
+      presets = pushIfNotExists(presets, Color.BLACK);
+    }
     createColorShades(color);
     adapter = new ColorPaletteAdapter(new ColorPaletteAdapter.OnColorSelectedListener() {
       @Override public void onColorSelected(int color) {
@@ -498,6 +501,23 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       int[] newArray = new int[array.length + 1];
       newArray[0] = value;
       System.arraycopy(array, 0, newArray, 1, newArray.length - 1);
+      return newArray;
+    }
+    return array;
+  }
+
+  private int[] pushIfNotExists(int[] array, int value) {
+    boolean present = false;
+    for (int i : array) {
+      if (i == value) {
+        present = true;
+        break;
+      }
+    }
+    if (!present) {
+      int[] newArray = new int[array.length + 1];
+      newArray[newArray.length - 1] = value;
+      System.arraycopy(array, 0, newArray, 0, newArray.length - 1);
       return newArray;
     }
     return array;
