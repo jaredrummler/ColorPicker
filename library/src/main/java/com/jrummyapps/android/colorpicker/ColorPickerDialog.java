@@ -533,46 +533,108 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
 
     }
 
+    /**
+     * Set the dialog title string resource id
+     *
+     * @param dialogTitle
+     *     The string resource used for the dialog title
+     * @return This builder object for chaining method calls
+     */
     public Builder setDialogTitle(@StringRes int dialogTitle) {
       this.dialogTitle = dialogTitle;
       return this;
     }
 
+    /**
+     * Set which dialog view to show.
+     *
+     * @param dialogType
+     *     Either {@link ColorPickerDialog#TYPE_CUSTOM} or {@link ColorPickerDialog#TYPE_PRESETS}.
+     * @return This builder object for chaining method calls
+     */
     public Builder setDialogType(@DialogType int dialogType) {
       this.dialogType = dialogType;
       return this;
     }
 
+    /**
+     * Set the colors used for the presets
+     *
+     * @param presets
+     *     An array of color ints.
+     * @return This builder object for chaining method calls
+     */
     public Builder setPresets(@NonNull int[] presets) {
       this.presets = presets;
       return this;
     }
 
+    /**
+     * Set the original color
+     *
+     * @param color
+     *     The default color for the color picker
+     * @return This builder object for chaining method calls
+     */
     public Builder setColor(int color) {
       this.color = color;
       return this;
     }
 
+    /**
+     * Set the dialog id used for callbacks
+     *
+     * @param dialogId
+     *     The id that is sent back to the {@link ColorPickerDialogListener}.
+     * @return This builder object for chaining method calls
+     */
     public Builder setDialogId(int dialogId) {
       this.dialogId = dialogId;
       return this;
     }
 
+    /**
+     * Show the alpha slider
+     *
+     * @param showAlphaSlider
+     *     {@code true} to show the alpha slider. Currently only supported with the {@link ColorPickerView}.
+     * @return This builder object for chaining method calls
+     */
     public Builder setShowAlphaSlider(boolean showAlphaSlider) {
       this.showAlphaSlider = showAlphaSlider;
       return this;
     }
 
+    /**
+     * Show/Hide a neutral button to select preset colors.
+     *
+     * @param allowPresets
+     *     {@code false} to disable showing the presets button.
+     * @return This builder object for chaining method calls
+     */
     public Builder setAllowPresets(boolean allowPresets) {
       this.allowPresets = allowPresets;
       return this;
     }
 
+    /**
+     * Show/Hide the neutral button to select a custom color.
+     *
+     * @param allowCustom
+     *     {@code false} to disable showing the custom button.
+     * @return This builder object for chaining method calls
+     */
     public Builder setAllowCustom(boolean allowCustom) {
       this.allowCustom = allowCustom;
       return this;
     }
 
+    /**
+     * Create the {@link ColorPickerDialog} instance.
+     *
+     * @return A new {@link ColorPickerDialog}.
+     * @see #show(Activity)
+     */
     public ColorPickerDialog create() {
       ColorPickerDialog dialog = new ColorPickerDialog();
       Bundle args = new Bundle();
@@ -588,6 +650,12 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       return dialog;
     }
 
+    /**
+     * Create and show the {@link ColorPickerDialog} created with this builder.
+     *
+     * @param activity
+     *     The current activity.
+     */
     public void show(Activity activity) {
       create().show(activity.getFragmentManager(), "color-picker-dialog");
     }
