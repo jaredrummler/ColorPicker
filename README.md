@@ -1,11 +1,12 @@
-# AndroidColorPicker
-##### A simple good looking color picker component for Android
+# color-picker-dialog
+##### A color picker for Android
 
 A color picker is something that has always been missing from the standard set of components which developers can build their user interface in Android with. This is a color picker which Daniel Nilsson wrote and we improved on.
 
 ### Screenshots
-<img src="art/screenshot-1.png" width="370" alt="Screenshot1">
-<img src="art/screenshot-2.png" width="370" alt="Screenshot2">
+<img src="art/screenshot1.png" width="370" alt="Screenshot">
+<img src="art/screenshot2.png" width="370" alt="Screenshot">
+<img src="art/screenshot3.png" width="370" alt="Screenshot">
 
 ### How to use
 
