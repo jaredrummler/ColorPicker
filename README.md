@@ -1,5 +1,10 @@
 # color-picker-dialog
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/color-picker-dialog/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/color-picker-dialog)
+[![License](http://img.shields.io/:license-apache-blue.svg)](LICENSE)
+[![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=14) 
+[![Twitter Follow](https://img.shields.io/twitter/follow/jrummy16.svg?style=social)](https://twitter.com/jrummy16)
+
 A color picker is something that has always been missing from the standard set of components which developers can build their user interface in Android with. This is a color picker which Daniel Nilsson wrote and we improved on. It includes a simple dialog for choosing a color as well as a `ColorPreference` for usage in a `PreferenceFragment`.
 
 ### Screenshots
@@ -20,6 +25,23 @@ ColorPickerDialog.newBuilder()
 The activity that shows the dialog should implement `ColorPickerDialogListener`.
 
 For further doumentation about how to use the library, check the [demo](demo) app included in this project.
+
+### Download
+
+Download [the latest AAR](https://repo1.maven.org/maven2/com/jrummyapps/color-picker-dialog/1.0.0/color-picker-dialog-1.0.0.aar) or grab via Gradle:
+
+```groovy
+compile 'com.jrummyapps:color-picker-dialog:1.0.0'
+```
+or Maven:
+```xml
+<dependency>
+  <groupId>com.jrummyapps</groupId>
+  <artifactId>color-picker-dialog</artifactId>
+  <version>1.0.0</version>
+  <type>aar</type>
+</dependency>
+```
 
 ### LICENSE
 
