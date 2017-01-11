@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"Rang tanlash"</string>
+  <string name="cpv_default_title">"Rang tanlash"</string>
 </resources>

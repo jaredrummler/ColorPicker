@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"Kies \'n kleur"</string>
+  <string name="cpv_default_title">"Kies \'n kleur"</string>
 </resources>

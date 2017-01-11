@@ -14,8 +14,8 @@
       android:orientation="vertical">
 
     <com.jrummyapps.android.colorpicker.ColorPickerView
-        android:id="@id/colorpickerview__color_picker_view"
-        style="@style/colorpickerview__ColorPickerViewStyle"
+        android:id="@id/cpv_color_picker_view"
+        style="@style/cpv_ColorPickerViewStyle"
         android:padding="16dp"/>
 
     <LinearLayout
@@ -25,25 +25,25 @@
         android:padding="16dp">
 
       <com.jrummyapps.android.colorpicker.ColorPanelView
-          android:id="@id/colorpickerview__color_panel_old"
-          android:layout_width="@dimen/colorpickerview__dialog_preview_width"
-          android:layout_height="@dimen/colorpickerview__dialog_preview_height"
+          android:id="@id/cpv_color_panel_old"
+          android:layout_width="@dimen/cpv_dialog_preview_width"
+          android:layout_height="@dimen/cpv_dialog_preview_height"
           app:shape="rect"/>
 
       <ImageView
-          android:id="@+id/colorpickerview__arrow_right"
+          android:id="@+id/cpv_arrow_right"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:paddingLeft="4dp"
           android:paddingRight="4dp"
-          android:src="@drawable/colorpickerview__ic_arrow_right_black_24dp"
+          android:src="@drawable/cpv_ic_arrow_right_black_24dp"
           tools:ignore="ContentDescription"/>
 
       <com.jrummyapps.android.colorpicker.ColorPanelView
-          android:id="@id/colorpickerview__color_panel_new"
-          android:layout_width="@dimen/colorpickerview__dialog_preview_width"
-          android:layout_height="@dimen/colorpickerview__dialog_preview_height"
+          android:id="@id/cpv_color_panel_new"
+          android:layout_width="@dimen/cpv_dialog_preview_width"
+          android:layout_height="@dimen/cpv_dialog_preview_height"
           app:shape="rect"/>
 
       <Space
@@ -69,7 +69,7 @@
             tools:ignore="HardcodedText"/>
 
         <EditText
-            android:id="@+id/colorpickerview__hex"
+            android:id="@+id/cpv_hex"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:digits="0123456789ABCDEFabcdef"

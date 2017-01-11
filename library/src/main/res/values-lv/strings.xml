@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"Krāsas atlase"</string>
+  <string name="cpv_default_title">"Krāsas atlase"</string>
 </resources>

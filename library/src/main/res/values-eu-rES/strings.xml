@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"Hautatu kolorea"</string>
+  <string name="cpv_default_title">"Hautatu kolorea"</string>
 </resources>

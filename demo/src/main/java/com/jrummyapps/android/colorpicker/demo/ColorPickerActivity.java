@@ -29,8 +29,9 @@ import android.widget.LinearLayout;
 
 import com.jrummyapps.android.colorpicker.ColorPanelView;
 import com.jrummyapps.android.colorpicker.ColorPickerView;
+import com.jrummyapps.android.colorpicker.ColorPickerView.OnColorChangedListener;
 
-public class ColorPickerActivity extends Activity implements ColorPickerView.OnColorChangedListener, View.OnClickListener {
+public class ColorPickerActivity extends Activity implements OnColorChangedListener, View.OnClickListener {
 
   private ColorPickerView colorPickerView;
   private ColorPanelView newColorPanelView;
@@ -44,9 +45,9 @@ public class ColorPickerActivity extends Activity implements ColorPickerView.OnC
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
     int initialColor = prefs.getInt("color_3", 0xFF000000);
 
-    colorPickerView = (ColorPickerView) findViewById(R.id.colorpickerview__color_picker_view);
-    ColorPanelView colorPanelView = (ColorPanelView) findViewById(R.id.colorpickerview__color_panel_old);
-    newColorPanelView = (ColorPanelView) findViewById(R.id.colorpickerview__color_panel_new);
+    colorPickerView = (ColorPickerView) findViewById(R.id.cpv_color_picker_view);
+    ColorPanelView colorPanelView = (ColorPanelView) findViewById(R.id.cpv_color_panel_old);
+    newColorPanelView = (ColorPanelView) findViewById(R.id.cpv_color_panel_new);
 
     Button btnOK = (Button) findViewById(R.id.okButton);
     Button btnCancel = (Button) findViewById(R.id.cancelButton);

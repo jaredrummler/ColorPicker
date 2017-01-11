@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"एउटा रङ्ग चयन गर्नहोस्"</string>
+  <string name="cpv_default_title">"एउटा रङ्ग चयन गर्नहोस्"</string>
 </resources>

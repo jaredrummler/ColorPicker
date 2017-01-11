@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"Veldu lit"</string>
+  <string name="cpv_default_title">"Veldu lit"</string>
 </resources>

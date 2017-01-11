@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"Valige värv"</string>
+  <string name="cpv_default_title">"Valige värv"</string>
 </resources>

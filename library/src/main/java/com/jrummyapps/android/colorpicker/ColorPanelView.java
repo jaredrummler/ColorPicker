@@ -102,13 +102,13 @@ public class ColorPanelView extends FrameLayout {
   }
 
   private void init(Context context, AttributeSet attrs) {
-    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.colorpickerview__ColorPickerView);
-    shape = a.getInt(R.styleable.colorpickerview__ColorPickerView_shape, Shape.CIRCLE);
-    showOldColor = a.getBoolean(R.styleable.colorpickerview__ColorPickerView_showOldColor, false);
+    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.cpv_ColorPickerView);
+    shape = a.getInt(R.styleable.cpv_ColorPickerView_shape, Shape.CIRCLE);
+    showOldColor = a.getBoolean(R.styleable.cpv_ColorPickerView_showOldColor, false);
     if (showOldColor && shape != Shape.CIRCLE) {
       throw new IllegalStateException("Color preview is only available in circle mode");
     }
-    borderColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_borderColor, DEFAULT_BORDER_COLOR);
+    borderColor = a.getColor(R.styleable.cpv_ColorPickerView_borderColor, DEFAULT_BORDER_COLOR);
     a.recycle();
     if (borderColor == DEFAULT_BORDER_COLOR) {
       // If no specific border color has been set we take the default secondary text color as border/slider color.
@@ -125,8 +125,7 @@ public class ColorPanelView extends FrameLayout {
       originalPaint = new Paint();
     }
     if (shape == Shape.CIRCLE) {
-      Bitmap bitmap =
-          ((BitmapDrawable) context.getResources().getDrawable(R.drawable.colorpickerview__alpha)).getBitmap();
+      Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.cpv_alpha)).getBitmap();
       alphaPaint = new Paint();
       alphaPaint.setAntiAlias(true);
       BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
@@ -286,7 +285,8 @@ public class ColorPanelView extends FrameLayout {
   /**
    * Set the shape.
    *
-   * @param shape Either {@link Shape#RECT} or {@link Shape#CIRCLE}.
+   * @param shape
+   *     Either {@link Shape#RECT} or {@link Shape#CIRCLE}.
    */
   public void setShape(@Shape int shape) {
     this.shape = shape;

@@ -191,11 +191,11 @@ public class ColorPickerView extends View {
 
   private void init(Context context, AttributeSet attrs) {
     //Load those if set in xml resource file.
-    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.colorpickerview__ColorPickerView);
-    showAlphaPanel = a.getBoolean(R.styleable.colorpickerview__ColorPickerView_alphaChannelVisible, false);
-    alphaSliderText = a.getString(R.styleable.colorpickerview__ColorPickerView_alphaChannelText);
-    sliderTrackerColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_sliderColor, 0xFFBDBDBD);
-    borderColor = a.getColor(R.styleable.colorpickerview__ColorPickerView_borderColor, 0xFF6E6E6E);
+    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.cpv_ColorPickerView);
+    showAlphaPanel = a.getBoolean(R.styleable.cpv_ColorPickerView_alphaChannelVisible, false);
+    alphaSliderText = a.getString(R.styleable.cpv_ColorPickerView_alphaChannelText);
+    sliderTrackerColor = a.getColor(R.styleable.cpv_ColorPickerView_sliderColor, 0xFFBDBDBD);
+    borderColor = a.getColor(R.styleable.cpv_ColorPickerView_borderColor, 0xFF6E6E6E);
     a.recycle();
 
     applyThemeColors(context);
@@ -207,7 +207,7 @@ public class ColorPickerView extends View {
     sliderTrackerSizePx = DrawingUtils.dpToPx(getContext(), SLIDER_TRACKER_SIZE_DP);
     sliderTrackerOffsetPx = DrawingUtils.dpToPx(getContext(), SLIDER_TRACKER_OFFSET_DP);
 
-    mRequiredPadding = getResources().getDimensionPixelSize(R.dimen.colorpickerview__required_padding);
+    mRequiredPadding = getResources().getDimensionPixelSize(R.dimen.cpv_required_padding);
 
     initPaintTools();
 

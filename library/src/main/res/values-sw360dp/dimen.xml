@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <dimen name="colorpickerview__dialog_preview_width">66dp</dimen>
+  <dimen name="cpv_dialog_preview_width">66dp</dimen>
   <dimen name="colorpickerview__dialog_preview_height">42dp</dimen>
 
 </resources>

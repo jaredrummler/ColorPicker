@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"选择颜色"</string>
+  <string name="cpv_default_title">"选择颜色"</string>
 </resources>

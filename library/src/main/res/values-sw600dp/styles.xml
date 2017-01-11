@@ -17,7 +17,7 @@
 
 <resources>
 
-  <style name="colorpickerview__ColorPickerViewStyle">
+  <style name="cpv_ColorPickerViewStyle">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">360dp</item>
   </style>

@@ -73,7 +73,7 @@ class ColorPaletteAdapter extends BaseAdapter {
       holder = (ViewHolder) convertView.getTag();
     }
     holder.colorPanelView.setColor(colors[position]);
-    holder.imageView.setImageResource(selectedPosition == position ? R.drawable.colorpickerview__preset_checked : 0);
+    holder.imageView.setImageResource(selectedPosition == position ? R.drawable.cpv_preset_checked : 0);
     holder.setOnClickListener(position);
     return convertView;
   }
@@ -95,7 +95,7 @@ class ColorPaletteAdapter extends BaseAdapter {
 
     ViewHolder(Context context) {
       colorPanelView = new ColorPanelView(context);
-      int size = context.getResources().getDimensionPixelSize(R.dimen.colorpickerview__item_size);
+      int size = context.getResources().getDimensionPixelSize(R.dimen.cpv_item_size);
       colorPanelView.setLayoutParams(new FrameLayout.LayoutParams(size, size, Gravity.CENTER));
       colorPanelView.setClickable(true);
       imageView = new ImageView(context);

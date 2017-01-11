@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"Pumili ng Kulay"</string>
+  <string name="cpv_default_title">"Pumili ng Kulay"</string>
 </resources>

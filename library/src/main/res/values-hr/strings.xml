@@ -15,5 +15,5 @@
  -->
 
 <resources>
-  <string name="colorpickerview__default_title">"Odabir boje"</string>
+  <string name="cpv_default_title">"Odabir boje"</string>
 </resources>
