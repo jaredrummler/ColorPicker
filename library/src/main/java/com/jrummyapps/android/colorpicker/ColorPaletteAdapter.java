@@ -20,6 +20,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -81,7 +82,7 @@ class ColorPaletteAdapter extends BaseAdapter {
     ViewHolder(Context context) {
       colorPanelView = new ColorPanelView(context);
       int size = context.getResources().getDimensionPixelSize(R.dimen.cpv_item_size);
-      colorPanelView.setLayoutParams(new FrameLayout.LayoutParams(size, size, Gravity.CENTER));
+      colorPanelView.setLayoutParams(new AbsListView.LayoutParams(size, size, Gravity.CENTER));
       colorPanelView.setClickable(true);
       imageView = new ImageView(context);
       imageView.setLayoutParams(new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER));
