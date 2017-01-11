@@ -23,11 +23,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -409,6 +411,8 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       for (int i = 0; i < shadesLayout.getChildCount(); i++) {
         ColorPanelView colorPanelView = (ColorPanelView) shadesLayout.getChildAt(i);
         colorPanelView.setColor(colorShades[i]);
+        colorPanelView.setTag(false);
+        ((ImageView) colorPanelView.getChildAt(0)).setImageDrawable(null);
       }
       return;
     }
@@ -448,6 +452,11 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
             ColorPanelView cpv = (ColorPanelView) shadesLayout.getChildAt(i);
             ImageView imageView = (ImageView) cpv.getChildAt(0);
             imageView.setImageResource(cpv == v ? R.drawable.cpv_preset_checked : 0);
+            if (cpv == v && ColorUtils.calculateLuminance(colorPanelView.getColor()) >= 0.65) {
+              imageView.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+            } else {
+              imageView.setColorFilter(null);
+            }
             cpv.setTag(cpv == v);
           }
         }

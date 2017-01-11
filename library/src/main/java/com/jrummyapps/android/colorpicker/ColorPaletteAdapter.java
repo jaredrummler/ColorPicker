@@ -17,6 +17,9 @@
 package com.jrummyapps.android.colorpicker;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.support.v4.graphics.ColorUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +63,7 @@ class ColorPaletteAdapter extends BaseAdapter {
     }
     holder.colorPanelView.setColor(colors[position]);
     holder.imageView.setImageResource(selectedPosition == position ? R.drawable.cpv_preset_checked : 0);
+    holder.setColorFilter(position);
     holder.setOnClickListener(position);
     return convertView;
   }
@@ -106,6 +110,14 @@ class ColorPaletteAdapter extends BaseAdapter {
           return true;
         }
       });
+    }
+
+    void setColorFilter(int position) {
+      if (position == selectedPosition && ColorUtils.calculateLuminance(colors[position]) >= 0.65) {
+        imageView.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+      } else {
+        imageView.setColorFilter(null);
+      }
     }
 
   }
