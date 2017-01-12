@@ -18,4 +18,5 @@
   <string name="cpv_default_title">Select a Color</string>
   <string name="cpv_presets">Presets</string>
   <string name="cpv_custom">Custom</string>
+  <string name="cpv_select">Select</string>
 </resources>
