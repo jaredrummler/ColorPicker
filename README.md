@@ -1,11 +1,15 @@
 # Color Picker
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker)
-[![License](http://img.shields.io/:license-apache-blue.svg)](LICENSE)
-[![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=14) 
-[![Twitter Follow](https://img.shields.io/twitter/follow/jrummy16.svg?style=social)](https://twitter.com/jrummy16)
+<img src="https://github.com/jrummyapps/colorpicker/blob/master/demo/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true" align="left" hspace="10" vspace="10"></a>
 
-A color picker is something that has always been missing from the standard set of components which developers can build their user interface in Android with. This is a color picker which Daniel Nilsson wrote and we improved on. It includes a simple dialog for choosing a color as well as a `ColorPreference` for usage in a `PreferenceFragment`.
+<a target="_blank" href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#ICE_CREAM_SANDWICH"><img src="https://img.shields.io/badge/API-14%2B-blue.svg?style=flat" alt="API" /></a>
+<a target="_blank" href="LICENSE"><img src="http://img.shields.io/:license-apache-blue.svg" alt="License" /></a>
+<a target="_blank" href="https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker"><img src="https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker/badge.svg" alt="Maven Central" /></a>
+<a target="_blank" href="http://www.methodscount.com/?lib=com.jrummyapps%3Acolorpicker%3A2.0.0"><img src="https://img.shields.io/badge/methods-409-e91e63.svg" /></a>
+<a target="_blank" href="http://www.methodscount.com/?lib=com.jrummyapps%3Acolorpicker%3A2.0.0"><img src="https://img.shields.io/badge/Size-72 KB-e91e63.svg"/></a>
+<a target="_blank" href="https://twitter.com/jrummyapps"><img src="https://img.shields.io/twitter/follow/jrummyapps.svg?style=social" /></a>
+
+Yet another open source color picker for Android. So, why should you use this color picker? It is highly customizable and easy to use. You can simply add the `ColorPreference` to your preferences and a beautiful color picker dialog will be displayed without additional code. The color picker supports alpha and allows you to set your own presets. Check out the usage and demo for more information. The original ColorPickerView was written by Daniel Nilsson.
 
 ## Screenshots
 ![GIF](art/demo.gif)
