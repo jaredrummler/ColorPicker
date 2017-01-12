@@ -38,6 +38,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
+import java.util.Locale;
 
 /**
  * This class draws a panel which which will be filled with a color which can be set. It can be used to show the
@@ -299,7 +300,13 @@ public class ColorPanelView extends View {
       final int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
       referenceX = screenWidth - referenceX; // mirror
     }
-    Toast cheatSheet = Toast.makeText(context, String.format("#%06X", 0xFFFFFF & color), Toast.LENGTH_SHORT);
+    StringBuilder hint = new StringBuilder("#");
+    if (Color.alpha(color) != 255) {
+      hint.append(Integer.toHexString(color).toUpperCase(Locale.ENGLISH));
+    } else {
+      hint.append(String.format("%06X", 0xFFFFFF & color).toUpperCase(Locale.ENGLISH));
+    }
+    Toast cheatSheet = Toast.makeText(context, hint.toString(), Toast.LENGTH_SHORT);
     if (midy < displayFrame.height()) {
       // Show along the top; follow action buttons
       cheatSheet.setGravity(Gravity.TOP | GravityCompat.END, referenceX,
