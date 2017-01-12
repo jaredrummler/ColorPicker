@@ -16,19 +16,23 @@
 
 package com.jrummyapps.android.colorpicker;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.preference.Preference;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.View;
 
 /**
  * A Preference to select a color
  */
-public class ColorPreference extends Preference {
+public class ColorPreference extends Preference implements ColorPickerDialogListener {
 
   /*package*/ OnShowDialogListener onShowDialogListener;
-  /*package*/ int color = 0xFF000000;
+  /*package*/ int color = Color.BLACK;
+  /*package*/ boolean showDialog;
 
   public ColorPreference(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -42,9 +46,24 @@ public class ColorPreference extends Preference {
 
   private void init(AttributeSet attrs) {
     setPersistent(true);
-    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.cpv_ColorPickerView);
-    int shape = a.getInt(R.styleable.cpv_ColorPickerView_colorShape, ColorShape.CIRCLE);
-    if (shape == ColorShape.CIRCLE) {
+    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ColorPreference);
+    showDialog = a.getBoolean(R.styleable.ColorPreference_showDialog, true);
+    @ColorPickerDialog.DialogType
+    final int dialogType = a.getInt(R.styleable.ColorPreference_dialogType, ColorPickerDialog.TYPE_PRESETS);
+    final int colorShape = a.getInt(R.styleable.ColorPreference_colorShape, ColorShape.CIRCLE);
+    final boolean allowPresets = a.getBoolean(R.styleable.ColorPreference_allowPresets, true);
+    final boolean allowCustom = a.getBoolean(R.styleable.ColorPreference_allowCustom, true);
+    final boolean showAlphaSlider = a.getBoolean(R.styleable.ColorPreference_showAlphaSlider, false);
+    final boolean showColorShades = a.getBoolean(R.styleable.ColorPreference_showColorShades, true);
+    final int presetsResId = a.getResourceId(R.styleable.ColorPreference_colorPresets, 0);
+    final int dialogTitle = a.getResourceId(R.styleable.ColorPreference_dialogTitle, R.string.cpv_default_title);
+    final int[] presets;
+    if (presetsResId != 0) {
+      presets = getContext().getResources().getIntArray(presetsResId);
+    } else {
+      presets = ColorPickerDialog.MATERIAL_COLORS;
+    }
+    if (colorShape == ColorShape.CIRCLE) {
       setWidgetLayoutResource(R.layout.cpv_preference_circle);
     } else {
       setWidgetLayoutResource(R.layout.cpv_preference_square);
@@ -53,7 +72,23 @@ public class ColorPreference extends Preference {
     setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
       @Override public boolean onPreferenceClick(Preference preference) {
-        if (onShowDialogListener != null) {
+        if (showDialog) {
+          ColorPickerDialog dialog = ColorPickerDialog.newBuilder()
+              .setDialogType(dialogType)
+              .setDialogTitle(dialogTitle)
+              .setColorShape(colorShape)
+              .setPresets(presets)
+              .setAllowPresets(allowPresets)
+              .setAllowCustom(allowCustom)
+              .setShowAlphaSlider(showAlphaSlider)
+              .setShowColorShades(showColorShades)
+              .setColor(color)
+              .create();
+          dialog.setColorPickerDialogListener(ColorPreference.this);
+          Activity activity = (Activity) getContext();
+          dialog.show(activity.getFragmentManager(), getFragmentTag());
+          return true;
+        } else if (onShowDialogListener != null) {
           onShowDialogListener.onShowColorPickerDialog((String) getTitle(), color);
           return true;
         } else {
@@ -62,6 +97,61 @@ public class ColorPreference extends Preference {
         }
       }
     });
+  }
+
+  @Override protected void onAttachedToActivity() {
+    super.onAttachedToActivity();
+
+    if (showDialog) {
+      Activity activity = (Activity) getContext();
+      ColorPickerDialog fragment =
+          (ColorPickerDialog) activity.getFragmentManager().findFragmentByTag(getFragmentTag());
+      if (fragment != null) {
+        // re-bind preference to fragment
+        fragment.setColorPickerDialogListener(this);
+      }
+    }
+  }
+
+  @Override protected void onBindView(View view) {
+    super.onBindView(view);
+    ColorPanelView preview = (ColorPanelView) view.findViewById(R.id.cpv_preference_preview_color_panel);
+    if (preview != null) {
+      preview.setColor(color);
+    }
+  }
+
+  @Override protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
+    if (restorePersistedValue) {
+      color = getPersistedInt(0xFF000000);
+    } else {
+      color = (Integer) defaultValue;
+      persistInt(color);
+    }
+  }
+
+  @Override protected Object onGetDefaultValue(TypedArray a, int index) {
+    return a.getInteger(index, Color.BLACK);
+  }
+
+  @Override public void onColorSelected(int dialogId, @ColorInt int color) {
+    saveValue(color);
+  }
+
+  @Override public void onDialogDismissed(int dialogId) {
+    // no-op
+  }
+
+  /**
+   * Set the new color
+   *
+   * @param color
+   *     The newly selected color
+   */
+  public void saveValue(@ColorInt int color) {
+    this.color = color;
+    persistInt(this.color);
+    notifyChanged();
   }
 
   /**
@@ -75,32 +165,13 @@ public class ColorPreference extends Preference {
     onShowDialogListener = listener;
   }
 
-  @Override protected void onBindView(View view) {
-    super.onBindView(view);
-    ColorPanelView preview = (ColorPanelView) view.findViewById(R.id.cpv_preference_preview_color_panel);
-    if (preview != null) {
-      preview.setColor(color);
-    }
-
-  }
-
-  @Override protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
-    if (restorePersistedValue) {
-      color = getPersistedInt(0xFF000000);
-    } else {
-      color = (Integer) defaultValue;
-      persistInt(color);
-    }
-  }
-
-  @Override protected Object onGetDefaultValue(TypedArray a, int index) {
-    return a.getInteger(index, 0xFF000000);
-  }
-
-  public void saveValue(int color) {
-    this.color = color;
-    persistInt(this.color);
-    notifyChanged();
+  /**
+   * The tag used for the {@link ColorPickerDialog}.
+   *
+   * @return The tag
+   */
+  public String getFragmentTag() {
+    return "color_" + getKey();
   }
 
   public interface OnShowDialogListener {

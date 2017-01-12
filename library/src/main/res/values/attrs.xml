@@ -1,15 +1,34 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
 
-  <declare-styleable name="cpv_ColorPickerView" tools:ignore="ResourceName">
-    <attr name="alphaChannelVisible" format="boolean|reference"/>
-    <attr name="alphaChannelText" format="string|reference"/>
-    <attr name="sliderColor" format="color|reference"/>
-    <attr name="borderColor" format="color|reference"/>
+  <declare-styleable name="ColorPanelView">
+    <attr name="showOldColor" format="boolean"/>
     <attr name="colorShape" format="enum">
       <enum name="square" value="0"/>
       <enum name="circle" value="1"/>
     </attr>
-    <attr name="showOldColor" format="boolean"/>
+    <attr name="borderColor" format="color|reference"/>
+  </declare-styleable>
+
+  <declare-styleable name="ColorPickerView" parent="ColorPanelView">
+    <attr name="alphaChannelVisible" format="boolean|reference"/>
+    <attr name="alphaChannelText" format="string|reference"/>
+    <attr name="sliderColor" format="color|reference"/>
+    <attr name="borderColor"/>
+  </declare-styleable>
+
+  <declare-styleable name="ColorPreference" parent="ColorPickerDialog">
+    <attr name="showAlphaSlider" format="boolean|reference"/>
+    <attr name="colorShape"/>
+    <attr name="dialogTitle" format="reference"/>
+    <attr name="colorPresets" format="reference"/>
+    <attr name="dialogType" format="enum">
+      <enum name="custom" value="0"/>
+      <enum name="preset" value="1"/>
+    </attr>
+    <attr name="showColorShades" format="boolean|reference"/>
+    <attr name="allowPresets" format="boolean|reference"/>
+    <attr name="allowCustom" format="boolean|reference"/>
+    <attr name="showDialog" format="boolean|reference"/>
   </declare-styleable>
 
 </resources>

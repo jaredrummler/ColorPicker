@@ -15,18 +15,53 @@
   ~
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <PreferenceCategory android:title="Demo">
     <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="0xFF000000"
-        android:key="color"
-        android:summary="Show our color picker using the custom ColorPreference class."
-        android:title="Show Dialog" />
+        android:key="default_color"
+        android:summary="This is the default ColorPreference"
+        android:title="Default Color Picker"/>
+
+    <com.jrummyapps.android.colorpicker.ColorPreference
+        android:defaultValue="0xFF000000"
+        android:key="square_color"
+        android:summary="A square shaped color picker"
+        android:title="Square color picker"
+        app:colorShape="square"/>
+
+    <com.jrummyapps.android.colorpicker.ColorPreference
+        android:defaultValue="0xFF000000"
+        android:key="custom_only_color"
+        android:summary="A picker that doesn't show the presets"
+        android:title="Custom color"
+        app:allowPresets="false"
+        app:dialogTitle="@string/app_name"
+        app:dialogType="custom"/>
+
+    <com.jrummyapps.android.colorpicker.ColorPreference
+        android:defaultValue="0x890099CC"
+        android:key="color_with_alpha"
+        android:summary="A picker with alpha slider"
+        android:title="Color picker with alpha"
+        app:allowPresets="false"
+        app:dialogType="custom"
+        app:showAlphaSlider="true"/>
+
+    <com.jrummyapps.android.colorpicker.ColorPreference
+        android:defaultValue="0xFF000000"
+        android:key="my_presets"
+        android:summary="A picker with presets different presets"
+        android:title="Custom presets"
+        app:allowCustom="false"
+        app:colorPresets="@array/demo_colors"
+        app:showColorShades="false"/>
 
     <Preference
         android:summary="Show how the custom color picker can be used in a standard activity."
-        android:title="Show Activity">
+        android:title="Show activity">
       <intent
           android:action="android.intent.action.VIEW"
           android:targetClass="com.jrummyapps.android.colorpicker.demo.ColorPickerActivity"

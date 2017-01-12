@@ -133,7 +133,9 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   @Override public void onAttach(Activity activity) {
     super.onAttach(activity);
     try {
-      colorPickerDialogListener = (ColorPickerDialogListener) activity;
+      if (colorPickerDialogListener == null) {
+        colorPickerDialogListener = (ColorPickerDialogListener) activity;
+      }
     } catch (ClassCastException e) {
       throw new ClassCastException("Parent activity must implement ColorPickerDialogListener to receive result.");
     }
@@ -229,6 +231,16 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     outState.putInt(ARG_COLOR, color);
     outState.putInt(ARG_TYPE, dialogType);
     super.onSaveInstanceState(outState);
+  }
+
+  /**
+   * Set the callback
+   *
+   * @param colorPickerDialogListener
+   *     The callback invoked when a color is selected or the dialog is dismissed.
+   */
+  public void setColorPickerDialogListener(ColorPickerDialogListener colorPickerDialogListener) {
+    this.colorPickerDialogListener = colorPickerDialogListener;
   }
 
   // region Custom Picker
@@ -692,7 +704,8 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     /**
      * Set the shape of the color panel view.
      *
-     * @param colorShape Either {@link ColorShape#CIRCLE} or {@link ColorShape#RECT}.
+     * @param colorShape
+     *     Either {@link ColorShape#CIRCLE} or {@link ColorShape#RECT}.
      * @return This builder object for chaining method calls
      */
     public Builder setColorShape(int colorShape) {

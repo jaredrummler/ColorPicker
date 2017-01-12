@@ -20,4 +20,89 @@
   <color name="colorPrimary">#3F51B5</color>
   <color name="colorPrimaryDark">#303F9F</color>
   <color name="colorAccent">#FF4081</color>
+
+  <array name="demo_colors">
+    <item>@color/md_red_500</item>
+    <item>@color/md_pink_500</item>
+    <item>@color/md_purple_500</item>
+    <item>@color/md_deep_purple_500</item>
+    <item>@color/md_indigo_500</item>
+    <item>@color/md_blue_500</item>
+    <item>@color/md_light_blue_500</item>
+    <item>@color/md_cyan_500</item>
+    <item>@color/md_teal_500</item>
+    <item>@color/md_green_500</item>
+    <item>@color/md_light_green_500</item>
+    <item>@color/md_lime_500</item>
+    <item>@color/md_yellow_500</item>
+    <item>@color/md_amber_500</item>
+    <item>@color/md_orange_500</item>
+    <item>@color/md_deep_orange_500</item>
+    <item>@color/md_brown_500</item>
+    <item>@color/md_grey_500</item>
+    <item>@color/md_blue_grey_500</item>
+    <item>@color/md_white</item>
+  </array>
+
+  <!-- red -->
+  <color name="md_red_500">#f44336</color>
+
+  <!-- pink -->
+  <color name="md_pink_500">#e91e63</color>
+
+  <!-- purple -->
+  <color name="md_purple_500">#9c27b0</color>
+
+  <!-- deep_purple -->
+  <color name="md_deep_purple_500">#673ab7</color>
+
+  <!-- indigo -->
+  <color name="md_indigo_500">#3f51b5</color>
+
+  <!-- blue -->
+  <color name="md_blue_500">#2196f3</color>
+
+  <!-- light_blue -->
+  <color name="md_light_blue_500">#03a9f4</color>
+
+  <!-- cyan -->
+  <color name="md_cyan_500">#00bcd4</color>
+
+  <!-- teal -->
+  <color name="md_teal_500">#009688</color>
+
+  <!-- green -->
+  <color name="md_green_500">#4caf50</color>
+
+  <!-- light_green -->
+  <color name="md_light_green_500">#8bc34a</color>
+
+  <!-- lime -->
+  <color name="md_lime_500">#cddc39</color>
+
+  <!-- yellow -->
+  <color name="md_yellow_500">#ffeb3b</color>
+
+  <!-- amber -->
+  <color name="md_amber_500">#ffc107</color>
+
+  <!-- orange -->
+  <color name="md_orange_500">#ff9800</color>
+
+  <!-- deep_orange -->
+  <color name="md_deep_orange_500">#ff5722</color>
+
+  <!-- brown -->
+  <color name="md_brown_500">#795548</color>
+
+  <!-- grey -->
+  <color name="md_grey_500">#9e9e9e</color>
+  <!-- <color name="md_grey_1000">#000000</color> -->
+  <color name="md_black">#000000</color>
+  <!-- <color name="md_grey_1000">#ffffff</color> -->
+  <color name="md_white">#ffffff</color>
+
+  <!-- blue_grey -->
+  <color name="md_blue_grey_500">#607d8b</color>
+
 </resources>
