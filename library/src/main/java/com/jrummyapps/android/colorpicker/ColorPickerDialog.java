@@ -434,7 +434,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
 
     for (final int colorShade : colorShades) {
       int layoutResId;
-      if (colorShape == ColorPanelView.Shape.RECT) {
+      if (colorShape == ColorShape.SQUARE) {
         layoutResId = R.layout.cpv_color_item_square;
       } else {
         layoutResId = R.layout.cpv_color_item_circle;
@@ -575,7 +575,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     boolean allowPresets = true;
     boolean allowCustom = true;
     boolean showColorShades = true;
-    @ColorPanelView.Shape int colorShape = ColorPanelView.Shape.CIRCLE;
+    @ColorShape int colorShape = ColorShape.CIRCLE;
 
     /*package*/ Builder() {
 
@@ -692,7 +692,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     /**
      * Set the shape of the color panel view.
      *
-     * @param colorShape Either {@link ColorPanelView.Shape#CIRCLE} or {@link ColorPanelView.Shape#RECT}.
+     * @param colorShape Either {@link ColorShape#CIRCLE} or {@link ColorShape#RECT}.
      * @return This builder object for chaining method calls
      */
     public Builder setColorShape(int colorShape) {

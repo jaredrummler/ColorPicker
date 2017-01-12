@@ -31,7 +31,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IntDef;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
@@ -95,9 +94,9 @@ public class ColorPanelView extends View {
 
   private void init(Context context, AttributeSet attrs) {
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.cpv_ColorPickerView);
-    shape = a.getInt(R.styleable.cpv_ColorPickerView_shape, Shape.CIRCLE);
+    shape = a.getInt(R.styleable.cpv_ColorPickerView_colorShape, ColorShape.CIRCLE);
     showOldColor = a.getBoolean(R.styleable.cpv_ColorPickerView_showOldColor, false);
-    if (showOldColor && shape != Shape.CIRCLE) {
+    if (showOldColor && shape != ColorShape.CIRCLE) {
       throw new IllegalStateException("Color preview is only available in circle mode");
     }
     borderColor = a.getColor(R.styleable.cpv_ColorPickerView_borderColor, DEFAULT_BORDER_COLOR);
@@ -116,7 +115,7 @@ public class ColorPanelView extends View {
     if (showOldColor) {
       originalPaint = new Paint();
     }
-    if (shape == Shape.CIRCLE) {
+    if (shape == ColorShape.CIRCLE) {
       Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.cpv_alpha)).getBitmap();
       alphaPaint = new Paint();
       alphaPaint.setAntiAlias(true);
@@ -128,7 +127,7 @@ public class ColorPanelView extends View {
   @Override protected void onDraw(Canvas canvas) {
     borderPaint.setColor(borderColor);
     colorPaint.setColor(color);
-    if (shape == Shape.RECT) {
+    if (shape == ColorShape.SQUARE) {
       if (borderWidthPx > 0) {
         canvas.drawRect(drawingRect, borderPaint);
       }
@@ -136,7 +135,7 @@ public class ColorPanelView extends View {
         alphaPattern.draw(canvas);
       }
       canvas.drawRect(colorRect, colorPaint);
-    } else if (shape == Shape.CIRCLE) {
+    } else if (shape == ColorShape.CIRCLE) {
       final int outerRadius = getMeasuredWidth() / 2;
       if (borderWidthPx > 0) {
         canvas.drawCircle(getMeasuredWidth() / 2,
@@ -162,11 +161,11 @@ public class ColorPanelView extends View {
   }
 
   @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    if (shape == Shape.RECT) {
+    if (shape == ColorShape.SQUARE) {
       int width = MeasureSpec.getSize(widthMeasureSpec);
       int height = MeasureSpec.getSize(heightMeasureSpec);
       setMeasuredDimension(width, height);
-    } else if (shape == Shape.CIRCLE) {
+    } else if (shape == ColorShape.CIRCLE) {
       super.onMeasure(widthMeasureSpec, widthMeasureSpec);
       setMeasuredDimension(getMeasuredWidth(), getMeasuredWidth());
     } else {
@@ -176,7 +175,7 @@ public class ColorPanelView extends View {
 
   @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
-    if (shape == Shape.RECT || showOldColor) {
+    if (shape == ColorShape.SQUARE || showOldColor) {
       drawingRect = new Rect();
       drawingRect.left = getPaddingLeft();
       drawingRect.right = w - getPaddingRight();
@@ -267,9 +266,9 @@ public class ColorPanelView extends View {
    * Set the shape.
    *
    * @param shape
-   *     Either {@link Shape#RECT} or {@link Shape#CIRCLE}.
+   *     Either {@link ColorShape#SQUARE} or {@link ColorShape#CIRCLE}.
    */
-  public void setShape(@Shape int shape) {
+  public void setShape(@ColorShape int shape) {
     this.shape = shape;
     invalidate();
   }
@@ -277,9 +276,9 @@ public class ColorPanelView extends View {
   /**
    * Get the shape
    *
-   * @return Either {@link Shape#RECT} or {@link Shape#CIRCLE}.
+   * @return Either {@link ColorShape#SQUARE} or {@link ColorShape#CIRCLE}.
    */
-  @Shape public int getShape() {
+  @ColorShape public int getShape() {
     return shape;
   }
 
@@ -310,13 +309,6 @@ public class ColorPanelView extends View {
       cheatSheet.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, height);
     }
     cheatSheet.show();
-  }
-
-  @IntDef({Shape.RECT, Shape.CIRCLE})
-  public @interface Shape {
-    int RECT = 0;
-
-    int CIRCLE = 1;
   }
 
 }

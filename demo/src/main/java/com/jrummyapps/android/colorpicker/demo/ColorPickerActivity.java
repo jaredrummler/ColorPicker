@@ -26,7 +26,6 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-
 import com.jrummyapps.android.colorpicker.ColorPanelView;
 import com.jrummyapps.android.colorpicker.ColorPickerView;
 import com.jrummyapps.android.colorpicker.ColorPickerView.OnColorChangedListener;
@@ -58,10 +57,6 @@ public class ColorPickerActivity extends Activity implements OnColorChangedListe
     colorPickerView.setOnColorChangedListener(this);
     colorPickerView.setColor(initialColor, true);
     colorPanelView.setColor(initialColor);
-
-    // TODO: fix attributes not applying when inflating layout
-    colorPanelView.setShape(ColorPanelView.Shape.RECT);
-    newColorPanelView.setShape(ColorPanelView.Shape.RECT);
 
     btnOK.setOnClickListener(this);
     btnCancel.setOnClickListener(this);

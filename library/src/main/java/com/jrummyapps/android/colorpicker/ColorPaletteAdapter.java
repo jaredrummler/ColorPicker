@@ -35,7 +35,7 @@ class ColorPaletteAdapter extends BaseAdapter {
   ColorPaletteAdapter(OnColorSelectedListener listener,
                       int[] colors,
                       int selectedPosition,
-                      @ColorPanelView.Shape int colorShape) {
+                      @ColorShape int colorShape) {
     this.listener = listener;
     this.colors = colors;
     this.selectedPosition = selectedPosition;
@@ -84,7 +84,7 @@ class ColorPaletteAdapter extends BaseAdapter {
 
     ViewHolder(Context context) {
       int layoutResId;
-      if (colorShape == ColorPanelView.Shape.RECT) {
+      if (colorShape == ColorShape.SQUARE) {
         layoutResId = R.layout.cpv_color_item_square;
       } else {
         layoutResId = R.layout.cpv_color_item_circle;
