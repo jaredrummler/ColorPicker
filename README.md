@@ -1,4 +1,4 @@
-# color-picker-dialog
+# Color Picker
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/color-picker-dialog/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/color-picker-dialog)
 [![License](http://img.shields.io/:license-apache-blue.svg)](LICENSE)
@@ -7,43 +7,77 @@
 
 A color picker is something that has always been missing from the standard set of components which developers can build their user interface in Android with. This is a color picker which Daniel Nilsson wrote and we improved on. It includes a simple dialog for choosing a color as well as a `ColorPreference` for usage in a `PreferenceFragment`.
 
-### Screenshots
-<img src="art/screenshot1.png" width="370" alt="Screenshot">
-<img src="art/screenshot3.png" width="370" alt="Screenshot">
+## Screenshots
+![GIF](art/demo.gif)
+&nbsp;&nbsp;
+<img src="art/screenshot3.png" width="300" alt="Screenshot">
 
-### How to use
 
-Show a `ColorPickerDialog`:
+## Usage
 
-```java
-ColorPickerDialog.newBuilder()
-  .setDialogId(DIALOG_ID)
-  .setColor(color)
-  .show(getActivity());
+Add the `ColorPreference` to your preference XML:
+
+```xml
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <PreferenceCategory>
+
+    <com.jrummyapps.android.colorpicker.ColorPreference
+        android:defaultValue="@color/color_default"
+        android:key="default_color"
+        android:summary="@string/color_default_summary"
+        android:title="@string/color_default_title"/>
+
+    ...
+
+  </PreferenceCategory>
+
+</PreferenceScreen>
 ```
 
-The activity that shows the dialog should implement `ColorPickerDialogListener`.
+You can add attributes to customize the `ColorPreference`:
+
+| name            | type      | documentation                                                                         |
+|-----------------|-----------|---------------------------------------------------------------------------------------|
+| dialogType      | enum      | "custom" to show the color picker, "preset" to show pre-defined colors                |
+| showAlphaSlider | boolean   | Show a slider for changing the alpha of a color (adding transparency)                 |
+| colorShape      | enum      | "square" or "circle" for the shape of the color preview                               |
+| colorPresets    | reference | An int-array of pre-defined colors to show in the dialog                              |
+| dialogTitle     | reference | The string resource id for the dialog title. By default the title is "Select a Color" |
+| showColorShades | boolean   | true to show different shades of the selected color                                   |
+| allowPresets    | boolean   | true to add a button to toggle to the custom color picker                             |
+| allowCustom     | boolean   | true to add a button to toggle to the presets color picker                            |
+| showDialog      | boolean   | true to let the ColorPreference handle showing the dialog                             |
+
+You can also show a `ColorPickerDialog` without using the `ColorPreference`:
+
+```java
+ColorPickerDialog.newBuilder().setColor(color).show(activity);
+```
+
+All the attributes above can also be applied to the `ColorPickerDialog`. The activity that shows the dialog should implement `ColorPickerDialogListener` to get a callback when a color is selected.
 
 For further doumentation about how to use the library, check the [demo](demo) app included in this project.
 
-### Download
+## Download
 
-Download [the latest AAR](https://repo1.maven.org/maven2/com/jrummyapps/color-picker-dialog/1.0.0/color-picker-dialog-1.0.0.aar) or grab via Gradle:
+Download [the latest AAR](https://repo1.maven.org/maven2/com/jrummyapps/color-picker-dialog/1.1.1/color-picker-dialog-1.1.1.aar) or grab via Gradle:
 
 ```groovy
-compile 'com.jrummyapps:color-picker-dialog:1.0.0'
+compile 'com.jrummyapps:color-picker-dialog:1.1.1'
 ```
 or Maven:
 ```xml
 <dependency>
   <groupId>com.jrummyapps</groupId>
   <artifactId>color-picker-dialog</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.1</version>
   <type>aar</type>
 </dependency>
 ```
 
-### LICENSE
+## License
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
