@@ -46,8 +46,7 @@
         android:key="color_with_alpha"
         android:summary="A picker with alpha slider"
         android:title="Color picker with alpha"
-        app:allowPresets="false"
-        app:dialogType="custom"
+        app:showColorShades="false"
         app:showAlphaSlider="true"/>
 
     <com.jrummyapps.android.colorpicker.ColorPreference

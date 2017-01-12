@@ -81,6 +81,7 @@ class ColorPaletteAdapter extends BaseAdapter {
     View view;
     ColorPanelView colorPanelView;
     ImageView imageView;
+    int originalBorderColor;
 
     ViewHolder(Context context) {
       int layoutResId;
@@ -92,13 +93,26 @@ class ColorPaletteAdapter extends BaseAdapter {
       view = View.inflate(context, layoutResId, null);
       colorPanelView = (ColorPanelView) view.findViewById(R.id.cpv_color_panel_view);
       imageView = (ImageView) view.findViewById(R.id.cpv_color_image_view);
+      originalBorderColor = colorPanelView.getBorderColor();
       view.setTag(this);
     }
 
     void setup(int position) {
-      colorPanelView.setColor(colors[position]);
+      int color = colors[position];
+      int alpha = Color.alpha(color);
+      colorPanelView.setColor(color);
       imageView.setImageResource(selectedPosition == position ? R.drawable.cpv_preset_checked : 0);
-      setColorFilter(position);
+      if (alpha != 255) {
+        if (alpha <= ColorPickerDialog.ALPHA_THRESHOLD) {
+          colorPanelView.setBorderColor(color | 0xFF000000);
+          imageView.setColorFilter(/*color | 0xFF000000*/Color.BLACK, PorterDuff.Mode.SRC_IN);
+        } else {
+          colorPanelView.setBorderColor(originalBorderColor);
+          imageView.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        }
+      } else {
+        setColorFilter(position);
+      }
       setOnClickListener(position);
     }
 

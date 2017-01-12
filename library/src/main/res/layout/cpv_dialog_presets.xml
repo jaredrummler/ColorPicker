@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -48,6 +49,40 @@
       </LinearLayout>
 
     </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/transparency_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:text="@string/cpv_transparency"/>
+
+    <LinearLayout
+        android:id="@+id/transparency_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+      <SeekBar
+          android:id="@+id/transparency_seekbar"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:layout_marginRight="4dp"
+          android:layout_weight="85"/>
+
+      <TextView
+          android:id="@+id/transparency_text"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:layout_weight="15"
+          android:textStyle="bold"
+          android:typeface="monospace"
+          tools:text="100%"/>
+
+    </LinearLayout>
 
   </LinearLayout>
 </ScrollView>

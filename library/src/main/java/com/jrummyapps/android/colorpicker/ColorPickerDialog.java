@@ -47,7 +47,10 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import com.jrummyapps.android.colorpicker.ColorPickerView.OnColorChangedListener;
+import java.util.Locale;
 
 /**
  * <p>A dialog to pick a color.</p>
@@ -75,6 +78,8 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
 
   public static final int TYPE_CUSTOM = 0;
   public static final int TYPE_PRESETS = 1;
+
+  static final int ALPHA_THRESHOLD = 165;
 
   /**
    * Material design colors used as the default color presets
@@ -122,6 +127,8 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   // -- PRESETS --------------------------
   ColorPaletteAdapter adapter;
   LinearLayout shadesLayout;
+  SeekBar transparencySeekBar;
+  TextView transparencyPercText;
 
   // -- CUSTOM ---------------------------
   ColorPickerView colorPicker;
@@ -404,10 +411,23 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   View createPresetsView() {
     View contentView = View.inflate(getActivity(), R.layout.cpv_dialog_presets, null);
     shadesLayout = (LinearLayout) contentView.findViewById(R.id.shades_layout);
+    transparencySeekBar = (SeekBar) contentView.findViewById(R.id.transparency_seekbar);
+    transparencyPercText = (TextView) contentView.findViewById(R.id.transparency_text);
     GridView gridView = (GridView) contentView.findViewById(R.id.gridView);
     presets = unshiftIfNotExists(getArguments().getIntArray(ARG_PRESETS), color);
     if (presets == MATERIAL_COLORS) {
       presets = pushIfNotExists(presets, Color.BLACK);
+    }
+    int alpha = Color.alpha(color);
+    if (alpha != 255) {
+      // add alpha to the presets
+      for (int i = 0; i < presets.length; i++) {
+        int color = presets[i];
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        presets[i] = Color.argb(alpha, red, green, blue);
+      }
     }
     if (showColorShades) {
       createColorShades(color);
@@ -424,6 +444,12 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       }
     }, presets, getSelectedItemPosition(), colorShape);
     gridView.setAdapter(adapter);
+    if (showAlphaSlider) {
+      setupTransparency();
+    } else {
+      contentView.findViewById(R.id.transparency_layout).setVisibility(View.GONE);
+      contentView.findViewById(R.id.transparency_title).setVisibility(View.GONE);
+    }
     return contentView;
   }
 
@@ -480,7 +506,8 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
             ColorPanelView cpv = (ColorPanelView) layout.findViewById(R.id.cpv_color_panel_view);
             ImageView iv = (ImageView) layout.findViewById(R.id.cpv_color_image_view);
             iv.setImageResource(cpv == v ? R.drawable.cpv_preset_checked : 0);
-            if (cpv == v && ColorUtils.calculateLuminance(colorPanelView.getColor()) >= 0.65) {
+            if (cpv == v && ColorUtils.calculateLuminance(cpv.getColor()) >= 0.65 ||
+                Color.alpha(cpv.getColor()) <= ALPHA_THRESHOLD) {
               iv.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
             } else {
               iv.setColorFilter(null);
@@ -506,10 +533,11 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     long R = f >> 16;
     long G = f >> 8 & 0x00FF;
     long B = f & 0x0000FF;
+    int alpha = Color.alpha(color);
     int red = (int) (Math.round((t - R) * p) + R);
     int green = (int) (Math.round((t - G) * p) + G);
     int blue = (int) (Math.round((t - B) * p) + B);
-    return Color.rgb(red, green, blue);
+    return Color.argb(alpha, red, green, blue);
   }
 
   private int[] getColorShades(@ColorInt int color) {
@@ -527,6 +555,73 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
         shadeColor(color, -0.7),
         shadeColor(color, -0.775),
     };
+  }
+
+  private void setupTransparency() {
+    int progress = 255 - Color.alpha(color);
+    transparencySeekBar.setMax(255);
+    transparencySeekBar.setProgress(progress);
+    int percentage = (int) ((double) progress * 100 / 255);
+    transparencyPercText.setText(String.format(Locale.ENGLISH, "%d%%", percentage));
+    transparencySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+      @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        int percentage = (int) ((double) progress * 100 / 255);
+        transparencyPercText.setText(String.format(Locale.ENGLISH, "%d%%", percentage));
+        int alpha = 255 - progress;
+        // update items in GridView:
+        for (int i = 0; i < adapter.colors.length; i++) {
+          int color = adapter.colors[i];
+          int red = Color.red(color);
+          int green = Color.green(color);
+          int blue = Color.blue(color);
+          adapter.colors[i] = Color.argb(alpha, red, green, blue);
+        }
+        adapter.notifyDataSetChanged();
+        // update shades:
+        for (int i = 0; i < shadesLayout.getChildCount(); i++) {
+          FrameLayout layout = (FrameLayout) shadesLayout.getChildAt(i);
+          ColorPanelView cpv = (ColorPanelView) layout.findViewById(R.id.cpv_color_panel_view);
+          ImageView iv = (ImageView) layout.findViewById(R.id.cpv_color_image_view);
+          if (layout.getTag() == null) {
+            // save the original border color
+            layout.setTag(cpv.getBorderColor());
+          }
+          int color = cpv.getColor();
+          color = Color.argb(alpha, Color.red(color), Color.green(color), Color.blue(color));
+          if (alpha <= ALPHA_THRESHOLD) {
+            cpv.setBorderColor(color | 0xFF000000);
+          } else {
+            cpv.setBorderColor((int) layout.getTag());
+          }
+          if (cpv.getTag() != null && (Boolean) cpv.getTag()) {
+            // The alpha changed on the selected shaded color. Update the checkmark color filter.
+            if (alpha <= ALPHA_THRESHOLD) {
+              iv.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+            } else {
+              if (ColorUtils.calculateLuminance(color) >= 0.65) {
+                iv.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+              } else {
+                iv.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+              }
+            }
+          }
+          cpv.setColor(color);
+        }
+        // update color:
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        color = Color.argb(alpha, red, green, blue);
+      }
+
+      @Override public void onStartTrackingTouch(SeekBar seekBar) {
+
+      }
+
+      @Override public void onStopTrackingTouch(SeekBar seekBar) {
+
+      }
+    });
   }
 
   private int[] unshiftIfNotExists(int[] array, int value) {
@@ -705,7 +800,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
      * Set the shape of the color panel view.
      *
      * @param colorShape
-     *     Either {@link ColorShape#CIRCLE} or {@link ColorShape#RECT}.
+     *     Either {@link ColorShape#CIRCLE} or {@link ColorShape#SQUARE}.
      * @return This builder object for chaining method calls
      */
     public Builder setColorShape(int colorShape) {
