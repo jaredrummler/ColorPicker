@@ -20,20 +20,20 @@
 
   <PreferenceCategory android:title="Demo">
     <com.jrummyapps.android.colorpicker.ColorPreference
-        android:defaultValue="0xFF000000"
+        android:defaultValue="0xFF3F51B5"
         android:key="default_color"
         android:summary="This is the default ColorPreference"
-        android:title="Default Color Picker"/>
+        android:title="Default color picker"/>
 
     <com.jrummyapps.android.colorpicker.ColorPreference
-        android:defaultValue="0xFF000000"
+        android:defaultValue="0xFF009688"
         android:key="square_color"
         android:summary="A square shaped color picker"
         android:title="Square color picker"
         app:colorShape="square"/>
 
     <com.jrummyapps.android.colorpicker.ColorPreference
-        android:defaultValue="0xFF000000"
+        android:defaultValue="0xFFEC407A"
         android:key="custom_only_color"
         android:summary="A picker that doesn't show the presets"
         android:title="Custom color"
@@ -50,7 +50,7 @@
         app:showAlphaSlider="true"/>
 
     <com.jrummyapps.android.colorpicker.ColorPreference
-        android:defaultValue="0xFF000000"
+        android:defaultValue="0xFFCDDC39"
         android:key="my_presets"
         android:summary="A picker with presets different presets"
         android:title="Custom presets"
