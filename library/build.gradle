@@ -19,5 +19,6 @@ dependencies {
   compile 'com.android.support:appcompat-v7:25.1.0'
 }
 
+apply plugin: 'com.getkeepsafe.dexcount'
 //apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/artifactory/publication.gradle'
 //apply from: 'https://raw.githubusercontent.com/jaredrummler/android-artifact-push/master/maven/gradle-mvn-push.gradle'
