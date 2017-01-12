@@ -43,7 +43,14 @@ public class ColorPreference extends Preference {
 
   private void init(AttributeSet attrs) {
     setPersistent(true);
-    setWidgetLayoutResource(R.layout.cpv_preference_preview_layout);
+    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.cpv_ColorPickerView);
+    int shape = a.getInt(R.styleable.cpv_ColorPickerView_shape, ColorPanelView.Shape.CIRCLE);
+    if (shape == ColorPanelView.Shape.CIRCLE) {
+      setWidgetLayoutResource(R.layout.cpv_preference_circle);
+    } else {
+      setWidgetLayoutResource(R.layout.cpv_preference_square);
+    }
+    a.recycle();
     setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
       @Override public boolean onPreferenceClick(Preference preference) {

@@ -20,25 +20,26 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v4.graphics.ColorUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 class ColorPaletteAdapter extends BaseAdapter {
 
   /*package*/ final OnColorSelectedListener listener;
   /*package*/ final int[] colors;
   /*package*/ int selectedPosition;
+  /*package*/ int colorShape;
 
-  ColorPaletteAdapter(OnColorSelectedListener listener, int[] colors, int selectedPosition) {
+  ColorPaletteAdapter(OnColorSelectedListener listener,
+                      int[] colors,
+                      int selectedPosition,
+                      @ColorPanelView.Shape int colorShape) {
     this.listener = listener;
     this.colors = colors;
     this.selectedPosition = selectedPosition;
+    this.colorShape = colorShape;
   }
 
   @Override public int getCount() {
@@ -57,14 +58,11 @@ class ColorPaletteAdapter extends BaseAdapter {
     final ViewHolder holder;
     if (convertView == null) {
       holder = new ViewHolder(parent.getContext());
-      convertView = holder.colorPanelView;
+      convertView = holder.view;
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
-    holder.colorPanelView.setColor(colors[position]);
-    holder.imageView.setImageResource(selectedPosition == position ? R.drawable.cpv_preset_checked : 0);
-    holder.setColorFilter(position);
-    holder.setOnClickListener(position);
+    holder.setup(position);
     return convertView;
   }
 
@@ -80,21 +78,31 @@ class ColorPaletteAdapter extends BaseAdapter {
 
   private final class ViewHolder {
 
+    View view;
     ColorPanelView colorPanelView;
     ImageView imageView;
 
     ViewHolder(Context context) {
-      colorPanelView = new ColorPanelView(context);
-      int size = context.getResources().getDimensionPixelSize(R.dimen.cpv_item_size);
-      colorPanelView.setLayoutParams(new AbsListView.LayoutParams(size, size, Gravity.CENTER));
-      colorPanelView.setClickable(true);
-      imageView = new ImageView(context);
-      imageView.setLayoutParams(new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER));
-      colorPanelView.addView(imageView);
-      colorPanelView.setTag(this);
+      int layoutResId;
+      if (colorShape == ColorPanelView.Shape.RECT) {
+        layoutResId = R.layout.cpv_color_item_square;
+      } else {
+        layoutResId = R.layout.cpv_color_item_circle;
+      }
+      view = View.inflate(context, layoutResId, null);
+      colorPanelView = (ColorPanelView) view.findViewById(R.id.cpv_color_panel_view);
+      imageView = (ImageView) view.findViewById(R.id.cpv_color_image_view);
+      view.setTag(this);
     }
 
-    void setOnClickListener(final int position) {
+    void setup(int position) {
+      colorPanelView.setColor(colors[position]);
+      imageView.setImageResource(selectedPosition == position ? R.drawable.cpv_preset_checked : 0);
+      setColorFilter(position);
+      setOnClickListener(position);
+    }
+
+    private void setOnClickListener(final int position) {
       colorPanelView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
           if (selectedPosition != position) {
@@ -112,7 +120,7 @@ class ColorPaletteAdapter extends BaseAdapter {
       });
     }
 
-    void setColorFilter(int position) {
+    private void setColorFilter(int position) {
       if (position == selectedPosition && ColorUtils.calculateLuminance(colors[position]) >= 0.65) {
         imageView.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
       } else {

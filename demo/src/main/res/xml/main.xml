@@ -19,10 +19,12 @@
 
   <PreferenceCategory android:title="Demo">
     <com.jrummyapps.android.colorpicker.ColorPreference
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:defaultValue="0xFF000000"
         android:key="color"
         android:summary="Show our color picker using the custom ColorPreference class."
-        android:title="Show Dialog"/>
+        android:title="Show Dialog" />
+        <!--app:shape="rect"/>-->
 
     <Preference
         android:summary="Show how the custom color picker can be used in a standard activity."

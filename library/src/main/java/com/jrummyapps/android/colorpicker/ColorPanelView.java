@@ -17,7 +17,6 @@
 package com.jrummyapps.android.colorpicker;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -29,29 +28,23 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.StateListDrawable;
-import android.graphics.drawable.shapes.OvalShape;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
-import android.support.annotation.FloatRange;
 import android.support.annotation.IntDef;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.widget.FrameLayout;
+import android.view.View;
 import android.widget.Toast;
 
 /**
  * This class draws a panel which which will be filled with a color which can be set. It can be used to show the
  * currently selected color which you will get from the {@link ColorPickerView}.
  */
-public class ColorPanelView extends FrameLayout {
+public class ColorPanelView extends View {
 
   private final static int DEFAULT_BORDER_COLOR = 0xFF6E6E6E;
 
@@ -228,17 +221,6 @@ public class ColorPanelView extends FrameLayout {
    */
   public void setColor(int color) {
     this.color = color;
-    Drawable selector = createSelector(color);
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      int[][] states = new int[][]{
-          new int[]{android.R.attr.state_pressed}
-      };
-      int[] colors = new int[]{shiftColor(color, 1.1f)};
-      ColorStateList rippleColors = new ColorStateList(states, colors);
-      setForeground(new RippleDrawable(rippleColors, selector, null));
-    } else {
-      setForeground(selector);
-    }
     invalidate();
   }
 
@@ -328,31 +310,6 @@ public class ColorPanelView extends FrameLayout {
       cheatSheet.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, height);
     }
     cheatSheet.show();
-  }
-
-  private Drawable createSelector(int color) {
-    ShapeDrawable darkerCircle = new ShapeDrawable(new OvalShape());
-    darkerCircle.getPaint().setColor(translucentColor(shiftColor(color, 1.1f)));
-    StateListDrawable stateListDrawable = new StateListDrawable();
-    stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, darkerCircle);
-    return stateListDrawable;
-  }
-
-  @ColorInt private int shiftColor(@ColorInt int color, @FloatRange(from = 0.0f, to = 2.0f) float by) {
-    if (by == 1f) return color;
-    float[] hsv = new float[3];
-    Color.colorToHSV(color, hsv);
-    hsv[2] *= by;
-    return Color.HSVToColor(hsv);
-  }
-
-  @ColorInt private int translucentColor(int color) {
-    final float factor = 0.7f;
-    int alpha = Math.round(Color.alpha(color) * factor);
-    int red = Color.red(color);
-    int green = Color.green(color);
-    int blue = Color.blue(color);
-    return Color.argb(alpha, red, green, blue);
   }
 
   @IntDef({Shape.RECT, Shape.CIRCLE})

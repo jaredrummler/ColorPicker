@@ -35,7 +35,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -49,7 +48,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.jrummyapps.android.colorpicker.ColorPickerView.OnColorChangedListener;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
  * <p>A dialog to pick a color.</p>
@@ -73,6 +71,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   private static final String ARG_ALLOW_CUSTOM = "allowCustom";
   private static final String ARG_DIALOG_TITLE = "dialogTitle";
   private static final String ARG_SHOW_COLOR_SHADES = "showColorShades";
+  private static final String ARG_COLOR_SHAPE = "colorShape";
 
   public static final int TYPE_CUSTOM = 0;
   public static final int TYPE_PRESETS = 1;
@@ -118,6 +117,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   int dialogType;
   int dialogId;
   boolean showColorShades;
+  int colorShape;
 
   // -- PRESETS --------------------------
   ColorPaletteAdapter adapter;
@@ -143,6 +143,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     dialogId = getArguments().getInt(ARG_ID);
     showAlphaSlider = getArguments().getBoolean(ARG_ALPHA);
     showColorShades = getArguments().getBoolean(ARG_SHOW_COLOR_SHADES);
+    colorShape = getArguments().getInt(ARG_COLOR_SHAPE);
     if (savedInstanceState == null) {
       color = getArguments().getInt(ARG_COLOR);
       dialogType = getArguments().getInt(ARG_TYPE);
@@ -409,7 +410,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
           createColorShades(color);
         }
       }
-    }, presets, getSelectedItemPosition());
+    }, presets, getSelectedItemPosition(), colorShape);
     gridView.setAdapter(adapter);
     return contentView;
   }
@@ -419,38 +420,42 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
 
     if (shadesLayout.getChildCount() != 0) {
       for (int i = 0; i < shadesLayout.getChildCount(); i++) {
-        ColorPanelView colorPanelView = (ColorPanelView) shadesLayout.getChildAt(i);
-        colorPanelView.setColor(colorShades[i]);
-        colorPanelView.setTag(false);
-        ((ImageView) colorPanelView.getChildAt(0)).setImageDrawable(null);
+        FrameLayout layout = (FrameLayout) shadesLayout.getChildAt(i);
+        final ColorPanelView cpv = (ColorPanelView) layout.findViewById(R.id.cpv_color_panel_view);
+        ImageView iv = (ImageView) layout.findViewById(R.id.cpv_color_image_view);
+        cpv.setColor(colorShades[i]);
+        cpv.setTag(false);
+        iv.setImageDrawable(null);
       }
       return;
     }
 
     final int horizontalPadding = getResources().getDimensionPixelSize(R.dimen.cpv_item_horizontal_padding);
 
-    for (int colorShade : colorShades) {
-      final ColorPanelView colorPanelView = new ColorPanelView(shadesLayout.getContext());
-      final int size = shadesLayout.getResources().getDimensionPixelSize(R.dimen.cpv_item_size);
-      FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(size, size, Gravity.CENTER);
-      layoutParams.leftMargin = layoutParams.rightMargin = horizontalPadding;
-      layoutParams.setMargins(horizontalPadding, 0, horizontalPadding, 0);
-      colorPanelView.setLayoutParams(layoutParams);
-      colorPanelView.setClickable(true);
+    for (final int colorShade : colorShades) {
+      int layoutResId;
+      if (colorShape == ColorPanelView.Shape.RECT) {
+        layoutResId = R.layout.cpv_color_item_square;
+      } else {
+        layoutResId = R.layout.cpv_color_item_circle;
+      }
+
+      final View view = View.inflate(getActivity(), layoutResId, null);
+      final ColorPanelView colorPanelView = (ColorPanelView) view.findViewById(R.id.cpv_color_panel_view);
+
+      ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) colorPanelView.getLayoutParams();
+      params.leftMargin = params.rightMargin = horizontalPadding;
+      colorPanelView.setLayoutParams(params);
       colorPanelView.setColor(colorShade);
-      final ImageView iv = new ImageView(shadesLayout.getContext());
-      iv.setLayoutParams(new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER));
-      colorPanelView.addView(iv);
-      shadesLayout.addView(colorPanelView);
+      shadesLayout.addView(view);
+
       colorPanelView.post(new Runnable() {
         @Override public void run() {
-          // Some versions of android won't update the params until after the view is displayed
-          ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) colorPanelView.getLayoutParams();
-          params.leftMargin = params.rightMargin = horizontalPadding;
-          colorPanelView.setLayoutParams(params);
+          // The color is black when rotating the dialog. This is a dirty fix. WTF!?
+          colorPanelView.setColor(colorShade);
         }
       });
-      colorPanelView.setPadding(horizontalPadding, 0, horizontalPadding, 0);
+
       colorPanelView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
           if (v.getTag() instanceof Boolean && (Boolean) v.getTag()) {
@@ -459,13 +464,14 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
           ColorPickerDialog.this.color = colorPanelView.getColor();
           adapter.selectNone();
           for (int i = 0; i < shadesLayout.getChildCount(); i++) {
-            ColorPanelView cpv = (ColorPanelView) shadesLayout.getChildAt(i);
-            ImageView imageView = (ImageView) cpv.getChildAt(0);
-            imageView.setImageResource(cpv == v ? R.drawable.cpv_preset_checked : 0);
+            FrameLayout layout = (FrameLayout) shadesLayout.getChildAt(i);
+            ColorPanelView cpv = (ColorPanelView) layout.findViewById(R.id.cpv_color_panel_view);
+            ImageView iv = (ImageView) layout.findViewById(R.id.cpv_color_image_view);
+            iv.setImageResource(cpv == v ? R.drawable.cpv_preset_checked : 0);
             if (cpv == v && ColorUtils.calculateLuminance(colorPanelView.getColor()) >= 0.65) {
-              imageView.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+              iv.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
             } else {
-              imageView.setColorFilter(null);
+              iv.setColorFilter(null);
             }
             cpv.setTag(cpv == v);
           }
@@ -569,6 +575,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     boolean allowPresets = true;
     boolean allowCustom = true;
     boolean showColorShades = true;
+    @ColorPanelView.Shape int colorShape = ColorPanelView.Shape.CIRCLE;
 
     /*package*/ Builder() {
 
@@ -673,11 +680,23 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     /**
      * Show/Hide the color shades in the presets picker
      *
-     * @param showColorShades {@code false} to hide the color shades.
+     * @param showColorShades
+     *     {@code false} to hide the color shades.
      * @return This builder object for chaining method calls
      */
     public Builder setShowColorShades(boolean showColorShades) {
       this.showColorShades = showColorShades;
+      return this;
+    }
+
+    /**
+     * Set the shape of the color panel view.
+     *
+     * @param colorShape Either {@link ColorPanelView.Shape#CIRCLE} or {@link ColorPanelView.Shape#RECT}.
+     * @return This builder object for chaining method calls
+     */
+    public Builder setColorShape(int colorShape) {
+      this.colorShape = colorShape;
       return this;
     }
 
@@ -699,6 +718,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       args.putBoolean(ARG_ALLOW_PRESETS, allowPresets);
       args.putInt(ARG_DIALOG_TITLE, dialogTitle);
       args.putBoolean(ARG_SHOW_COLOR_SHADES, showColorShades);
+      args.putInt(ARG_COLOR_SHAPE, colorShape);
       dialog.setArguments(args);
       return dialog;
     }

@@ -131,8 +131,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
       super.onCreate(savedInstanceState);
       addPreferencesFromResource(R.xml.main);
 
-      // Find preference and add code to handle showing the ColorPickerDialogFragment
-      // once requested.
+      // Find preference and add code to handle showing the ColorPickerDialogFragment once requested.
       ColorPreference pref = (ColorPreference) findPreference("color");
       pref.setOnShowDialogListener(new ColorPreference.OnShowDialogListener() {
 
@@ -144,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
               .setDialogId(PREFERENCE_DIALOG_ID)
               .setColor(currentColor)
 //              .setShowColorShades(false)
+//              .setColorShape(ColorPanelView.Shape.RECT)
               .setShowAlphaSlider(false)
               .create();
 
