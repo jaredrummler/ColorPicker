@@ -10,7 +10,7 @@
 
 Yet another open source color picker for Android. So, why should you use this color picker? It is highly customizable and easy to use. You can simply add the `ColorPreference` to your preferences and a beautiful color picker dialog will be displayed without additional code. The color picker supports alpha and allows you to set your own presets. [Try the demo app on appetize.io.](https://appetize.io/app/h1zukd6ux5yy5pw91vpyer32zr)
 
-The original ColorPickerView was written by Daniel Nilsson.
+The original ColorPickerView was written by [Daniel Nilsson](https://github.com/danielnilsson9/color-picker-view).
 
 ## Screenshots
 ![GIF](art/demo.gif)
