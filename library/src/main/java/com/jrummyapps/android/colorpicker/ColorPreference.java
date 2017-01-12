@@ -24,15 +24,25 @@ import android.preference.Preference;
 import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.View;
+import com.jrummyapps.android.colorpicker.ColorPickerDialog.DialogType;
 
 /**
  * A Preference to select a color
  */
 public class ColorPreference extends Preference implements ColorPickerDialogListener {
 
-  /*package*/ OnShowDialogListener onShowDialogListener;
-  /*package*/ int color = Color.BLACK;
-  /*package*/ boolean showDialog;
+  private OnShowDialogListener onShowDialogListener;
+  private int color = Color.BLACK;
+  private boolean showDialog;
+  @DialogType
+  private int dialogType;
+  private int colorShape;
+  private boolean allowPresets;
+  private boolean allowCustom;
+  private boolean showAlphaSlider;
+  private boolean showColorShades;
+  private int[] presets;
+  private int dialogTitle;
 
   public ColorPreference(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -48,16 +58,15 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
     setPersistent(true);
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ColorPreference);
     showDialog = a.getBoolean(R.styleable.ColorPreference_showDialog, true);
-    @ColorPickerDialog.DialogType
-    final int dialogType = a.getInt(R.styleable.ColorPreference_dialogType, ColorPickerDialog.TYPE_PRESETS);
-    final int colorShape = a.getInt(R.styleable.ColorPreference_colorShape, ColorShape.CIRCLE);
-    final boolean allowPresets = a.getBoolean(R.styleable.ColorPreference_allowPresets, true);
-    final boolean allowCustom = a.getBoolean(R.styleable.ColorPreference_allowCustom, true);
-    final boolean showAlphaSlider = a.getBoolean(R.styleable.ColorPreference_showAlphaSlider, false);
-    final boolean showColorShades = a.getBoolean(R.styleable.ColorPreference_showColorShades, true);
+    //noinspection WrongConstant
+    dialogType = a.getInt(R.styleable.ColorPreference_dialogType, ColorPickerDialog.TYPE_PRESETS);
+    colorShape = a.getInt(R.styleable.ColorPreference_colorShape, ColorShape.CIRCLE);
+    allowPresets = a.getBoolean(R.styleable.ColorPreference_allowPresets, true);
+    allowCustom = a.getBoolean(R.styleable.ColorPreference_allowCustom, true);
+    showAlphaSlider = a.getBoolean(R.styleable.ColorPreference_showAlphaSlider, false);
+    showColorShades = a.getBoolean(R.styleable.ColorPreference_showColorShades, true);
     final int presetsResId = a.getResourceId(R.styleable.ColorPreference_colorPresets, 0);
-    final int dialogTitle = a.getResourceId(R.styleable.ColorPreference_dialogTitle, R.string.cpv_default_title);
-    final int[] presets;
+    dialogTitle = a.getResourceId(R.styleable.ColorPreference_dialogTitle, R.string.cpv_default_title);
     if (presetsResId != 0) {
       presets = getContext().getResources().getIntArray(presetsResId);
     } else {
@@ -69,34 +78,28 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
       setWidgetLayoutResource(R.layout.cpv_preference_square);
     }
     a.recycle();
-    setOnPreferenceClickListener(new OnPreferenceClickListener() {
+  }
 
-      @Override public boolean onPreferenceClick(Preference preference) {
-        if (showDialog) {
-          ColorPickerDialog dialog = ColorPickerDialog.newBuilder()
-              .setDialogType(dialogType)
-              .setDialogTitle(dialogTitle)
-              .setColorShape(colorShape)
-              .setPresets(presets)
-              .setAllowPresets(allowPresets)
-              .setAllowCustom(allowCustom)
-              .setShowAlphaSlider(showAlphaSlider)
-              .setShowColorShades(showColorShades)
-              .setColor(color)
-              .create();
-          dialog.setColorPickerDialogListener(ColorPreference.this);
-          Activity activity = (Activity) getContext();
-          dialog.show(activity.getFragmentManager(), getFragmentTag());
-          return true;
-        } else if (onShowDialogListener != null) {
-          onShowDialogListener.onShowColorPickerDialog((String) getTitle(), color);
-          return true;
-        } else {
-          throw new IllegalArgumentException(
-              "You must first call setOnShowDialogListener() and handle showing the ColorPickerDialog yourself.");
-        }
-      }
-    });
+  @Override protected void onClick() {
+    super.onClick();
+    if (onShowDialogListener != null) {
+      onShowDialogListener.onShowColorPickerDialog((String) getTitle(), color);
+    } else if (showDialog) {
+      ColorPickerDialog dialog = ColorPickerDialog.newBuilder()
+          .setDialogType(dialogType)
+          .setDialogTitle(dialogTitle)
+          .setColorShape(colorShape)
+          .setPresets(presets)
+          .setAllowPresets(allowPresets)
+          .setAllowCustom(allowCustom)
+          .setShowAlphaSlider(showAlphaSlider)
+          .setShowColorShades(showColorShades)
+          .setColor(color)
+          .create();
+      dialog.setColorPickerDialogListener(ColorPreference.this);
+      Activity activity = (Activity) getContext();
+      dialog.show(activity.getFragmentManager(), getFragmentTag());
+    }
   }
 
   @Override protected void onAttachedToActivity() {
@@ -152,11 +155,13 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
     this.color = color;
     persistInt(this.color);
     notifyChanged();
+    callChangeListener(color);
   }
 
   /**
    * The listener used for showing the {@link ColorPickerDialog}.
    * Call {@link #saveValue(int)} after the user chooses a color.
+   * If this is set then it is up to you to show the dialog.
    *
    * @param listener
    *     The listener to show the dialog
