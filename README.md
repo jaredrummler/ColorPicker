@@ -1,6 +1,6 @@
 # Color Picker
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/color-picker-dialog/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/color-picker-dialog)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker)
 [![License](http://img.shields.io/:license-apache-blue.svg)](LICENSE)
 [![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=14) 
 [![Twitter Follow](https://img.shields.io/twitter/follow/jrummy16.svg?style=social)](https://twitter.com/jrummy16)
@@ -62,17 +62,17 @@ For further doumentation about how to use the library, check the [demo](demo) ap
 
 ## Download
 
-Download [the latest AAR](https://repo1.maven.org/maven2/com/jrummyapps/color-picker-dialog/1.1.1/color-picker-dialog-1.1.1.aar) or grab via Gradle:
+Download [the latest AAR](https://repo1.maven.org/maven2/com/jrummyapps/colorpicker/2.0.0/colorpicker-2.0.0.aar) or grab via Gradle:
 
 ```groovy
-compile 'com.jrummyapps:color-picker-dialog:1.1.1'
+compile 'com.jrummyapps:colorpicker:2.0.0'
 ```
 or Maven:
 ```xml
 <dependency>
   <groupId>com.jrummyapps</groupId>
-  <artifactId>color-picker-dialog</artifactId>
-  <version>1.1.1</version>
+  <artifactId>colorpicker</artifactId>
+  <version>2.0.0</version>
   <type>aar</type>
 </dependency>
 ```
