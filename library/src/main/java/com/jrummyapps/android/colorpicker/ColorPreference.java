@@ -38,7 +38,6 @@ public class ColorPreference extends Preference {
   public ColorPreference(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
     init(attrs);
-
   }
 
   private void init(AttributeSet attrs) {
@@ -59,21 +58,18 @@ public class ColorPreference extends Preference {
           return true;
         } else {
           throw new IllegalArgumentException(
-              "You must first call setOnShowDialogListener() and handle showing the ColorPickerDialogFragment yourself.");
+              "You must first call setOnShowDialogListener() and handle showing the ColorPickerDialog yourself.");
         }
       }
     });
   }
 
   /**
-   * Since the color picker dialog is now a DialogFragment
-   * this preference cannot take care of showing it without
-   * access to the fragment manager. Therefore I leave it up to
-   * you to actually show the dialog once the preference is clicked.
-   *
-   * Call saveValue() once you have a color to save.
+   * The listener used for showing the {@link ColorPickerDialog}.
+   * Call {@link #saveValue(int)} after the user chooses a color.
    *
    * @param listener
+   *     The listener to show the dialog
    */
   public void setOnShowDialogListener(OnShowDialogListener listener) {
     onShowDialogListener = listener;
