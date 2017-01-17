@@ -122,8 +122,8 @@ class ColorPaletteAdapter extends BaseAdapter {
           if (selectedPosition != position) {
             selectedPosition = position;
             notifyDataSetChanged();
-            listener.onColorSelected(colors[position]);
           }
+          listener.onColorSelected(colors[position]);
         }
       });
       colorPanelView.setOnLongClickListener(new View.OnLongClickListener() {

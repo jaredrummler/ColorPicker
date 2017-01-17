@@ -50,6 +50,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import com.jrummyapps.android.colorpicker.ColorPickerView.OnColorChangedListener;
+import java.util.Arrays;
 import java.util.Locale;
 
 /**
@@ -86,8 +87,8 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
    */
   public static final int[] MATERIAL_COLORS = {
       0xFFF44336, // RED 500
-      0xFFEA4C89, // LIGHT PINK 500
       0xFFE91E63, // PINK 500
+      0xFFFF2C93, // LIGHT PINK 500
       0xFF9C27B0, // PURPLE 500
       0xFF673AB7, // DEEP PURPLE 500
       0xFF3F51B5, // INDIGO 500
@@ -276,6 +277,15 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       hexEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
     }
 
+    newColorPanel.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        if (newColorPanel.getColor() == color) {
+          colorPickerDialogListener.onColorSelected(dialogId, color);
+          dismiss();
+        }
+      }
+    });
+
     contentView.setOnTouchListener(this);
     colorPicker.setOnColorChangedListener(this);
     hexEditText.addTextChangedListener(this);
@@ -284,7 +294,6 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       @Override
       public void onFocusChange(View v, boolean hasFocus) {
         if (hasFocus) {
-
           InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
           imm.showSoftInput(hexEditText, InputMethodManager.SHOW_IMPLICIT);
         }
@@ -410,11 +419,48 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     transparencySeekBar = (SeekBar) contentView.findViewById(R.id.transparency_seekbar);
     transparencyPercText = (TextView) contentView.findViewById(R.id.transparency_text);
     GridView gridView = (GridView) contentView.findViewById(R.id.gridView);
-    presets = unshiftIfNotExists(getArguments().getIntArray(ARG_PRESETS), color);
-    if (presets == MATERIAL_COLORS) {
-      presets = pushIfNotExists(presets, Color.BLACK);
+
+    loadPresets();
+
+    if (showColorShades) {
+      createColorShades(color);
+    } else {
+      shadesLayout.setVisibility(View.GONE);
+      contentView.findViewById(R.id.shades_divider).setVisibility(View.GONE);
     }
+
+    adapter = new ColorPaletteAdapter(new ColorPaletteAdapter.OnColorSelectedListener() {
+      @Override public void onColorSelected(int newColor) {
+        if (color == newColor) {
+          colorPickerDialogListener.onColorSelected(dialogId, color);
+          dismiss();
+          return;
+        }
+        color = newColor;
+        if (showColorShades) {
+          createColorShades(color);
+        }
+      }
+    }, presets, getSelectedItemPosition(), colorShape);
+
+    gridView.setAdapter(adapter);
+
+    if (showAlphaSlider) {
+      setupTransparency();
+    } else {
+      contentView.findViewById(R.id.transparency_layout).setVisibility(View.GONE);
+      contentView.findViewById(R.id.transparency_title).setVisibility(View.GONE);
+    }
+
+    return contentView;
+  }
+
+  private void loadPresets() {
     int alpha = Color.alpha(color);
+    presets = getArguments().getIntArray(ARG_PRESETS);
+    if (presets == null) presets = MATERIAL_COLORS;
+    boolean isMaterialColors = presets == MATERIAL_COLORS;
+    presets = Arrays.copyOf(presets, presets.length); // don't update the original array when modifying alpha
     if (alpha != 255) {
       // add alpha to the presets
       for (int i = 0; i < presets.length; i++) {
@@ -425,31 +471,14 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
         presets[i] = Color.argb(alpha, red, green, blue);
       }
     }
-    if (showColorShades) {
-      createColorShades(color);
-    } else {
-      shadesLayout.setVisibility(View.GONE);
-      contentView.findViewById(R.id.shades_divider).setVisibility(View.GONE);
+    presets = unshiftIfNotExists(presets, color);
+    if (isMaterialColors && presets.length == 19) {
+      // Add black to have a total of 20 colors if the current color is in the material color palette
+      presets = pushIfNotExists(presets, Color.argb(alpha, 0, 0, 0));
     }
-    adapter = new ColorPaletteAdapter(new ColorPaletteAdapter.OnColorSelectedListener() {
-      @Override public void onColorSelected(int color) {
-        ColorPickerDialog.this.color = color;
-        if (showColorShades) {
-          createColorShades(color);
-        }
-      }
-    }, presets, getSelectedItemPosition(), colorShape);
-    gridView.setAdapter(adapter);
-    if (showAlphaSlider) {
-      setupTransparency();
-    } else {
-      contentView.findViewById(R.id.transparency_layout).setVisibility(View.GONE);
-      contentView.findViewById(R.id.transparency_title).setVisibility(View.GONE);
-    }
-    return contentView;
   }
 
-  void createColorShades(@ColorInt int color) {
+  void createColorShades(@ColorInt final int color) {
     final int[] colorShades = getColorShades(color);
 
     if (shadesLayout.getChildCount() != 0) {
@@ -493,6 +522,8 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       colorPanelView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
           if (v.getTag() instanceof Boolean && (Boolean) v.getTag()) {
+            colorPickerDialogListener.onColorSelected(dialogId, ColorPickerDialog.this.color);
+            dismiss();
             return; // already selected
           }
           ColorPickerDialog.this.color = colorPanelView.getColor();
