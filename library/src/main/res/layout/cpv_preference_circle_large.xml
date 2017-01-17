@@ -2,6 +2,6 @@
     android:id="@id/cpv_preference_preview_color_panel"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
+    android:layout_width="@dimen/cpv_color_preference_large"
+    android:layout_height="@dimen/cpv_color_preference_large"
     app:colorShape="circle"/>
