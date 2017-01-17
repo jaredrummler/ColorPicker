@@ -22,6 +22,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.preference.Preference;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import com.jrummyapps.android.colorpicker.ColorPickerDialog.DialogType;
@@ -164,6 +165,24 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
     persistInt(this.color);
     notifyChanged();
     callChangeListener(color);
+  }
+
+  /**
+   * Set the colors shown in the {@link ColorPickerDialog}.
+   *
+   * @param presets An array of color ints
+   */
+  public void setPresets(@NonNull int[] presets) {
+    this.presets = presets;
+  }
+
+  /**
+   * Get the colors that will be shown in the {@link ColorPickerDialog}.
+   *
+   * @return An array of color ints
+   */
+  public int[] getPresets() {
+    return presets;
   }
 
   /**
