@@ -18,6 +18,10 @@
 
   <declare-styleable name="ColorPreference" parent="ColorPickerDialog">
     <attr name="showAlphaSlider" format="boolean|reference"/>
+    <attr name="previewSize" format="enum">
+      <enum name="regular" value="0"/>
+      <enum name="large" value="1"/>
+    </attr>
     <attr name="colorShape"/>
     <attr name="dialogTitle" format="reference"/>
     <attr name="colorPresets" format="reference"/>

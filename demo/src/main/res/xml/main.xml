@@ -47,6 +47,7 @@
         android:summary="A picker with alpha slider"
         android:title="Color picker with alpha"
         app:showColorShades="false"
+        app:previewSize="large"
         app:showAlphaSlider="true"/>
 
     <com.jrummyapps.android.colorpicker.ColorPreference
@@ -56,6 +57,7 @@
         android:title="Custom presets"
         app:allowCustom="false"
         app:colorPresets="@array/demo_colors"
+        app:previewSize="large"
         app:showColorShades="false"/>
 
     <Preference

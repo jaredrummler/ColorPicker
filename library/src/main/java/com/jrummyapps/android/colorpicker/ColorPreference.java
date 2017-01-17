@@ -31,6 +31,9 @@ import com.jrummyapps.android.colorpicker.ColorPickerDialog.DialogType;
  */
 public class ColorPreference extends Preference implements ColorPickerDialogListener {
 
+  private static final int SIZE_NORMAL = 0;
+  private static final int SIZE_LARGE = 1;
+
   private OnShowDialogListener onShowDialogListener;
   private int color = Color.BLACK;
   private boolean showDialog;
@@ -41,6 +44,7 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
   private boolean allowCustom;
   private boolean showAlphaSlider;
   private boolean showColorShades;
+  private int previewSize;
   private int[] presets;
   private int dialogTitle;
 
@@ -65,6 +69,7 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
     allowCustom = a.getBoolean(R.styleable.ColorPreference_allowCustom, true);
     showAlphaSlider = a.getBoolean(R.styleable.ColorPreference_showAlphaSlider, false);
     showColorShades = a.getBoolean(R.styleable.ColorPreference_showColorShades, true);
+    previewSize = a.getInt(R.styleable.ColorPreference_previewSize, SIZE_NORMAL);
     final int presetsResId = a.getResourceId(R.styleable.ColorPreference_colorPresets, 0);
     dialogTitle = a.getResourceId(R.styleable.ColorPreference_dialogTitle, R.string.cpv_default_title);
     if (presetsResId != 0) {
@@ -73,9 +78,12 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
       presets = ColorPickerDialog.MATERIAL_COLORS;
     }
     if (colorShape == ColorShape.CIRCLE) {
-      setWidgetLayoutResource(R.layout.cpv_preference_circle);
+      setWidgetLayoutResource(
+          previewSize == SIZE_LARGE ? R.layout.cpv_preference_circle_large : R.layout.cpv_preference_circle);
     } else {
-      setWidgetLayoutResource(R.layout.cpv_preference_square);
+      setWidgetLayoutResource(
+          previewSize == SIZE_LARGE ? R.layout.cpv_preference_square_large : R.layout.cpv_preference_square
+      );
     }
     a.recycle();
   }
