@@ -139,12 +139,8 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
 
   @Override public void onAttach(Activity activity) {
     super.onAttach(activity);
-    try {
-      if (colorPickerDialogListener == null) {
-        colorPickerDialogListener = (ColorPickerDialogListener) activity;
-      }
-    } catch (ClassCastException e) {
-      throw new ClassCastException("Parent activity must implement ColorPickerDialogListener to receive result.");
+    if (colorPickerDialogListener == null && activity instanceof ColorPickerDialogListener) {
+      colorPickerDialogListener = (ColorPickerDialogListener) activity;
     }
   }
 
