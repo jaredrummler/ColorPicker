@@ -15,9 +15,11 @@
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
         android:clickable="false"
         android:columnWidth="@dimen/cpv_column_width"
         android:horizontalSpacing="4dp"
+        android:listSelector="@android:color/transparent"
         android:numColumns="auto_fit"
         android:stretchMode="spacingWidthUniform"
         android:verticalSpacing="8dp"/>
