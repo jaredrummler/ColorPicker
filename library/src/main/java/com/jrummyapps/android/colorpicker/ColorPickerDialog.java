@@ -86,7 +86,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
    */
   public static final int[] MATERIAL_COLORS = {
       0xFFF44336, // RED 500
-      0xFFF759F7, // BRIGHT PINK
+      0xFFEA4C89, // LIGHT PINK 500
       0xFFE91E63, // PINK 500
       0xFF9C27B0, // PURPLE 500
       0xFF673AB7, // DEEP PURPLE 500
