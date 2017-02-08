@@ -112,7 +112,9 @@ public class ColorPanelView extends View {
     }
     borderWidthPx = DrawingUtils.dpToPx(context, 1);
     borderPaint = new Paint();
+    borderPaint.setAntiAlias(true);
     colorPaint = new Paint();
+    colorPaint.setAntiAlias(true);
     if (showOldColor) {
       originalPaint = new Paint();
     }
