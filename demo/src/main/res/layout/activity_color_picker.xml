@@ -35,7 +35,7 @@
         android:id="@id/cpv_color_picker_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        app:alphaChannelVisible="true"/>
+        app:jrcc_alphaChannelVisible="true"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -51,8 +51,8 @@
           android:layout_width="0px"
           android:layout_height="fill_parent"
           android:layout_weight="0.5"
-          app:borderColor="#0099cc"
-          app:colorShape="square"/>
+          app:jrcc_borderColor="#0099cc"
+          app:jrcc_colorShape="square"/>
 
       <TextView
           android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
           android:layout_width="0px"
           android:layout_height="fill_parent"
           android:layout_weight="0.5"
-          app:colorShape="square"/>
+          app:jrcc_colorShape="square"/>
     </LinearLayout>
   </RelativeLayout>
 

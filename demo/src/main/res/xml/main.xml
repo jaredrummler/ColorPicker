@@ -30,35 +30,35 @@
         android:key="square_color"
         android:summary="A square shaped color picker"
         android:title="Square color picker"
-        app:colorShape="square"/>
+        app:jrcc_colorShape="square"/>
 
     <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="0xFFEC407A"
         android:key="custom_only_color"
         android:summary="A picker that doesn't show the presets"
         android:title="Custom color"
-        app:allowPresets="false"
-        app:dialogTitle="@string/app_name"
-        app:dialogType="custom"/>
+        app:jrcc_allowPresets="false"
+        app:jrcc_dialogTitle="@string/app_name"
+        app:jrcc_dialogType="custom"/>
 
     <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="0x890099CC"
         android:key="color_with_alpha"
         android:summary="A picker with alpha slider"
         android:title="Color picker with alpha"
-        app:showColorShades="false"
-        app:previewSize="large"
-        app:showAlphaSlider="true"/>
+        app:jrcc_showColorShades="false"
+        app:jrcc_previewSize="large"
+        app:jrcc_showAlphaSlider="true"/>
 
     <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="0xFFCDDC39"
         android:key="my_presets"
         android:summary="A picker with presets different presets"
         android:title="Custom presets"
-        app:allowCustom="false"
-        app:colorPresets="@array/demo_colors"
-        app:previewSize="large"
-        app:showColorShades="false"/>
+        app:jrcc_allowCustom="false"
+        app:jrcc_colorPresets="@array/demo_colors"
+        app:jrcc_previewSize="large"
+        app:jrcc_showColorShades="false"/>
 
     <Preference
         android:summary="Show how the custom color picker can be used in a standard activity."
