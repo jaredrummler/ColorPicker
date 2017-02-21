@@ -95,12 +95,12 @@ public class ColorPanelView extends View {
 
   private void init(Context context, AttributeSet attrs) {
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ColorPanelView);
-    shape = a.getInt(R.styleable.ColorPanelView_colorShape, ColorShape.CIRCLE);
-    showOldColor = a.getBoolean(R.styleable.ColorPanelView_showOldColor, false);
+    shape = a.getInt(R.styleable.ColorPanelView_cpv_colorShape, ColorShape.CIRCLE);
+    showOldColor = a.getBoolean(R.styleable.ColorPanelView_cpv_showOldColor, false);
     if (showOldColor && shape != ColorShape.CIRCLE) {
       throw new IllegalStateException("Color preview is only available in circle mode");
     }
-    borderColor = a.getColor(R.styleable.ColorPanelView_borderColor, DEFAULT_BORDER_COLOR);
+    borderColor = a.getColor(R.styleable.ColorPanelView_cpv_borderColor, DEFAULT_BORDER_COLOR);
     a.recycle();
     if (borderColor == DEFAULT_BORDER_COLOR) {
       // If no specific border color has been set we take the default secondary text color as border/slider color.

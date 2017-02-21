@@ -42,17 +42,17 @@ Add the `ColorPreference` to your preference XML:
 
 You can add attributes to customize the `ColorPreference`:
 
-| name            | type      | documentation                                                                         |
-|-----------------|-----------|---------------------------------------------------------------------------------------|
-| dialogType      | enum      | "custom" to show the color picker, "preset" to show pre-defined colors                |
-| showAlphaSlider | boolean   | Show a slider for changing the alpha of a color (adding transparency)                 |
-| colorShape      | enum      | "square" or "circle" for the shape of the color preview                               |
-| colorPresets    | reference | An int-array of pre-defined colors to show in the dialog                              |
-| dialogTitle     | reference | The string resource id for the dialog title. By default the title is "Select a Color" |
-| showColorShades | boolean   | true to show different shades of the selected color                                   |
-| allowPresets    | boolean   | true to add a button to toggle to the custom color picker                             |
-| allowCustom     | boolean   | true to add a button to toggle to the presets color picker                            |
-| showDialog      | boolean   | true to let the ColorPreference handle showing the dialog                             |
+| name                | type      | documentation                                                                         |
+|---------------------|-----------|---------------------------------------------------------------------------------------|
+| cpv_dialogType      | enum      | "custom" to show the color picker, "preset" to show pre-defined colors                |
+| cpv_showAlphaSlider | boolean   | Show a slider for changing the alpha of a color (adding transparency)                 |
+| cpv_colorShape      | enum      | "square" or "circle" for the shape of the color preview                               |
+| cpv_colorPresets    | reference | An int-array of pre-defined colors to show in the dialog                              |
+| cpv_dialogTitle     | reference | The string resource id for the dialog title. By default the title is "Select a Color" |
+| cpv_showColorShades | boolean   | true to show different shades of the selected color                                   |
+| cpv_allowPresets    | boolean   | true to add a button to toggle to the custom color picker                             |
+| cpv_allowCustom     | boolean   | true to add a button to toggle to the presets color picker                            |
+| cpv_showDialog      | boolean   | true to let the ColorPreference handle showing the dialog                             |
 
 You can also show a `ColorPickerDialog` without using the `ColorPreference`:
 

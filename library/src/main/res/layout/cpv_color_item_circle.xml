@@ -12,7 +12,7 @@
       android:layout_height="@dimen/cpv_item_size"
       android:layout_gravity="center"
       android:clickable="true"
-      app:colorShape="circle"/>
+      app:cpv_colorShape="circle"/>
 
   <ImageView
       android:id="@+id/cpv_color_image_view"

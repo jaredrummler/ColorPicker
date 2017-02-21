@@ -62,17 +62,17 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
   private void init(AttributeSet attrs) {
     setPersistent(true);
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ColorPreference);
-    showDialog = a.getBoolean(R.styleable.ColorPreference_showDialog, true);
+    showDialog = a.getBoolean(R.styleable.ColorPreference_cpv_showDialog, true);
     //noinspection WrongConstant
-    dialogType = a.getInt(R.styleable.ColorPreference_dialogType, ColorPickerDialog.TYPE_PRESETS);
-    colorShape = a.getInt(R.styleable.ColorPreference_colorShape, ColorShape.CIRCLE);
-    allowPresets = a.getBoolean(R.styleable.ColorPreference_allowPresets, true);
-    allowCustom = a.getBoolean(R.styleable.ColorPreference_allowCustom, true);
-    showAlphaSlider = a.getBoolean(R.styleable.ColorPreference_showAlphaSlider, false);
-    showColorShades = a.getBoolean(R.styleable.ColorPreference_showColorShades, true);
-    previewSize = a.getInt(R.styleable.ColorPreference_previewSize, SIZE_NORMAL);
-    final int presetsResId = a.getResourceId(R.styleable.ColorPreference_colorPresets, 0);
-    dialogTitle = a.getResourceId(R.styleable.ColorPreference_dialogTitle, R.string.cpv_default_title);
+    dialogType = a.getInt(R.styleable.ColorPreference_cpv_dialogType, ColorPickerDialog.TYPE_PRESETS);
+    colorShape = a.getInt(R.styleable.ColorPreference_cpv_colorShape, ColorShape.CIRCLE);
+    allowPresets = a.getBoolean(R.styleable.ColorPreference_cpv_allowPresets, true);
+    allowCustom = a.getBoolean(R.styleable.ColorPreference_cpv_allowCustom, true);
+    showAlphaSlider = a.getBoolean(R.styleable.ColorPreference_cpv_showAlphaSlider, false);
+    showColorShades = a.getBoolean(R.styleable.ColorPreference_cpv_showColorShades, true);
+    previewSize = a.getInt(R.styleable.ColorPreference_cpv_previewSize, SIZE_NORMAL);
+    final int presetsResId = a.getResourceId(R.styleable.ColorPreference_cpv_colorPresets, 0);
+    dialogTitle = a.getResourceId(R.styleable.ColorPreference_cpv_dialogTitle, R.string.cpv_default_title);
     if (presetsResId != 0) {
       presets = getContext().getResources().getIntArray(presetsResId);
     } else {
