@@ -28,7 +28,7 @@
           android:id="@id/cpv_color_panel_old"
           android:layout_width="@dimen/cpv_dialog_preview_width"
           android:layout_height="@dimen/cpv_dialog_preview_height"
-          app:colorShape="square"/>
+          app:jrcc_colorShape="square"/>
 
       <ImageView
           android:id="@+id/cpv_arrow_right"
@@ -44,7 +44,7 @@
           android:id="@id/cpv_color_panel_new"
           android:layout_width="@dimen/cpv_dialog_preview_width"
           android:layout_height="@dimen/cpv_dialog_preview_height"
-          app:colorShape="square"/>
+          app:jrcc_colorShape="square"/>
 
       <Space
           android:layout_width="0dp"
