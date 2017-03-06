@@ -5,7 +5,7 @@
 <a target="_blank" href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#ICE_CREAM_SANDWICH"><img src="https://img.shields.io/badge/API-14%2B-blue.svg?style=flat" alt="API" /></a>
 <a target="_blank" href="LICENSE"><img src="http://img.shields.io/:license-apache-blue.svg" alt="License" /></a>
 <a target="_blank" href="https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker"><img src="https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker/badge.svg" alt="Maven Central" /></a>
-<a target="_blank" href="http://www.methodscount.com/?lib=com.jrummyapps%3Acolorpicker%3A2.1.5"><img src="https://img.shields.io/badge/methods-409-e91e63.svg" /></a>
+<a target="_blank" href="http://www.methodscount.com/?lib=com.jrummyapps%3Acolorpicker%3A2.1.6"><img src="https://img.shields.io/badge/methods-409-e91e63.svg" /></a>
 <a target="_blank" href="https://twitter.com/jrummyapps"><img src="https://img.shields.io/twitter/follow/jrummyapps.svg?style=social" /></a>
 
 Yet another open source color picker for Android. So, why should you use this color picker? It is highly customizable and easy to use. You can simply add the `ColorPreference` to your preferences and a beautiful color picker dialog will be displayed without additional code. The color picker supports alpha and allows you to set your own presets. [Try the demo app on appetize.io.](https://appetize.io/app/h1zukd6ux5yy5pw91vpyer32zr)
@@ -66,17 +66,17 @@ For further doumentation about how to use the library, check the [demo](demo) ap
 
 ## Download
 
-Download [the latest AAR](https://repo1.maven.org/maven2/com/jrummyapps/colorpicker/2.1.5/colorpicker-2.1.5.aar) or grab via Gradle:
+Download [the latest AAR](https://repo1.maven.org/maven2/com/jrummyapps/colorpicker/2.1.6/colorpicker-2.1.6.aar) or grab via Gradle:
 
 ```groovy
-compile 'com.jrummyapps:colorpicker:2.1.5'
+compile 'com.jrummyapps:colorpicker:2.1.6'
 ```
 or Maven:
 ```xml
 <dependency>
   <groupId>com.jrummyapps</groupId>
   <artifactId>colorpicker</artifactId>
-  <version>2.1.5</version>
+  <version>2.1.6</version>
   <type>aar</type>
 </dependency>
 ```
