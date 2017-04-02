@@ -348,9 +348,9 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
 
   private void setHex(int color) {
     if (showAlphaSlider) {
-      hexEditText.setText(String.format("#%08X", (color)));
+      hexEditText.setText(String.format("%08X", (color)));
     } else {
-      hexEditText.setText(String.format("#%06X", (0xFFFFFF & color)));
+      hexEditText.setText(String.format("%06X", (0xFFFFFF & color)));
     }
   }
 
