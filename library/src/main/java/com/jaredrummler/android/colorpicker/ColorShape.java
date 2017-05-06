@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+ * Copyright (C) 2017 Jared Rummler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,22 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.jrummyapps.android.colorpicker.demo;
+package com.jaredrummler.android.colorpicker;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import android.support.annotation.IntDef;
 
 /**
- * To work on unit tests, switch the Test Artifact in the Build Variants view.
+ * The shape of the color preview
  */
-public class ExampleUnitTest {
+@IntDef({ColorShape.SQUARE, ColorShape.CIRCLE})
+public @interface ColorShape {
 
-  @Test
-  public void addition_isCorrect() throws Exception {
-    assertEquals(4, 2 + 2);
-  }
+  int SQUARE = 0;
+
+  int CIRCLE = 1;
+
 }

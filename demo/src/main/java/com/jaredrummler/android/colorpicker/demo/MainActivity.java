@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
- * Copyright (C) 2015 Daniel Nilsson
+ * Copyright (C) 2017 Jared Rummler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.jrummyapps.android.colorpicker.demo;
+package com.jaredrummler.android.colorpicker.demo;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -28,8 +26,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.jrummyapps.android.colorpicker.ColorPickerDialog;
-import com.jrummyapps.android.colorpicker.ColorPickerDialogListener;
+import com.jaredrummler.android.colorpicker.ColorPickerDialog;
+import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 
 public class MainActivity extends AppCompatActivity implements ColorPickerDialogListener {
 
@@ -63,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         return true;
       case R.id.menu_github:
         try {
-          startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jrummyapps/color-picker-dialog")));
+          startActivity(new Intent(Intent.ACTION_VIEW,
+              Uri.parse("https://github.com/jaredrummler/ColorPicker")));
         } catch (ActivityNotFoundException ignored) {
         }
         return true;

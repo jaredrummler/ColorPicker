@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 JRummy Apps Inc.
+ * Copyright (C) 2017 Jared Rummler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jrummyapps.android.colorpicker;
+package com.jaredrummler.android.colorpicker;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,7 +25,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
-import com.jrummyapps.android.colorpicker.ColorPickerDialog.DialogType;
 
 /**
  * A Preference to select a color
@@ -38,7 +37,7 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
   private OnShowDialogListener onShowDialogListener;
   private int color = Color.BLACK;
   private boolean showDialog;
-  @DialogType
+  @ColorPickerDialog.DialogType
   private int dialogType;
   private int colorShape;
   private boolean allowPresets;

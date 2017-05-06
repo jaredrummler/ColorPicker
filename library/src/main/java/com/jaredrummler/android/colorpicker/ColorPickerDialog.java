@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 JRummy Apps Inc.
+ * Copyright (C) 2017 Jared Rummler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jrummyapps.android.colorpicker;
+package com.jaredrummler.android.colorpicker;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -49,7 +49,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import com.jrummyapps.android.colorpicker.ColorPickerView.OnColorChangedListener;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -64,7 +63,8 @@ import java.util.Locale;
  *   ColorPickerDialog.newBuilder().show(activity);
  * </pre>
  */
-public class ColorPickerDialog extends DialogFragment implements OnTouchListener, OnColorChangedListener, TextWatcher {
+public class ColorPickerDialog extends DialogFragment implements OnTouchListener,
+    ColorPickerView.OnColorChangedListener, TextWatcher {
 
   private static final String ARG_ID = "id";
   private static final String ARG_TYPE = "dialogType";

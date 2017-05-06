@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
- * Copyright (C) 2015 Daniel Nilsson
+ * Copyright (C) 2017 Jared Rummler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.jrummyapps.android.colorpicker.demo;
+package com.jaredrummler.android.colorpicker.demo;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -26,9 +24,9 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import com.jrummyapps.android.colorpicker.ColorPanelView;
-import com.jrummyapps.android.colorpicker.ColorPickerView;
-import com.jrummyapps.android.colorpicker.ColorPickerView.OnColorChangedListener;
+import com.jaredrummler.android.colorpicker.ColorPanelView;
+import com.jaredrummler.android.colorpicker.ColorPickerView;
+import com.jaredrummler.android.colorpicker.ColorPickerView.OnColorChangedListener;
 
 public class ColorPickerActivity extends Activity implements OnColorChangedListener, View.OnClickListener {
 

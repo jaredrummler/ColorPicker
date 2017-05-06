@@ -5,7 +5,7 @@ android {
   buildToolsVersion "25.0.2"
 
   defaultConfig {
-    applicationId "com.jrummyapps.android.colorpicker.demo"
+    applicationId "com.jaredrummler.android.colorpicker.demo"
     minSdkVersion 14
     targetSdkVersion 25
     versionCode 1
@@ -17,11 +17,13 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+  lintOptions {
+    checkReleaseBuilds false
+    abortOnError false
+  }
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  testCompile 'junit:junit:4.12'
   compile 'com.android.support:appcompat-v7:25.3.1'
   compile project(':library')
 }
