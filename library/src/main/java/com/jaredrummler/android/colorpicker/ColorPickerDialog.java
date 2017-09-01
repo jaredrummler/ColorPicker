@@ -76,6 +76,9 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   private static final String ARG_DIALOG_TITLE = "dialogTitle";
   private static final String ARG_SHOW_COLOR_SHADES = "showColorShades";
   private static final String ARG_COLOR_SHAPE = "colorShape";
+  private static final String ARG_PRESETS_BUTTON_TEXT = "neutralButtonText";
+  private static final String ARG_CUSTOM_BUTTON_TEXT = "customButtonText";
+  private static final String ARG_SELECTED_BUTTON_TEXT = "selectedButtonText";
 
   public static final int TYPE_CUSTOM = 0;
   public static final int TYPE_PRESETS = 1;
@@ -130,6 +133,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   LinearLayout shadesLayout;
   SeekBar transparencySeekBar;
   TextView transparencyPercText;
+  private int presetsButtonStringRes;
 
   // -- CUSTOM ---------------------------
   ColorPickerView colorPicker;
@@ -137,6 +141,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   EditText hexEditText;
   boolean showAlphaSlider;
   private boolean fromEditText;
+  private int customButtonStringRes;
 
   @Override public void onAttach(Activity activity) {
     super.onAttach(activity);
@@ -165,9 +170,14 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       rootView.addView(createPresetsView());
     }
 
+    int selectedButtonStringRes = getArguments().getInt(ARG_SELECTED_BUTTON_TEXT);
+    if (selectedButtonStringRes == 0) {
+      selectedButtonStringRes = R.string.cpv_select;
+    }
+
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
         .setView(rootView)
-        .setPositiveButton(R.string.cpv_select, new DialogInterface.OnClickListener() {
+        .setPositiveButton(selectedButtonStringRes, new DialogInterface.OnClickListener() {
           @Override public void onClick(DialogInterface dialog, int which) {
             colorPickerDialogListener.onColorSelected(dialogId, color);
           }
@@ -178,11 +188,16 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       builder.setTitle(dialogTitleStringRes);
     }
 
+    presetsButtonStringRes = getArguments().getInt(ARG_PRESETS_BUTTON_TEXT);
+    customButtonStringRes = getArguments().getInt(ARG_CUSTOM_BUTTON_TEXT);
+
     int neutralButtonStringRes;
     if (dialogType == TYPE_CUSTOM && getArguments().getBoolean(ARG_ALLOW_PRESETS)) {
-      neutralButtonStringRes = R.string.cpv_presets;
+      neutralButtonStringRes =
+          (presetsButtonStringRes != 0 ? presetsButtonStringRes : R.string.cpv_presets);
     } else if (dialogType == TYPE_PRESETS && getArguments().getBoolean(ARG_ALLOW_CUSTOM)) {
-      neutralButtonStringRes = R.string.cpv_custom;
+      neutralButtonStringRes =
+          (customButtonStringRes != 0 ? customButtonStringRes : R.string.cpv_custom);
     } else {
       neutralButtonStringRes = 0;
     }
@@ -213,12 +228,14 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
           switch (dialogType) {
             case TYPE_CUSTOM:
               dialogType = TYPE_PRESETS;
-              ((Button) v).setText(R.string.cpv_custom);
+              ((Button) v).setText(
+                  customButtonStringRes != 0 ? customButtonStringRes : R.string.cpv_custom);
               rootView.addView(createPresetsView());
               break;
             case TYPE_PRESETS:
               dialogType = TYPE_CUSTOM;
-              ((Button) v).setText(R.string.cpv_presets);
+              ((Button) v).setText(
+                  presetsButtonStringRes != 0 ? presetsButtonStringRes : R.string.cpv_presets);
               rootView.addView(createPickerView());
           }
         }
@@ -700,6 +717,9 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   public static final class Builder {
 
     @StringRes int dialogTitle = R.string.cpv_default_title;
+    @StringRes int presetsButtonText = R.string.cpv_presets;
+    @StringRes int customButtonText = R.string.cpv_custom;
+    @StringRes int selectedButtonText = R.string.cpv_select;
     @DialogType int dialogType = TYPE_PRESETS;
     int[] presets = MATERIAL_COLORS;
     @ColorInt int color = Color.BLACK;
@@ -723,6 +743,42 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
      */
     public Builder setDialogTitle(@StringRes int dialogTitle) {
       this.dialogTitle = dialogTitle;
+      return this;
+    }
+
+    /**
+     * Set the selected button text string resource id
+     *
+     * @param selectedButtonText
+     *     The string resource used for the selected button text
+     * @return This builder object for chaining method calls
+     */
+    public Builder setSelectedButtonText(@StringRes int selectedButtonText) {
+      this.selectedButtonText = selectedButtonText;
+      return this;
+    }
+
+    /**
+     * Set the presets button text string resource id
+     *
+     * @param presetsButtonText
+     *     The string resource used for the presets button text
+     * @return This builder object for chaining method calls
+     */
+    public Builder setPresetsButtonText(@StringRes int presetsButtonText) {
+      this.presetsButtonText = presetsButtonText;
+      return this;
+    }
+
+    /**
+     * Set the custom button text string resource id
+     *
+     * @param customButtonText
+     *     The string resource used for the custom button text
+     * @return This builder object for chaining method calls
+     */
+    public Builder setCustomButtonText(@StringRes int customButtonText) {
+      this.customButtonText = customButtonText;
       return this;
     }
 
@@ -853,6 +909,9 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       args.putInt(ARG_DIALOG_TITLE, dialogTitle);
       args.putBoolean(ARG_SHOW_COLOR_SHADES, showColorShades);
       args.putInt(ARG_COLOR_SHAPE, colorShape);
+      args.putInt(ARG_PRESETS_BUTTON_TEXT, presetsButtonText);
+      args.putInt(ARG_CUSTOM_BUTTON_TEXT, customButtonText);
+      args.putInt(ARG_SELECTED_BUTTON_TEXT, selectedButtonText);
       dialog.setArguments(args);
       return dialog;
     }
