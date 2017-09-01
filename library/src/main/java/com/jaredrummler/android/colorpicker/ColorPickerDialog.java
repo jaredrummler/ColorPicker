@@ -76,7 +76,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
   private static final String ARG_DIALOG_TITLE = "dialogTitle";
   private static final String ARG_SHOW_COLOR_SHADES = "showColorShades";
   private static final String ARG_COLOR_SHAPE = "colorShape";
-  private static final String ARG_PRESETS_BUTTON_TEXT = "neutralButtonText";
+  private static final String ARG_PRESETS_BUTTON_TEXT = "presetsButtonText";
   private static final String ARG_CUSTOM_BUTTON_TEXT = "customButtonText";
   private static final String ARG_SELECTED_BUTTON_TEXT = "selectedButtonText";
 
