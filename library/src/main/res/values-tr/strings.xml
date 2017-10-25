@@ -12,9 +12,9 @@
 -->
 <resources>
   <!-- Default title for color picker dialog [CHAR LIMIT=30] -->
-  <string name="cpv_default_title">Renk seçin</string>
-  <string name="cpv_presets">Ön ayarlar</string>
+  <string name="cpv_default_title">Renk Seçin</string>
+  <string name="cpv_presets">Ön Ayarlar</string>
   <string name="cpv_custom">Özel</string>
-  <string name="cpv_select">Seçmek</string>
+  <string name="cpv_select">Seç</string>
   <string name="cpv_transparency">Şeffaflık</string>
 </resources>
