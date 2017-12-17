@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     super.onCreate(savedInstanceState);
     if(savedInstanceState == null) {
       getFragmentManager().beginTransaction()
-          .add(android.R.id.content, new ExamplePreferenceFragment())
+          .add(android.R.id.content, new DemoFragment())
           .commit();
     }
   }
@@ -80,15 +79,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
   }
 
   @Override public void onDialogDismissed(int dialogId) {
-
-  }
-
-  public static class ExamplePreferenceFragment extends PreferenceFragment {
-
-    @Override public void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      addPreferencesFromResource(R.xml.main);
-    }
 
   }
 
