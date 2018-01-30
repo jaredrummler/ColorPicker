@@ -729,6 +729,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
     boolean allowCustom = true;
     boolean showColorShades = true;
     @ColorShape int colorShape = ColorShape.CIRCLE;
+    ColorPickerDialogListener colorPickerDialogListener;
 
     /*package*/ Builder() {
 
@@ -890,6 +891,11 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
       return this;
     }
 
+    public Builder setcolorPickerDialogListener(ColorPickerDialogListener colorPickerDialogListener){
+      this.colorPickerDialogListener = colorPickerDialogListener;
+      return this;
+    }
+
     /**
      * Create the {@link ColorPickerDialog} instance.
      *
@@ -898,6 +904,7 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
      */
     public ColorPickerDialog create() {
       ColorPickerDialog dialog = new ColorPickerDialog();
+      dialog.colorPickerDialogListener = colorPickerDialogListener;
       Bundle args = new Bundle();
       args.putInt(ARG_ID, dialogId);
       args.putInt(ARG_TYPE, dialogType);
