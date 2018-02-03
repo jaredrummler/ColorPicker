@@ -16,20 +16,19 @@
 
 package com.jaredrummler.android.colorpicker;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.preference.Preference;
+import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.View;
 
 /**
  * A Preference to select a color
  */
-public class ColorPreference extends Preference implements ColorPickerDialogListener {
+public class ColorPreferenceSupport extends android.support.v7.preference.DialogPreference  implements ColorPickerDialogListener {
 
   private static final int SIZE_NORMAL = 0;
   private static final int SIZE_LARGE = 1;
@@ -47,13 +46,15 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
   private int previewSize;
   private int[] presets;
   private int dialogTitle;
+  private ColorPanelView preview;
+  private Bundle args;
 
-  public ColorPreference(Context context, AttributeSet attrs) {
+  public ColorPreferenceSupport(Context context, AttributeSet attrs) {
     super(context, attrs);
     init(attrs);
   }
 
-  public ColorPreference(Context context, AttributeSet attrs, int defStyle) {
+  public ColorPreferenceSupport(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
     init(attrs);
   }
@@ -85,51 +86,38 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
           previewSize == SIZE_LARGE ? R.layout.cpv_preference_square_large : R.layout.cpv_preference_square
       );
     }
+    args=new Bundle();
+    int dialogId=a.getInt(R.styleable.ColorPreference_cpv_dialogID, 0);
+    int presetsButtonText = a.getResourceId(R.styleable.ColorPreference_cpv_presetsButtonText, R.string.cpv_default_title);
+    int customButtonText = a.getResourceId(R.styleable.ColorPreference_cpv_customButtonText, R.string.cpv_default_title);
+    int selectedButtonText = a.getResourceId(R.styleable.ColorPreference_cpv_selectedButtonText, R.string.cpv_default_title);
+
+    args.putInt(ColorPickerDialogPreference.ARG_ID, dialogId);
+    args.putInt(ColorPickerDialogPreference.ARG_TYPE, dialogType);
+    args.putInt(ColorPickerDialogPreference.ARG_COLOR, color);
+    args.putIntArray(ColorPickerDialogPreference.ARG_PRESETS, presets);
+    args.putBoolean(ColorPickerDialogPreference.ARG_ALPHA, showAlphaSlider);
+    args.putBoolean(ColorPickerDialogPreference.ARG_ALLOW_CUSTOM, allowCustom);
+    args.putBoolean(ColorPickerDialogPreference.ARG_ALLOW_PRESETS, allowPresets);
+    args.putInt(ColorPickerDialogPreference.ARG_DIALOG_TITLE, dialogTitle);
+    args.putBoolean(ColorPickerDialogPreference.ARG_SHOW_COLOR_SHADES, showColorShades);
+    args.putInt(ColorPickerDialogPreference.ARG_COLOR_SHAPE, colorShape);
+    args.putInt(ColorPickerDialogPreference.ARG_PRESETS_BUTTON_TEXT, presetsButtonText);
+    args.putInt(ColorPickerDialogPreference.ARG_CUSTOM_BUTTON_TEXT, customButtonText);
+    args.putInt(ColorPickerDialogPreference.ARG_SELECTED_BUTTON_TEXT, selectedButtonText);
     a.recycle();
+
   }
 
-  @Override protected void onClick() {
-    super.onClick();
-    if (onShowDialogListener != null) {
-      onShowDialogListener.onShowColorPickerDialog((String) getTitle(), color);
-    } else if (showDialog) {
-      ColorPickerDialog dialog = ColorPickerDialog.newBuilder()
-          .setDialogType(dialogType)
-          .setDialogTitle(dialogTitle)
-          .setColorShape(colorShape)
-          .setPresets(presets)
-          .setAllowPresets(allowPresets)
-          .setAllowCustom(allowCustom)
-          .setShowAlphaSlider(showAlphaSlider)
-          .setShowColorShades(showColorShades)
-          .setColor(color)
-          .create();
-      dialog.setColorPickerDialogListener(ColorPreference.this);
-      Activity activity = (Activity) getContext();
-      dialog.show(activity.getFragmentManager(), getFragmentTag());
-    }
-  }
 
-  @Override protected void onAttachedToActivity() {
-    super.onAttachedToActivity();
-
-    if (showDialog) {
-      Activity activity = (Activity) getContext();
-      ColorPickerDialog fragment =
-          (ColorPickerDialog) activity.getFragmentManager().findFragmentByTag(getFragmentTag());
-      if (fragment != null) {
-        // re-bind preference to fragment
-        fragment.setColorPickerDialogListener(this);
-      }
-    }
-  }
-
-  @Override protected void onBindView(View view) {
-    super.onBindView(view);
-    ColorPanelView preview = (ColorPanelView) view.findViewById(R.id.cpv_preference_preview_color_panel);
+  @Override
+  public void onBindViewHolder(PreferenceViewHolder view) {
+    super.onBindViewHolder(view);
+    preview = (ColorPanelView) view.findViewById(R.id.cpv_preference_preview_color_panel);
     if (preview != null) {
       preview.setColor(color);
     }
+
   }
 
   @Override protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
@@ -138,6 +126,9 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
     } else {
       color = (Integer) defaultValue;
       persistInt(color);
+    }
+    if (preview != null) {
+      preview.setColor(color);
     }
   }
 
@@ -160,12 +151,10 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
    *     The newly selected color
    */
   public void saveValue(@ColorInt int color) {
-    if(this.color != color) {
-      this.color = color;
-      persistInt(this.color);
-      notifyChanged();
-      callChangeListener(color);
-    }
+    this.color = color;
+    persistInt(this.color);
+    notifyChanged();
+    callChangeListener(color);
   }
 
   /**
@@ -205,6 +194,14 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
    */
   public String getFragmentTag() {
     return "color_" + getKey();
+  }
+
+  public Bundle getArgs() {
+    return args;
+  }
+
+  public int getColor() {
+    return getPersistedInt(Color.BLACK);
   }
 
   public interface OnShowDialogListener {

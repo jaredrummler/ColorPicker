@@ -33,6 +33,11 @@
     <attr name="cpv_allowPresets" format="boolean|reference"/>
     <attr name="cpv_allowCustom" format="boolean|reference"/>
     <attr name="cpv_showDialog" format="boolean|reference"/>
+    <attr name="cpv_dialogID" format="integer|reference" />
+    <attr name="cpv_presetsButtonText" format="string|reference" />
+    <attr name="cpv_customButtonText" format="string|reference" />
+    <attr name="cpv_selectedButtonText" format="string|reference" />
+
   </declare-styleable>
 
 </resources>
