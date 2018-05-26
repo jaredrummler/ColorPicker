@@ -69,7 +69,7 @@ For further doumentation about how to use the library, check the [demo](demo) ap
 Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/colorpicker/1.0.2/colorpicker-1.0.2.aar) or grab via Gradle:
 
 ```groovy
-compile 'com.jaredrummler:colorpicker:1.0.2'
+implementation 'com.jaredrummler:colorpicker:1.0.2'
 ```
 or Maven:
 ```xml
