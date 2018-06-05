@@ -20,4 +20,6 @@
   <string name="cpv_custom">Dostosuj</string>
   <string name="cpv_select">Wybierz</string>
   <string name="cpv_transparency">Przezroczystość</string>
+    <string name="cpv_reset">Zresetować</string>
+  <string name="cpv_confirm">Potwierdzać</string>
 </resources>

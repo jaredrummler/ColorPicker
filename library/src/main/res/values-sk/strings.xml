@@ -20,4 +20,6 @@
   <string name="cpv_custom">Vlastné</string>
   <string name="cpv_select">Vybrať</string>
   <string name="cpv_transparency">Priehľadnosť</string>
+    <string name="cpv_reset">Obnoviť</string>
+  <string name="cpv_confirm">Birmovať</string>
 </resources>

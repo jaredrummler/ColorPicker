@@ -17,4 +17,6 @@
   <string name="cpv_custom">Özel</string>
   <string name="cpv_select">Seç</string>
   <string name="cpv_transparency">Şeffaflık</string>
+    <string name="cpv_confirm">Onaylamak</string>
+  <string name="cpv_reset">Sıfırlamak</string>
 </resources>

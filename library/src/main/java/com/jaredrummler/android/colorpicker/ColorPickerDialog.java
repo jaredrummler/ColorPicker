@@ -181,6 +181,21 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
           @Override public void onClick(DialogInterface dialog, int which) {
             colorPickerDialogListener.onColorSelected(dialogId, color);
           }
+        })
+        .setNegativeButton(R.string.cpv_reset, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.cpv_confirm)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                colorPickerDialogListener.onColorReset(dialogId);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
+            }
         });
 
     int dialogTitleStringRes = getArguments().getInt(ARG_DIALOG_TITLE);

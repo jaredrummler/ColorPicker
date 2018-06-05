@@ -17,4 +17,6 @@
   <string name="cpv_custom">Aangepast</string>
   <string name="cpv_select">Kiezen</string>
   <string name="cpv_transparency">Transparantie</string>
+  <string name="cpv_reset">Reset</string>
+  <string name="cpv_confirm">Bevestigen</string>
 </resources>

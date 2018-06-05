@@ -19,4 +19,6 @@
     <string name="cpv_presets">Predefiniti</string>
     <string name="cpv_select">Seleziona</string>
     <string name="cpv_transparency">Trasparenza</string>
+    <string name="cpv_confirm">Confermare</string>
+    <string name="cpv_reset">Resettare</string>
 </resources>

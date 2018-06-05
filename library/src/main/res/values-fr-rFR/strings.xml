@@ -17,4 +17,6 @@
   <string name="cpv_custom">Personnalisée</string>
   <string name="cpv_select">Valider</string>
   <string name="cpv_transparency">Transparence</string>
+    <string name="cpv_confirm">Confirmer</string>
+  <string name="cpv_reset">Réinitialiser</string>
 </resources>

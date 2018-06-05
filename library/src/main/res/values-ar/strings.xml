@@ -20,4 +20,6 @@
   <string name="cpv_custom">ألوان معدلة</string>
   <string name="cpv_select">اختر</string>
   <string name="cpv_transparency">الشفافية</string>
+    <string name="cpv_reset">إعادة تعيين</string>
+  <string name="cpv_confirm">تؤكد</string>
 </resources>

@@ -20,4 +20,6 @@
   <string name="cpv_custom">Vlastní</string>
   <string name="cpv_select">Vybrat</string>
   <string name="cpv_transparency">Průhlednost</string>
+    <string name="cpv_reset">Resetovat</string>
+  <string name="cpv_confirm">Potvrdit</string>
 </resources>
