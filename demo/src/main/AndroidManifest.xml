@@ -16,7 +16,7 @@
   ~
   -->
 
-<manifest package="com.jrummyapps.android.colorpicker.demo"
+<manifest package="com.jaredrummler.android.colorpicker.demo"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
   <application

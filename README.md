@@ -1,14 +1,14 @@
 # Color Picker
 
-<img src="https://github.com/jrummyapps/colorpicker/blob/master/demo/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true" align="left" hspace="10" vspace="10"></a>
+<img src="https://github.com/jaredrummler/ColorPicker/blob/master/demo/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true" align="left" hspace="10" vspace="10"></a>
 
 <a target="_blank" href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#ICE_CREAM_SANDWICH"><img src="https://img.shields.io/badge/API-14%2B-blue.svg?style=flat" alt="API" /></a>
 <a target="_blank" href="LICENSE"><img src="http://img.shields.io/:license-apache-blue.svg" alt="License" /></a>
-<a target="_blank" href="https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker"><img src="https://maven-badges.herokuapp.com/maven-central/com.jrummyapps/colorpicker/badge.svg" alt="Maven Central" /></a>
-<a target="_blank" href="http://www.methodscount.com/?lib=com.jrummyapps%3Acolorpicker%3A2.1.6"><img src="https://img.shields.io/badge/methods-409-e91e63.svg" /></a>
-<a target="_blank" href="https://twitter.com/jrummyapps"><img src="https://img.shields.io/twitter/follow/jrummyapps.svg?style=social" /></a>
+<a target="_blank" href="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/colorpicker"><img src="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/colorpicker/badge.svg" alt="Maven Central" /></a>
+<a target="_blank" href="http://www.methodscount.com/?lib=com.jaredrummler%3Acolorpicker%3A1.0.2"><img src="https://img.shields.io/badge/methods-409-e91e63.svg" /></a>
+<a target="_blank" href="https://twitter.com/jaredrummler"><img src="https://img.shields.io/twitter/follow/jaredrummler.svg?style=social" /></a>
 
-Yet another open source color picker for Android. So, why should you use this color picker? It is highly customizable and easy to use. You can simply add the `ColorPreference` to your preferences and a beautiful color picker dialog will be displayed without additional code. The color picker supports alpha and allows you to set your own presets. [Try the demo app on appetize.io.](https://appetize.io/app/h1zukd6ux5yy5pw91vpyer32zr)
+Yet another open source color picker for Android. So, why should you use this color picker? It is highly customizable and easy to use. You can simply add the `ColorPreference` to your preferences and a beautiful color picker dialog will be displayed without additional code. The color picker supports alpha and allows you to set your own presets.
 
 The original ColorPickerView was written by [Daniel Nilsson](https://github.com/danielnilsson9/color-picker-view).
 
@@ -27,7 +27,7 @@ Add the `ColorPreference` to your preference XML:
 
   <PreferenceCategory>
 
-    <com.jrummyapps.android.colorpicker.ColorPreference
+    <com.jaredrummler.android.colorpicker.ColorPreference
         android:defaultValue="@color/color_default"
         android:key="default_color"
         android:summary="@string/color_default_summary"
@@ -66,17 +66,17 @@ For further doumentation about how to use the library, check the [demo](demo) ap
 
 ## Download
 
-Download [the latest AAR](https://repo1.maven.org/maven2/com/jrummyapps/colorpicker/2.1.6/colorpicker-2.1.6.aar) or grab via Gradle:
+Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/colorpicker/1.0.2/colorpicker-1.0.2.aar) or grab via Gradle:
 
 ```groovy
-compile 'com.jrummyapps:colorpicker:2.1.6'
+compile 'com.jaredrummler:colorpicker:1.0.2'
 ```
 or Maven:
 ```xml
 <dependency>
-  <groupId>com.jrummyapps</groupId>
+  <groupId>com.jaredrummler</groupId>
   <artifactId>colorpicker</artifactId>
-  <version>2.1.6</version>
+  <version>1.0.2</version>
   <type>aar</type>
 </dependency>
 ```
