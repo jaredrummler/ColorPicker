@@ -16,7 +16,7 @@
 
 package com.jaredrummler.android.colorpicker;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 /**
  * The shape of the color preview

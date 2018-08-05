@@ -18,19 +18,12 @@ package com.jaredrummler.android.colorpicker;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -49,8 +42,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import java.util.Arrays;
 import java.util.Locale;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.ColorUtils;
+import androidx.fragment.app.DialogFragment;
 
 /**
  * <p>A dialog to pick a color.</p>
@@ -922,8 +925,8 @@ public class ColorPickerDialog extends DialogFragment implements OnTouchListener
      * @param activity
      *     The current activity.
      */
-    public void show(Activity activity) {
-      create().show(activity.getFragmentManager(), "color-picker-dialog");
+    public void show(AppCompatActivity activity) {
+      create().show(activity.getSupportFragmentManager(), "color-picker-dialog");
     }
 
   }

@@ -30,15 +30,17 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.ColorInt;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
+
 import java.util.Locale;
+
+import androidx.annotation.ColorInt;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
 
 /**
  * This class draws a panel which which will be filled with a color which can be set. It can be used to show the

@@ -16,7 +16,7 @@
 
 package com.jaredrummler.android.colorpicker;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 /**
  * Callback used for getting the selected color from a color picker dialog.

@@ -17,7 +17,7 @@
 package com.jaredrummler.android.colorpicker;
 
 import android.content.Context;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
