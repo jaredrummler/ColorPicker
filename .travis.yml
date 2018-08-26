@@ -12,9 +12,6 @@ android:
 jdk:
   - oraclejdk8
 
-before_install:
-  - yes | sdkmanager "platforms;android-28.0.2"
-
 script:
   - ./gradlew build
 
