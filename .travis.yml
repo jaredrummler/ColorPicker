@@ -4,13 +4,16 @@ android:
   components:
     - tools                             # Tools
     - platform-tools                    # Platform tools
-    - build-tools-26.0.2                # Build tools version
-    - android-26                        # Target SDK version
+    - build-tools-28.0.2                # Build tools version
+    - android-28                        # Target SDK version
     - extra-android-m2repository        # Support repo
     - sys-img-armeabi-v7a-android-18    # Emulator
 
 jdk:
   - oraclejdk8
+
+before_install:
+  - yes | sdkmanager "platforms;android-28.0.2"
 
 script:
   - ./gradlew build
