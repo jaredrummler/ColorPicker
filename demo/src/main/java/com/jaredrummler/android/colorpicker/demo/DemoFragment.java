@@ -28,5 +28,4 @@ public class DemoFragment extends PreferenceFragment {
       }
     });
   }
-
 }

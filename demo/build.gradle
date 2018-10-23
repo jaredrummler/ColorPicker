@@ -23,6 +23,6 @@ android {
 }
 
 dependencies {
-  implementation 'androidx.appcompat:appcomat:1.0.0'
+  implementation 'androidx.appcompat:appcompat:1.0.0'
   implementation project(':library')
 }

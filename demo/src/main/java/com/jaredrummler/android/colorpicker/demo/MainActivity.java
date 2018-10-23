@@ -21,10 +21,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 
@@ -35,10 +35,8 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    if(savedInstanceState == null) {
-      getFragmentManager().beginTransaction()
-          .add(android.R.id.content, new DemoFragment())
-          .commit();
+    if (savedInstanceState == null) {
+      getFragmentManager().beginTransaction().add(android.R.id.content, new DemoFragment()).commit();
     }
   }
 
@@ -60,8 +58,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         return true;
       case R.id.menu_github:
         try {
-          startActivity(new Intent(Intent.ACTION_VIEW,
-              Uri.parse("https://github.com/jaredrummler/ColorPicker")));
+          startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jaredrummler/ColorPicker")));
         } catch (ActivityNotFoundException ignored) {
         }
         return true;
@@ -81,6 +78,5 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
   @Override public void onDialogDismissed(int dialogId) {
 
   }
-
 }
  

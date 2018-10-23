@@ -41,7 +41,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * Displays a color picker to the user and allow them to select a color. A slider for the alpha channel is also available.
+ * Displays a color picker to the user and allow them to select a color. A slider for the alpha channel is also
+ * available.
  * Enable it by setting setAlphaSliderVisible(boolean) to true.
  */
 public class ColorPickerView extends View {
@@ -222,7 +223,7 @@ public class ColorPickerView extends View {
     // to theme changes automatically.
 
     final TypedValue value = new TypedValue();
-    TypedArray a = c.obtainStyledAttributes(value.data, new int[]{android.R.attr.textColorSecondary});
+    TypedArray a = c.obtainStyledAttributes(value.data, new int[] { android.R.attr.textColorSecondary });
 
     if (borderColor == DEFAULT_BORDER_COLOR) {
       borderColor = a.getColor(0, DEFAULT_BORDER_COLOR);
@@ -258,7 +259,6 @@ public class ColorPickerView extends View {
     alphaTextPaint.setAntiAlias(true);
     alphaTextPaint.setTextAlign(Align.CENTER);
     alphaTextPaint.setFakeBoldText(true);
-
   }
 
   @Override protected void onDraw(Canvas canvas) {
@@ -276,14 +276,14 @@ public class ColorPickerView extends View {
 
     if (BORDER_WIDTH_PX > 0) {
       borderPaint.setColor(borderColor);
-      canvas.drawRect(drawingRect.left, drawingRect.top,
-          rect.right + BORDER_WIDTH_PX,
-          rect.bottom + BORDER_WIDTH_PX, borderPaint);
+      canvas.drawRect(drawingRect.left, drawingRect.top, rect.right + BORDER_WIDTH_PX, rect.bottom + BORDER_WIDTH_PX,
+          borderPaint);
     }
 
     if (valShader == null) {
       //Black gradient has either not been created or the view has been resized.
-      valShader = new LinearGradient(rect.left, rect.top, rect.left, rect.bottom, 0xffffffff, 0xff000000, TileMode.CLAMP);
+      valShader =
+          new LinearGradient(rect.left, rect.top, rect.left, rect.bottom, 0xffffffff, 0xff000000, TileMode.CLAMP);
     }
 
     //If the hue has changed we need to recreate the cache.
@@ -295,8 +295,7 @@ public class ColorPickerView extends View {
 
       //We create our bitmap in the cache if it doesn't exist.
       if (satValBackgroundCache.bitmap == null) {
-        satValBackgroundCache.bitmap = Bitmap
-            .createBitmap(rect.width(), rect.height(), Config.ARGB_8888);
+        satValBackgroundCache.bitmap = Bitmap.createBitmap(rect.width(), rect.height(), Config.ARGB_8888);
       }
 
       //We create the canvas once so we can draw on our bitmap and the hold on to it.
@@ -304,12 +303,11 @@ public class ColorPickerView extends View {
         satValBackgroundCache.canvas = new Canvas(satValBackgroundCache.bitmap);
       }
 
-      int rgb = Color.HSVToColor(new float[]{hue, 1f, 1f});
+      int rgb = Color.HSVToColor(new float[] { hue, 1f, 1f });
 
       satShader = new LinearGradient(rect.left, rect.top, rect.right, rect.top, 0xffffffff, rgb, TileMode.CLAMP);
 
-      ComposeShader mShader = new ComposeShader(
-          valShader, satShader, PorterDuff.Mode.MULTIPLY);
+      ComposeShader mShader = new ComposeShader(valShader, satShader, PorterDuff.Mode.MULTIPLY);
       satValPaint.setShader(mShader);
 
       // Finally we draw on our canvas, the result will be
@@ -320,15 +318,12 @@ public class ColorPickerView extends View {
       // wasn't supported by hardware acceleration which mean
       // there is no need to turn it of anymore. The rest of
       // the view will still be hw accelerated.
-      satValBackgroundCache.canvas.drawRect(0, 0,
-          satValBackgroundCache.bitmap.getWidth(),
-          satValBackgroundCache.bitmap.getHeight(),
-          satValPaint);
+      satValBackgroundCache.canvas.drawRect(0, 0, satValBackgroundCache.bitmap.getWidth(),
+          satValBackgroundCache.bitmap.getHeight(), satValPaint);
 
       //We set the hue value in our cache to which hue it was drawn with,
       //then we know that if it hasn't changed we can reuse our cached bitmap.
       satValBackgroundCache.value = hue;
-
     }
 
     // We draw our bitmap from the cached, if the hue has changed
@@ -342,7 +337,6 @@ public class ColorPickerView extends View {
 
     satValTrackerPaint.setColor(0xffdddddd);
     canvas.drawCircle(p.x, p.y, circleTrackerRadiusPx, satValTrackerPaint);
-
   }
 
   private void drawHuePanel(Canvas canvas) {
@@ -351,11 +345,8 @@ public class ColorPickerView extends View {
     if (BORDER_WIDTH_PX > 0) {
       borderPaint.setColor(borderColor);
 
-      canvas.drawRect(rect.left - BORDER_WIDTH_PX,
-          rect.top - BORDER_WIDTH_PX,
-          rect.right + BORDER_WIDTH_PX,
-          rect.bottom + BORDER_WIDTH_PX,
-          borderPaint);
+      canvas.drawRect(rect.left - BORDER_WIDTH_PX, rect.top - BORDER_WIDTH_PX, rect.right + BORDER_WIDTH_PX,
+          rect.bottom + BORDER_WIDTH_PX, borderPaint);
     }
 
     if (hueBackgroundCache == null) {
@@ -368,7 +359,7 @@ public class ColorPickerView extends View {
       // Generate array of all colors, will be drawn as individual lines.
       float h = 360f;
       for (int i = 0; i < hueColors.length; i++) {
-        hueColors[i] = Color.HSVToColor(new float[]{h, 1f, 1f});
+        hueColors[i] = Color.HSVToColor(new float[] { h, 1f, 1f });
         h -= 360f / hueColors.length;
       }
 
@@ -400,9 +391,9 @@ public class ColorPickerView extends View {
   private void drawAlphaPanel(Canvas canvas) {
     /*
      * Will be drawn with hw acceleration, very fast.
-		 * Also the AlphaPatternDrawable is backed by a bitmap
-		 * generated only once if the size does not change.
-		 */
+     * Also the AlphaPatternDrawable is backed by a bitmap
+     * generated only once if the size does not change.
+     */
 
     if (!showAlphaPanel || alphaRect == null || alphaPatternDrawable == null) return;
 
@@ -410,28 +401,25 @@ public class ColorPickerView extends View {
 
     if (BORDER_WIDTH_PX > 0) {
       borderPaint.setColor(borderColor);
-      canvas.drawRect(rect.left - BORDER_WIDTH_PX,
-          rect.top - BORDER_WIDTH_PX,
-          rect.right + BORDER_WIDTH_PX,
-          rect.bottom + BORDER_WIDTH_PX,
-          borderPaint);
+      canvas.drawRect(rect.left - BORDER_WIDTH_PX, rect.top - BORDER_WIDTH_PX, rect.right + BORDER_WIDTH_PX,
+          rect.bottom + BORDER_WIDTH_PX, borderPaint);
     }
 
     alphaPatternDrawable.draw(canvas);
 
-    float[] hsv = new float[]{hue, sat, val};
+    float[] hsv = new float[] { hue, sat, val };
     int color = Color.HSVToColor(hsv);
     int acolor = Color.HSVToColor(0, hsv);
 
-    alphaShader = new LinearGradient(rect.left, rect.top, rect.right, rect.top,
-        color, acolor, TileMode.CLAMP);
+    alphaShader = new LinearGradient(rect.left, rect.top, rect.right, rect.top, color, acolor, TileMode.CLAMP);
 
     alphaPaint.setShader(alphaShader);
 
     canvas.drawRect(rect, alphaPaint);
 
     if (alphaSliderText != null && !alphaSliderText.equals("")) {
-      canvas.drawText(alphaSliderText, rect.centerX(), rect.centerY() + DrawingUtils.dpToPx(getContext(), 4), alphaTextPaint);
+      canvas.drawText(alphaSliderText, rect.centerX(), rect.centerY() + DrawingUtils.dpToPx(getContext(), 4),
+          alphaTextPaint);
     }
 
     Point p = alphaToPoint(alpha);
@@ -483,7 +471,6 @@ public class ColorPickerView extends View {
     p.y = rect.top;
 
     return p;
-
   }
 
   private float[] pointToSatVal(float x, float y) {
@@ -549,7 +536,6 @@ public class ColorPickerView extends View {
     }
 
     return 0xff - (x * 0xff / width);
-
   }
 
   @Override public boolean onTouchEvent(MotionEvent event) {
@@ -572,7 +558,7 @@ public class ColorPickerView extends View {
 
     if (update) {
       if (onColorChangedListener != null) {
-        onColorChangedListener.onColorChanged(Color.HSVToColor(alpha, new float[]{hue, sat, val}));
+        onColorChangedListener.onColorChanged(Color.HSVToColor(alpha, new float[] { hue, sat, val }));
       }
       invalidate();
       return true;
@@ -619,8 +605,7 @@ public class ColorPickerView extends View {
     int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
     int widthAllowed = MeasureSpec.getSize(widthMeasureSpec) - getPaddingLeft() - getPaddingRight();
-    int heightAllowed =
-        MeasureSpec.getSize(heightMeasureSpec) - getPaddingBottom() - getPaddingTop();
+    int heightAllowed = MeasureSpec.getSize(heightMeasureSpec) - getPaddingBottom() - getPaddingTop();
 
     if (widthMode == MeasureSpec.EXACTLY || heightMode == MeasureSpec.EXACTLY) {
       //A exact value has been set in either direction, we need to stay within this size.
@@ -641,7 +626,6 @@ public class ColorPickerView extends View {
         }
 
         finalWidth = widthAllowed;
-
       } else if (heightMode == MeasureSpec.EXACTLY && widthMode != MeasureSpec.EXACTLY) {
         //The height has been specified exactly, we need to stay within this height and adopt the width.
 
@@ -659,7 +643,6 @@ public class ColorPickerView extends View {
         }
 
         finalHeight = heightAllowed;
-
       } else {
         //If we get here the dev has set the width and height to exact sizes. For example match_parent or 300dp.
         //This will mean that the sat/val panel will not be square but it doesn't matter. It will work anyway.
@@ -669,7 +652,6 @@ public class ColorPickerView extends View {
         finalWidth = widthAllowed;
         finalHeight = heightAllowed;
       }
-
     } else {
       //If no exact size has been set we try to make our view as big as possible
       //within the allowed space.
@@ -709,7 +691,6 @@ public class ColorPickerView extends View {
         finalHeight = heightAllowed;
         finalWidth = widthAllowed;
       }
-
     }
 
     setMeasuredDimension(finalWidth + getPaddingLeft() + getPaddingRight(),
@@ -793,8 +774,7 @@ public class ColorPickerView extends View {
 
     int left = dRect.right - huePanelWidthPx + BORDER_WIDTH_PX;
     int top = dRect.top + BORDER_WIDTH_PX;
-    int bottom = dRect.bottom - BORDER_WIDTH_PX -
-        (showAlphaPanel ? (panelSpacingPx + alphaPanelHeightPx) : 0);
+    int bottom = dRect.bottom - BORDER_WIDTH_PX - (showAlphaPanel ? (panelSpacingPx + alphaPanelHeightPx) : 0);
     int right = dRect.right - BORDER_WIDTH_PX;
 
     hueRect = new Rect(left, top, right, bottom);
@@ -814,17 +794,15 @@ public class ColorPickerView extends View {
     alphaRect = new Rect(left, top, right, bottom);
 
     alphaPatternDrawable = new AlphaPatternDrawable(DrawingUtils.dpToPx(getContext(), 4));
-    alphaPatternDrawable.setBounds(Math.round(alphaRect.left), Math
-        .round(alphaRect.top), Math.round(alphaRect.right), Math
-        .round(alphaRect.bottom));
+    alphaPatternDrawable.setBounds(Math.round(alphaRect.left), Math.round(alphaRect.top), Math.round(alphaRect.right),
+        Math.round(alphaRect.bottom));
   }
 
   /**
    * Set a OnColorChangedListener to get notified when the color
    * selected by the user has changed.
    *
-   * @param listener
-   *     the listener
+   * @param listener the listener
    */
   public void setOnColorChangedListener(OnColorChangedListener listener) {
     onColorChangedListener = listener;
@@ -836,14 +814,13 @@ public class ColorPickerView extends View {
    * @return the current color.
    */
   public int getColor() {
-    return Color.HSVToColor(alpha, new float[]{hue, sat, val});
+    return Color.HSVToColor(alpha, new float[] { hue, sat, val });
   }
 
   /**
    * Set the color the view should show.
    *
-   * @param color
-   *     The color that should be selected. #argb
+   * @param color The color that should be selected. #argb
    */
   public void setColor(int color) {
     setColor(color, false);
@@ -852,10 +829,8 @@ public class ColorPickerView extends View {
   /**
    * Set the color this view should show.
    *
-   * @param color
-   *     The color that should be selected. #argb
-   * @param callback
-   *     If you want to get a callback to your OnColorChangedListener.
+   * @param color The color that should be selected. #argb
+   * @param callback If you want to get a callback to your OnColorChangedListener.
    */
   public void setColor(int color, boolean callback) {
 
@@ -874,8 +849,7 @@ public class ColorPickerView extends View {
     val = hsv[2];
 
     if (callback && onColorChangedListener != null) {
-      onColorChangedListener
-          .onColorChanged(Color.HSVToColor(this.alpha, new float[]{hue, sat, val}));
+      onColorChangedListener.onColorChanged(Color.HSVToColor(this.alpha, new float[] { hue, sat, val }));
     }
 
     invalidate();
@@ -885,16 +859,15 @@ public class ColorPickerView extends View {
    * Set if the user is allowed to adjust the alpha panel. Default is false.
    * If it is set to false no alpha will be set.
    *
-   * @param visible
-   *     {@code true} to show the alpha slider
+   * @param visible {@code true} to show the alpha slider
    */
   public void setAlphaSliderVisible(boolean visible) {
     if (showAlphaPanel != visible) {
       showAlphaPanel = visible;
 
-			/*
+      /*
        * Force recreation.
-			 */
+       */
       valShader = null;
       satShader = null;
       alphaShader = null;
@@ -903,19 +876,6 @@ public class ColorPickerView extends View {
 
       requestLayout();
     }
-
-  }
-
-  /**
-   * Set the color of the tracker slider on the hue and alpha panel.
-   *
-   * @param color
-   *     a color value
-   */
-  public void setSliderTrackerColor(int color) {
-    sliderTrackerColor = color;
-    hueAlphaTrackerPaint.setColor(sliderTrackerColor);
-    invalidate();
   }
 
   /**
@@ -928,13 +888,13 @@ public class ColorPickerView extends View {
   }
 
   /**
-   * Set the color of the border surrounding all panels.
+   * Set the color of the tracker slider on the hue and alpha panel.
    *
-   * @param color
-   *     a color value
+   * @param color a color value
    */
-  public void setBorderColor(int color) {
-    borderColor = color;
+  public void setSliderTrackerColor(int color) {
+    sliderTrackerColor = color;
+    hueAlphaTrackerPaint.setColor(sliderTrackerColor);
     invalidate();
   }
 
@@ -946,27 +906,24 @@ public class ColorPickerView extends View {
   }
 
   /**
-   * Set the text that should be shown in the
-   * alpha slider. Set to null to disable text.
+   * Set the color of the border surrounding all panels.
    *
-   * @param res
-   *     string resource id.
+   * @param color a color value
    */
-  public void setAlphaSliderText(int res) {
-    String text = getContext().getString(res);
-    setAlphaSliderText(text);
+  public void setBorderColor(int color) {
+    borderColor = color;
+    invalidate();
   }
 
   /**
    * Set the text that should be shown in the
    * alpha slider. Set to null to disable text.
    *
-   * @param text
-   *     Text that should be shown.
+   * @param res string resource id.
    */
-  public void setAlphaSliderText(String text) {
-    alphaSliderText = text;
-    invalidate();
+  public void setAlphaSliderText(int res) {
+    String text = getContext().getString(res);
+    setAlphaSliderText(text);
   }
 
   /**
@@ -980,11 +937,15 @@ public class ColorPickerView extends View {
     return alphaSliderText;
   }
 
-  private class BitmapCache {
-
-    public Canvas canvas;
-    public Bitmap bitmap;
-    public float value;
+  /**
+   * Set the text that should be shown in the
+   * alpha slider. Set to null to disable text.
+   *
+   * @param text Text that should be shown.
+   */
+  public void setAlphaSliderText(String text) {
+    alphaSliderText = text;
+    invalidate();
   }
 
   public interface OnColorChangedListener {
@@ -992,4 +953,10 @@ public class ColorPickerView extends View {
     void onColorChanged(int newColor);
   }
 
+  private class BitmapCache {
+
+    public Canvas canvas;
+    public Bitmap bitmap;
+    public float value;
+  }
 }

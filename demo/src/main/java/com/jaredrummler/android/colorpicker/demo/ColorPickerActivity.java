@@ -49,8 +49,8 @@ public class ColorPickerActivity extends Activity implements OnColorChangedListe
     Button btnOK = (Button) findViewById(R.id.okButton);
     Button btnCancel = (Button) findViewById(R.id.cancelButton);
 
-    ((LinearLayout) colorPanelView.getParent())
-        .setPadding(colorPickerView.getPaddingLeft(), 0, colorPickerView.getPaddingRight(), 0);
+    ((LinearLayout) colorPanelView.getParent()).setPadding(colorPickerView.getPaddingLeft(), 0,
+        colorPickerView.getPaddingRight(), 0);
 
     colorPickerView.setOnColorChangedListener(this);
     colorPickerView.setColor(initialColor, true);
@@ -58,7 +58,6 @@ public class ColorPickerActivity extends Activity implements OnColorChangedListe
 
     btnOK.setOnClickListener(this);
     btnCancel.setOnClickListener(this);
-
   }
 
   @Override public void onColorChanged(int newColor) {
@@ -78,5 +77,4 @@ public class ColorPickerActivity extends Activity implements OnColorChangedListe
         break;
     }
   }
-
 }

@@ -81,7 +81,8 @@ class AlphaPatternDrawable extends Drawable {
 
   /**
    * This will generate a bitmap with the pattern as big as the rectangle we were allow to draw on.
-   * We do this to chache the bitmap so we don't need to recreate it each time draw() is called since it takes a few milliseconds
+   * We do this to chache the bitmap so we don't need to recreate it each time draw() is called since it takes a few
+   * milliseconds
    */
   private void generatePatternBitmap() {
     if (getBounds().width() <= 0 || getBounds().height() <= 0) {
@@ -106,5 +107,4 @@ class AlphaPatternDrawable extends Drawable {
       verticalStartWhite = !verticalStartWhite;
     }
   }
-
 }

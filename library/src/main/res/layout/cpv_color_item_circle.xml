@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:clickable="false">
+    android:clickable="false"
+    >
 
   <com.jaredrummler.android.colorpicker.ColorPanelView
       android:id="@+id/cpv_color_panel_view"
@@ -12,13 +13,15 @@
       android:layout_height="@dimen/cpv_item_size"
       android:layout_gravity="center"
       android:clickable="true"
-      app:cpv_colorShape="circle"/>
+      app:cpv_colorShape="circle"
+      />
 
   <ImageView
       android:id="@+id/cpv_color_image_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      android:clickable="false"/>
+      android:clickable="false"
+      />
 
 </FrameLayout>

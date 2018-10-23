@@ -30,14 +30,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.ColorInt;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
+import androidx.annotation.ColorInt;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
 import java.util.Locale;
 
 /**
@@ -106,7 +106,8 @@ public class ColorPanelView extends View {
       // If no specific border color has been set we take the default secondary text color as border/slider color.
       // Thus it will adopt to theme changes automatically.
       final TypedValue value = new TypedValue();
-      TypedArray typedArray = context.obtainStyledAttributes(value.data, new int[]{android.R.attr.textColorSecondary});
+      TypedArray typedArray =
+          context.obtainStyledAttributes(value.data, new int[] { android.R.attr.textColorSecondary });
       borderColor = typedArray.getColor(0, borderColor);
       typedArray.recycle();
     }
@@ -141,24 +142,16 @@ public class ColorPanelView extends View {
     } else if (shape == ColorShape.CIRCLE) {
       final int outerRadius = getMeasuredWidth() / 2;
       if (borderWidthPx > 0) {
-        canvas.drawCircle(getMeasuredWidth() / 2,
-            getMeasuredHeight() / 2,
-            outerRadius,
-            borderPaint);
+        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() / 2, outerRadius, borderPaint);
       }
       if (Color.alpha(color) < 255) {
-        canvas.drawCircle(getMeasuredWidth() / 2,
-            getMeasuredHeight() / 2,
-            outerRadius - borderWidthPx, alphaPaint);
+        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() / 2, outerRadius - borderWidthPx, alphaPaint);
       }
       if (showOldColor) {
         canvas.drawArc(centerRect, 90, 180, true, originalPaint);
         canvas.drawArc(centerRect, 270, 180, true, colorPaint);
       } else {
-        canvas.drawCircle(getMeasuredWidth() / 2,
-            getMeasuredHeight() / 2,
-            outerRadius - borderWidthPx,
-            colorPaint);
+        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() / 2, outerRadius - borderWidthPx, colorPaint);
       }
     }
   }
@@ -209,21 +202,8 @@ public class ColorPanelView extends View {
     int right = dRect.right - borderWidthPx;
     colorRect = new Rect(left, top, right, bottom);
     alphaPattern = new AlphaPatternDrawable(DrawingUtils.dpToPx(getContext(), 4));
-    alphaPattern.setBounds(Math.round(colorRect.left),
-        Math.round(colorRect.top),
-        Math.round(colorRect.right),
+    alphaPattern.setBounds(Math.round(colorRect.left), Math.round(colorRect.top), Math.round(colorRect.right),
         Math.round(colorRect.bottom));
-  }
-
-  /**
-   * Set the color that should be shown by this view.
-   *
-   * @param color
-   *     the color value
-   */
-  public void setColor(int color) {
-    this.color = color;
-    invalidate();
   }
 
   /**
@@ -236,26 +216,24 @@ public class ColorPanelView extends View {
   }
 
   /**
+   * Set the color that should be shown by this view.
+   *
+   * @param color the color value
+   */
+  public void setColor(int color) {
+    this.color = color;
+    invalidate();
+  }
+
+  /**
    * Set the original color. This is only used for previewing colors.
    *
-   * @param color
-   *     The original color
+   * @param color The original color
    */
   public void setOriginalColor(@ColorInt int color) {
     if (originalPaint != null) {
       originalPaint.setColor(color);
     }
-  }
-
-  /**
-   * Set the color of the border surrounding the panel.
-   *
-   * @param color
-   *     the color value
-   */
-  public void setBorderColor(int color) {
-    borderColor = color;
-    invalidate();
   }
 
   /**
@@ -266,13 +244,12 @@ public class ColorPanelView extends View {
   }
 
   /**
-   * Set the shape.
+   * Set the color of the border surrounding the panel.
    *
-   * @param shape
-   *     Either {@link ColorShape#SQUARE} or {@link ColorShape#CIRCLE}.
+   * @param color the color value
    */
-  public void setShape(@ColorShape int shape) {
-    this.shape = shape;
+  public void setBorderColor(int color) {
+    borderColor = color;
     invalidate();
   }
 
@@ -283,6 +260,16 @@ public class ColorPanelView extends View {
    */
   @ColorShape public int getShape() {
     return shape;
+  }
+
+  /**
+   * Set the shape.
+   *
+   * @param shape Either {@link ColorShape#SQUARE} or {@link ColorShape#CIRCLE}.
+   */
+  public void setShape(@ColorShape int shape) {
+    this.shape = shape;
+    invalidate();
   }
 
   /**
@@ -311,13 +298,11 @@ public class ColorPanelView extends View {
     Toast cheatSheet = Toast.makeText(context, hint.toString(), Toast.LENGTH_SHORT);
     if (midy < displayFrame.height()) {
       // Show along the top; follow action buttons
-      cheatSheet.setGravity(Gravity.TOP | GravityCompat.END, referenceX,
-          screenPos[1] + height - displayFrame.top);
+      cheatSheet.setGravity(Gravity.TOP | GravityCompat.END, referenceX, screenPos[1] + height - displayFrame.top);
     } else {
       // Show along the bottom center
       cheatSheet.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, height);
     }
     cheatSheet.show();
   }
-
 }

@@ -29,5 +29,4 @@ final class DrawingUtils {
     // Ensure at least 1 pixel if val was > 0
     return res == 0 && val > 0 ? 1 : res;
   }
-
 }

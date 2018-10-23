@@ -21,10 +21,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.preference.Preference;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 
 /**
  * A Preference to select a color
@@ -37,8 +37,7 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
   private OnShowDialogListener onShowDialogListener;
   private int color = Color.BLACK;
   private boolean showDialog;
-  @ColorPickerDialog.DialogType
-  private int dialogType;
+  @ColorPickerDialog.DialogType private int dialogType;
   private int colorShape;
   private boolean allowPresets;
   private boolean allowCustom;
@@ -83,8 +82,7 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
           previewSize == SIZE_LARGE ? R.layout.cpv_preference_circle_large : R.layout.cpv_preference_circle);
     } else {
       setWidgetLayoutResource(
-          previewSize == SIZE_LARGE ? R.layout.cpv_preference_square_large : R.layout.cpv_preference_square
-      );
+          previewSize == SIZE_LARGE ? R.layout.cpv_preference_square_large : R.layout.cpv_preference_square);
     }
     a.recycle();
   }
@@ -168,23 +166,13 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
   /**
    * Set the new color
    *
-   * @param color
-   *     The newly selected color
+   * @param color The newly selected color
    */
   public void saveValue(@ColorInt int color) {
     this.color = color;
     persistInt(this.color);
     notifyChanged();
     callChangeListener(color);
-  }
-
-  /**
-   * Set the colors shown in the {@link ColorPickerDialog}.
-   *
-   * @param presets An array of color ints
-   */
-  public void setPresets(@NonNull int[] presets) {
-    this.presets = presets;
   }
 
   /**
@@ -197,12 +185,20 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
   }
 
   /**
+   * Set the colors shown in the {@link ColorPickerDialog}.
+   *
+   * @param presets An array of color ints
+   */
+  public void setPresets(@NonNull int[] presets) {
+    this.presets = presets;
+  }
+
+  /**
    * The listener used for showing the {@link ColorPickerDialog}.
    * Call {@link #saveValue(int)} after the user chooses a color.
    * If this is set then it is up to you to show the dialog.
    *
-   * @param listener
-   *     The listener to show the dialog
+   * @param listener The listener to show the dialog
    */
   public void setOnShowDialogListener(OnShowDialogListener listener) {
     onShowDialogListener = listener;
@@ -221,5 +217,4 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
 
     void onShowColorPickerDialog(String title, int currentColor);
   }
-
 }

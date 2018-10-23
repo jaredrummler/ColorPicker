@@ -19,11 +19,11 @@ package com.jaredrummler.android.colorpicker;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.support.v4.graphics.ColorUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import androidx.core.graphics.ColorUtils;
 
 class ColorPaletteAdapter extends BaseAdapter {
 
@@ -32,10 +32,8 @@ class ColorPaletteAdapter extends BaseAdapter {
   /*package*/ int selectedPosition;
   /*package*/ int colorShape;
 
-  ColorPaletteAdapter(OnColorSelectedListener listener,
-                      int[] colors,
-                      int selectedPosition,
-                      @ColorShape int colorShape) {
+  ColorPaletteAdapter(OnColorSelectedListener listener, int[] colors, int selectedPosition,
+      @ColorShape int colorShape) {
     this.listener = listener;
     this.colors = colors;
     this.selectedPosition = selectedPosition;
@@ -141,7 +139,5 @@ class ColorPaletteAdapter extends BaseAdapter {
         imageView.setColorFilter(null);
       }
     }
-
   }
-
 }
