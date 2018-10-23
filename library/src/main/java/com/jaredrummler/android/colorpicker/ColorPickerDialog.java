@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,6 +67,8 @@ import java.util.Locale;
  */
 public class ColorPickerDialog extends DialogFragment
     implements OnTouchListener, ColorPickerView.OnColorChangedListener, TextWatcher {
+
+  private static final String TAG = "ColorPickerDialog";
 
   public static final int TYPE_CUSTOM = 0;
   public static final int TYPE_PRESETS = 1;
@@ -144,13 +147,6 @@ public class ColorPickerDialog extends DialogFragment
     return new Builder();
   }
 
-  @Override public void onAttach(Activity activity) {
-    super.onAttach(activity);
-    if (colorPickerDialogListener == null && activity instanceof ColorPickerDialogListener) {
-      colorPickerDialogListener = (ColorPickerDialogListener) activity;
-    }
-  }
-
   @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
     dialogId = getArguments().getInt(ARG_ID);
     showAlphaSlider = getArguments().getBoolean(ARG_ALPHA);
@@ -176,10 +172,10 @@ public class ColorPickerDialog extends DialogFragment
       selectedButtonStringRes = R.string.cpv_select;
     }
 
-    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(rootView)
+    AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity()).setView(rootView)
         .setPositiveButton(selectedButtonStringRes, new DialogInterface.OnClickListener() {
           @Override public void onClick(DialogInterface dialog, int which) {
-            colorPickerDialogListener.onColorSelected(dialogId, color);
+            onColorSelected(color);
           }
         })
         .setNegativeButton(R.string.cpv_reset, new DialogInterface.OnClickListener() {
@@ -256,7 +252,7 @@ public class ColorPickerDialog extends DialogFragment
 
   @Override public void onDismiss(DialogInterface dialog) {
     super.onDismiss(dialog);
-    colorPickerDialogListener.onDialogDismissed(dialogId);
+    onDialogDismissed();
   }
 
   @Override public void onSaveInstanceState(Bundle outState) {
@@ -266,7 +262,10 @@ public class ColorPickerDialog extends DialogFragment
   }
 
   /**
-   * Set the callback
+   * Set the callback.
+   * <p/>
+   * Note: The preferred way to handle the callback is to have the calling Activity implement
+   * {@link ColorPickerDialogListener} as this will not survive an orientation change.
    *
    * @param colorPickerDialogListener The callback invoked when a color is selected or the dialog is dismissed.
    */
@@ -307,7 +306,7 @@ public class ColorPickerDialog extends DialogFragment
     newColorPanel.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         if (newColorPanel.getColor() == color) {
-          colorPickerDialogListener.onColorSelected(dialogId, color);
+          onColorSelected(color);
           dismiss();
         }
       }
@@ -457,7 +456,7 @@ public class ColorPickerDialog extends DialogFragment
     adapter = new ColorPaletteAdapter(new ColorPaletteAdapter.OnColorSelectedListener() {
       @Override public void onColorSelected(int newColor) {
         if (color == newColor) {
-          colorPickerDialogListener.onColorSelected(dialogId, color);
+          onColorChanged(color);
           dismiss();
           return;
         }
@@ -547,7 +546,7 @@ public class ColorPickerDialog extends DialogFragment
       colorPanelView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
           if (v.getTag() instanceof Boolean && (Boolean) v.getTag()) {
-            colorPickerDialogListener.onColorSelected(dialogId, ColorPickerDialog.this.color);
+            onColorSelected(ColorPickerDialog.this.color);
             dismiss();
             return; // already selected
           }
@@ -574,6 +573,32 @@ public class ColorPickerDialog extends DialogFragment
           return true;
         }
       });
+    }
+  }
+
+  private void onColorSelected(int color) {
+    if (colorPickerDialogListener != null) {
+      Log.w(TAG, "Using deprecated listener which may be remove in future releases");
+      colorPickerDialogListener.onColorSelected(dialogId, color);
+      return;
+    }
+    Activity activity = getActivity();
+    if (activity instanceof ColorPickerDialogListener) {
+      ((ColorPickerDialogListener) activity).onColorSelected(dialogId, color);
+    } else {
+      throw new IllegalStateException("The activity must implement ColorPickerDialogListener");
+    }
+  }
+
+  private void onDialogDismissed() {
+    if (colorPickerDialogListener != null) {
+      Log.w(TAG, "Using deprecated listener which may be remove in future releases");
+      colorPickerDialogListener.onDialogDismissed(dialogId);
+      return;
+    }
+    Activity activity = getActivity();
+    if (activity instanceof ColorPickerDialogListener) {
+      ((ColorPickerDialogListener) activity).onDialogDismissed(dialogId);
     }
   }
 
@@ -720,6 +745,7 @@ public class ColorPickerDialog extends DialogFragment
 
   public static final class Builder {
 
+    ColorPickerDialogListener colorPickerDialogListener;
     @StringRes int dialogTitle = R.string.cpv_default_title;
     @StringRes int presetsButtonText = R.string.cpv_presets;
     @StringRes int customButtonText = R.string.cpv_custom;

@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -30,8 +31,11 @@ import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 
 public class MainActivity extends AppCompatActivity implements ColorPickerDialogListener {
 
+  private static final String TAG = "MainActivity";
+
   // Give your color picker dialog unique IDs if you have multiple dialogs.
   private static final int DIALOG_ID = 0;
+
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -67,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
   }
 
   @Override public void onColorSelected(int dialogId, int color) {
+    Log.d(TAG, "onColorSelected() called with: dialogId = [" + dialogId + "], color = [" + color + "]");
     switch (dialogId) {
       case DIALOG_ID:
         // We got result from the dialog that is shown when clicking on the icon in the action bar.
@@ -76,7 +81,8 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
   }
 
   @Override public void onDialogDismissed(int dialogId) {
-
+    Log.d(TAG, "onDialogDismissed() called with: dialogId = [" + dialogId + "]");
   }
+
 }
  
