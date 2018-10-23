@@ -18,7 +18,6 @@ package com.jaredrummler.android.colorpicker;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -49,6 +48,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.ColorUtils;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -68,6 +69,7 @@ public class ColorPickerDialog extends DialogFragment
 
   public static final int TYPE_CUSTOM = 0;
   public static final int TYPE_PRESETS = 1;
+
   /**
    * Material design colors used as the default color presets
    */
@@ -92,7 +94,9 @@ public class ColorPickerDialog extends DialogFragment
       0xFF607D8B, // BLUE GREY 500
       0xFF9E9E9E, // GREY 500
   };
+
   static final int ALPHA_THRESHOLD = 165;
+
   private static final String ARG_ID = "id";
   private static final String ARG_TYPE = "dialogType";
   private static final String ARG_COLOR = "color";
@@ -106,6 +110,7 @@ public class ColorPickerDialog extends DialogFragment
   private static final String ARG_PRESETS_BUTTON_TEXT = "presetsButtonText";
   private static final String ARG_CUSTOM_BUTTON_TEXT = "customButtonText";
   private static final String ARG_SELECTED_BUTTON_TEXT = "selectedButtonText";
+
   ColorPickerDialogListener colorPickerDialogListener;
   FrameLayout rootView;
   int[] presets;
@@ -114,11 +119,13 @@ public class ColorPickerDialog extends DialogFragment
   int dialogId;
   boolean showColorShades;
   int colorShape;
+
   // -- PRESETS --------------------------
   ColorPaletteAdapter adapter;
   LinearLayout shadesLayout;
   SeekBar transparencySeekBar;
   TextView transparencyPercText;
+
   // -- CUSTOM ---------------------------
   ColorPickerView colorPicker;
   ColorPanelView newColorPanel;
@@ -157,7 +164,7 @@ public class ColorPickerDialog extends DialogFragment
       dialogType = savedInstanceState.getInt(ARG_TYPE);
     }
 
-    rootView = new FrameLayout(getActivity());
+    rootView = new FrameLayout(requireActivity());
     if (dialogType == TYPE_CUSTOM) {
       rootView.addView(createPickerView());
     } else if (dialogType == TYPE_PRESETS) {
@@ -879,7 +886,7 @@ public class ColorPickerDialog extends DialogFragment
      * Create the {@link ColorPickerDialog} instance.
      *
      * @return A new {@link ColorPickerDialog}.
-     * @see #show(Activity)
+     * @see #show(FragmentActivity)
      */
     public ColorPickerDialog create() {
       ColorPickerDialog dialog = new ColorPickerDialog();
@@ -906,8 +913,8 @@ public class ColorPickerDialog extends DialogFragment
      *
      * @param activity The current activity.
      */
-    public void show(Activity activity) {
-      create().show(activity.getFragmentManager(), "color-picker-dialog");
+    public void show(FragmentActivity activity) {
+      create().show(activity.getSupportFragmentManager(), "color-picker-dialog");
     }
   }
 
