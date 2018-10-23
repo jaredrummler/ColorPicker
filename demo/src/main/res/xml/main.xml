@@ -16,7 +16,7 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <PreferenceCategory android:title="Demo">
     <com.jaredrummler.android.colorpicker.ColorPreference
@@ -46,9 +46,9 @@
         android:key="color_with_alpha"
         android:summary="A picker with alpha slider"
         android:title="Color picker with alpha"
-        app:cpv_showColorShades="false"
         app:cpv_previewSize="large"
-        app:cpv_showAlphaSlider="true"/>
+        app:cpv_showAlphaSlider="true"
+        app:cpv_showColorShades="false"/>
 
     <com.jaredrummler.android.colorpicker.ColorPreference
         android:defaultValue="0xFFCDDC39"
