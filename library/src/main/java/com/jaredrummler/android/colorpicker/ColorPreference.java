@@ -102,7 +102,7 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
           .setShowColorShades(showColorShades)
           .setColor(color)
           .create();
-      dialog.setColorPickerDialogListener(ColorPreference.this);
+      dialog.setColorPickerDialogListener(this);
       FragmentActivity activity = (FragmentActivity) getContext();
       dialog.show(activity.getSupportFragmentManager(), getFragmentTag());
     }
