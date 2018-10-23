@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2013 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,12 +13,12 @@
      limitations under the License.
 -->
 <resources>
-  <!-- Default title for color picker dialog [CHAR LIMIT=30] -->
-  <string name="cpv_default_title">Farbe auswählen</string>
-  <string name="cpv_presets">Voreinstellungen</string>
-  <string name="cpv_custom">Benutzerdefiniert</string>
-  <string name="cpv_select">Auswählen</string>
-  <string name="cpv_transparency">Transparenz</string>
+    <!-- Default title for color picker dialog [CHAR LIMIT=30] -->
+    <string name="cpv_default_title">Farbe auswählen</string>
+    <string name="cpv_presets">Voreinstellungen</string>
+    <string name="cpv_custom">Benutzerdefiniert</string>
+    <string name="cpv_select">Auswählen</string>
+    <string name="cpv_transparency">Transparenz</string>
     <string name="cpv_reset">Zurücksetzen</string>
-  <string name="cpv_confirm">Bestätigen</string>
+    <string name="cpv_confirm">Bestätigen</string>
 </resources>
