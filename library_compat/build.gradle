@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion 28
+
+  defaultConfig {
+    minSdkVersion 14
+    targetSdkVersion 28
+    versionCode 1
+    versionName "1.0"
+  }
+}
+
+dependencies {
+  implementation project(':library')
+  implementation 'androidx.preference:preference:1.0.0'
+}
+
+apply plugin: 'com.getkeepsafe.dexcount'
+
+apply from: rootProject.file('gradle/maven-push.gradle')

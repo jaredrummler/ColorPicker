@@ -24,5 +24,7 @@ android {
 
 dependencies {
   implementation 'androidx.appcompat:appcompat:1.0.0'
+  implementation 'androidx.preference:preference:1.0.0'
+  implementation project(':library_compat')
   implementation project(':library')
 }
