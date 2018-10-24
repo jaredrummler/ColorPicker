@@ -5,7 +5,7 @@
 <a target="_blank" href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#ICE_CREAM_SANDWICH"><img src="https://img.shields.io/badge/API-14%2B-blue.svg?style=flat" alt="API" /></a>
 <a target="_blank" href="LICENSE"><img src="http://img.shields.io/:license-apache-blue.svg" alt="License" /></a>
 <a target="_blank" href="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/colorpicker"><img src="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/colorpicker/badge.svg" alt="Maven Central" /></a>
-<a target="_blank" href="http://www.methodscount.com/?lib=com.jaredrummler%3Acolorpicker%3A1.0.2"><img src="https://img.shields.io/badge/methods-409-e91e63.svg" /></a>
+<a target="_blank" href="http://www.methodscount.com/?lib=com.jaredrummler%3Acolorpicker%3A1.0.3"><img src="https://img.shields.io/badge/methods-409-e91e63.svg" /></a>
 <a target="_blank" href="https://twitter.com/jaredrummler"><img src="https://img.shields.io/twitter/follow/jaredrummler.svg?style=social" /></a>
 
 Yet another open source color picker for Android. So, why should you use this color picker? It is highly customizable and easy to use. You can simply add the `ColorPreference` to your preferences and a beautiful color picker dialog will be displayed without additional code. The color picker supports alpha and allows you to set your own presets.
@@ -60,26 +60,39 @@ You can also show a `ColorPickerDialog` without using the `ColorPreference`:
 ColorPickerDialog.newBuilder().setColor(color).show(activity);
 ```
 
-All the attributes above can also be applied to the `ColorPickerDialog`. The activity that shows the dialog should implement `ColorPickerDialogListener` to get a callback when a color is selected.
+All the attributes above can also be applied to the `ColorPickerDialog`. The activity that shows the dialog *must* 
+implement `ColorPickerDialogListener` to get a callback when a color is selected.
 
 For further doumentation about how to use the library, check the [demo](demo) app included in this project.
 
 ## Download
 
-Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/colorpicker/1.0.2/colorpicker-1.0.2.aar) or grab via Gradle:
+Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/colorpicker/1.0.3/colorpicker-1.0.3.aar) or grab via Gradle:
 
 ```groovy
-implementation 'com.jaredrummler:colorpicker:1.0.2'
+implementation 'com.jaredrummler:colorpicker:1.0.3'
 ```
 or Maven:
 ```xml
 <dependency>
   <groupId>com.jaredrummler</groupId>
   <artifactId>colorpicker</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <type>aar</type>
 </dependency>
 ```
+
+---
+
+## v7 Preference Support Library
+
+If you are using the v7 Preference Support Library you should use this in your `build.gradle` instead:
+
+```groovy
+implementation 'com.jaredrummler:colorpicker-compat:1.0.3'
+```
+
+Note: The demo project uses the v7 Preference Support Library
 
 ## License
 
