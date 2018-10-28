@@ -65,8 +65,7 @@ import java.util.Locale;
  *   ColorPickerDialog.newBuilder().show(activity);
  * </pre>
  */
-public class ColorPickerDialog extends DialogFragment
-    implements OnTouchListener, ColorPickerView.OnColorChangedListener, TextWatcher {
+public class ColorPickerDialog extends DialogFragment implements ColorPickerView.OnColorChangedListener, TextWatcher {
 
   private static final String TAG = "ColorPickerDialog";
 
@@ -137,6 +136,19 @@ public class ColorPickerDialog extends DialogFragment
   private int presetsButtonStringRes;
   private boolean fromEditText;
   private int customButtonStringRes;
+
+  private final OnTouchListener onPickerTouchListener = new OnTouchListener() {
+    @Override public boolean onTouch(View v, MotionEvent event) {
+      if (v != hexEditText && hexEditText.hasFocus()) {
+        hexEditText.clearFocus();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(hexEditText.getWindowToken(), 0);
+        hexEditText.clearFocus();
+        return true;
+      }
+      return false;
+    }
+  };
 
   /**
    * Create a new Builder for creating a {@link ColorPickerDialog} instance
@@ -312,7 +324,7 @@ public class ColorPickerDialog extends DialogFragment
       }
     });
 
-    contentView.setOnTouchListener(this);
+    contentView.setOnTouchListener(onPickerTouchListener);
     colorPicker.setOnColorChangedListener(this);
     hexEditText.addTextChangedListener(this);
 
@@ -328,21 +340,12 @@ public class ColorPickerDialog extends DialogFragment
     return contentView;
   }
 
-  @Override public boolean onTouch(View v, MotionEvent event) {
-    if (v != hexEditText && hexEditText.hasFocus()) {
-      hexEditText.clearFocus();
-      InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-      imm.hideSoftInputFromWindow(hexEditText.getWindowToken(), 0);
-      hexEditText.clearFocus();
-      return true;
-    }
-    return false;
-  }
-
   @Override public void onColorChanged(int newColor) {
     color = newColor;
-    newColorPanel.setColor(newColor);
-    if (!fromEditText) {
+    if (newColorPanel != null) {
+      newColorPanel.setColor(newColor);
+    }
+    if (!fromEditText && hexEditText != null) {
       setHex(newColor);
       if (hexEditText.hasFocus()) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -456,7 +459,8 @@ public class ColorPickerDialog extends DialogFragment
     adapter = new ColorPaletteAdapter(new ColorPaletteAdapter.OnColorSelectedListener() {
       @Override public void onColorSelected(int newColor) {
         if (color == newColor) {
-          onColorChanged(color);
+          // Double tab selects the color
+          ColorPickerDialog.this.onColorSelected(color);
           dismiss();
           return;
         }
