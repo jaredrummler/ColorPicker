@@ -16,6 +16,24 @@ dependencies {
   implementation 'androidx.preference:preference:1.0.0'
 }
 
+afterEvaluate { project ->
+  uploadArchives {
+    repositories {
+      mavenDeployer {
+        pom.whenConfigured { pom ->
+          pom.dependencies.forEach { dep ->
+            println "Processing ${dep}"
+            if (dep.getVersion() == "unspecified") {
+              dep.setGroupId(GROUP)
+              dep.setVersion(VERSION_NAME)
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 apply plugin: 'com.getkeepsafe.dexcount'
 
 apply from: rootProject.file('gradle/maven-push.gradle')
