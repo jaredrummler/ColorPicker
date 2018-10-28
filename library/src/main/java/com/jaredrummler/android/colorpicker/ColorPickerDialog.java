@@ -485,6 +485,11 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
       }
     }
     presets = unshiftIfNotExists(presets, color);
+    int initialColor = getArguments().getInt(ARG_COLOR);
+    if (initialColor != color) {
+      // The user clicked a color and a configuration change occurred. Make sure the initial color is in the presets
+      presets = unshiftIfNotExists(presets, initialColor);
+    }
     if (isMaterialColors && presets.length == 19) {
       // Add black to have a total of 20 colors if the current color is in the material color palette
       presets = pushIfNotExists(presets, Color.argb(alpha, 0, 0, 0));
