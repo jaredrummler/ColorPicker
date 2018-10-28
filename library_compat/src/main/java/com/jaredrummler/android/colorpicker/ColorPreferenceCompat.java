@@ -88,7 +88,10 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
           .setColor(color)
           .create();
       dialog.setColorPickerDialogListener(this);
-      dialog.show(getActivity().getSupportFragmentManager(), getFragmentTag());
+      getActivity().getSupportFragmentManager()
+          .beginTransaction()
+          .add(dialog, getFragmentTag())
+          .commitAllowingStateLoss();
     }
   }
 
