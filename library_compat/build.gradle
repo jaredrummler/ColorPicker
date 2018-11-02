@@ -1,5 +1,9 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.zacharee'
+
 android {
   compileSdkVersion 28
 
@@ -13,9 +17,6 @@ android {
 
 dependencies {
   implementation project(':library')
-  implementation 'androidx.appcompat:appcompat:1.0.0'
-  implementation 'androidx.fragment:fragment:1.0.0'
-  implementation group: 'androidx.annotation', name: 'annotation', version: '1.0.0'
   implementation 'androidx.preference:preference:1.0.0'
 }
 
