@@ -84,5 +84,9 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     Log.d(TAG, "onDialogDismissed() called with: dialogId = [" + dialogId + "]");
   }
 
+  @Override
+  public void onColorReset(int dialogId) {
+
+  }
 }
  
