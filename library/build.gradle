@@ -1,24 +1,20 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 28
-  buildToolsVersion "28.0.3"
+  compileSdkVersion buildConfig.compileSdk
   resourcePrefix "cpv_"
-
   defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
   }
-
   lintOptions {
     abortOnError false
   }
 }
 
 dependencies {
-  implementation 'androidx.appcompat:appcompat:1.0.0'
+  implementation deps.androidx.appCompat
+  implementation deps.androidx.preferences
 }
-
-apply plugin: 'com.getkeepsafe.dexcount'
 
 apply from: rootProject.file('gradle/maven-push.gradle')

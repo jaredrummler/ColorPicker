@@ -1,17 +1,38 @@
 buildscript {
+
+  // @formatter:off
+  ext.buildConfig = [
+      compileSdk   : 28,
+      targetSdk    : 28,
+      minSdk       : 14,
+      gradlePlugin : '3.3.0'
+  ]
+  ext.versions = [
+      androidx      : '1.0.2',
+      preferences   : '1.0.0'
+  ]
+  ext.deps = [
+    'androidx' : [
+      'appCompat'   : "androidx.appcompat:appcompat:${versions.androidx}",
+      'preferences' : "androidx.preference:preference:${versions.preferences}"
+    ]
+  ]
+  // @formatter:on
+
   repositories {
     google()
+    mavenCentral()
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.1'
-    classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.4'
+    classpath "com.android.tools.build:gradle:${buildConfig.gradlePlugin}"
   }
 }
 
 allprojects {
   repositories {
     google()
+    mavenCentral()
     jcenter()
   }
 }

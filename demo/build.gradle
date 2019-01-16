@@ -1,13 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 28
-  buildToolsVersion "28.0.3"
-
+  compileSdkVersion buildConfig.compileSdk
   defaultConfig {
     applicationId "com.jaredrummler.android.colorpicker.demo"
-    minSdkVersion 14
-    targetSdkVersion 28
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
     versionCode 1
     versionName "1.0"
   }
@@ -24,8 +22,7 @@ android {
 }
 
 dependencies {
-  implementation 'androidx.appcompat:appcompat:1.0.0'
-  implementation 'androidx.preference:preference:1.0.0'
-  implementation project(':library_compat')
+  implementation deps.androidx.appCompat
+  implementation deps.androidx.preferences
   implementation project(':library')
 }
