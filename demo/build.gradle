@@ -5,12 +5,11 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.zacharee'
 
 android {
-  compileSdkVersion 28
-
+  compileSdkVersion buildConfig.compileSdk
   defaultConfig {
     applicationId "com.jaredrummler.android.colorpicker.demo"
-    minSdkVersion 14
-    targetSdkVersion 28
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
     versionCode 1
     versionName "1.0"
   }
@@ -27,7 +26,8 @@ android {
 }
 
 dependencies {
-  implementation 'androidx.preference:preference:1.0.0'
   implementation project(':library_compat')
+  implementation deps.androidx.appCompat
+  implementation deps.androidx.preferences
   implementation project(':library')
 }
