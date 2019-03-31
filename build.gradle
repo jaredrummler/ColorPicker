@@ -5,11 +5,11 @@ buildscript {
       compileSdk   : 28,
       targetSdk    : 28,
       minSdk       : 14,
-      gradlePlugin : '3.5.0-alpha01'
+      gradlePlugin : '3.5.0-alpha06'
   ]
   ext.versions = [
-      androidx      : '1.0.2',
-      preferences   : '1.0.0'
+      androidx      : '1.1.0-alpha03',
+      preferences   : '1.1.0-alpha04'
   ]
   ext.deps = [
     'androidx' : [
