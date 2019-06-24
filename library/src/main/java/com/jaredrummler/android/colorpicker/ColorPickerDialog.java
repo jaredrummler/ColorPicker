@@ -141,6 +141,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
   private int presetsButtonStringRes;
   private boolean fromEditText;
   private int customButtonStringRes;
+  private TextView hexHashTextView;
 
   private final OnTouchListener onPickerTouchListener = new OnTouchListener() {
     @Override public boolean onTouch(View v, MotionEvent event) {
@@ -290,14 +291,17 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     newColorPanel = contentView.findViewById(R.id.cpv_color_panel_new);
     ImageView arrowRight = contentView.findViewById(R.id.cpv_arrow_right);
     hexEditText = contentView.findViewById(R.id.cpv_hex);
+    hexHashTextView = contentView.findViewById(R.id.hex_hash_text_view);
 
     try {
       final TypedValue value = new TypedValue();
       TypedArray typedArray =
           getActivity().obtainStyledAttributes(value.data, new int[] { android.R.attr.textColorPrimary });
       int arrowColor = typedArray.getColor(0, Color.BLACK);
+      int hashColor = typedArray.getColor(R.styleable.ColorPickerView_cpv_hashColor, Color.BLACK);
       typedArray.recycle();
       arrowRight.setColorFilter(arrowColor);
+      hexHashTextView.setTextColor(hashColor);
     } catch (Exception ignored) {
     }
 
