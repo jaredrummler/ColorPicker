@@ -28,7 +28,7 @@
 
   <!-- Styling the color picker dialog fragment. -->
   <eat-comment/>
-  <!-- Below are some styles that show you how to change the apperance of the color picker dialog. -->
+  <!-- Below are some styles that show you how to change the appearance of the color picker dialog. -->
   <eat-comment/>
 
   <style name="LightPickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
