@@ -5,16 +5,18 @@ buildscript {
       compileSdk   : 28,
       targetSdk    : 28,
       minSdk       : 14,
-      gradlePlugin : '3.5.0-alpha06'
+      gradlePlugin : '3.5.0'
   ]
   ext.versions = [
       androidx      : '1.1.0-alpha03',
-      preferences   : '1.1.0-alpha04'
+      preferences   : '1.1.0-alpha04',
+      material      : '1.1.0-alpha09'
   ]
   ext.deps = [
     'androidx' : [
       'appCompat'   : "androidx.appcompat:appcompat:${versions.androidx}",
-      'preferences' : "androidx.preference:preference:${versions.preferences}"
+      'preferences' : "androidx.preference:preference:${versions.preferences}",
+      'material'    : "com.google.android.material:material:${versions.material}"
     ]
   ]
   // @formatter:on
