@@ -17,7 +17,6 @@
 package com.jaredrummler.android.colorpicker;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -48,6 +47,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
