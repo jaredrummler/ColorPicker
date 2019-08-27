@@ -17,7 +17,8 @@ android {
 
 dependencies {
   implementation project(':library')
-  implementation 'androidx.preference:preference:1.0.0'
+  implementation deps.androidx.preferences
+  implementation deps.androidx.material
 }
 
 afterEvaluate { project ->

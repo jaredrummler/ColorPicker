@@ -19,6 +19,7 @@ android {
 dependencies {
   implementation deps.androidx.appCompat
   implementation deps.androidx.preferences
+  implementation deps.androidx.material
 }
 
 apply from: rootProject.file('gradle/maven-push.gradle')

@@ -51,6 +51,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -184,7 +187,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
       selectedButtonStringRes = R.string.cpv_select;
     }
 
-    AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity()).setView(rootView)
+    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity()).setView(rootView)
         .setPositiveButton(selectedButtonStringRes, new DialogInterface.OnClickListener() {
           @Override public void onClick(DialogInterface dialog, int which) {
             onColorSelected(color);
@@ -193,7 +196,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         .setNegativeButton(R.string.cpv_reset, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new AlertDialog.Builder(getActivity())
+                new MaterialAlertDialogBuilder(requireActivity())
                         .setTitle(R.string.cpv_confirm)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
