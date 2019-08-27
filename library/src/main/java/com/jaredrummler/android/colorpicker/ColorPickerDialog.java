@@ -201,7 +201,18 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                colorPickerDialogListener.onColorReset(dialogId);
+                                if (colorPickerDialogListener != null) {
+                                  Log.w(TAG, "Using deprecated listener which may be remove in future releases");
+                                  colorPickerDialogListener.onColorReset(dialogId);
+                                  return;
+                                }
+
+                                Activity activity = getActivity();
+                                if (activity instanceof ColorPickerDialogListener) {
+                                  ((ColorPickerDialogListener) activity).onColorReset(dialogId);
+                                } else {
+                                  throw new IllegalStateException("The activity must implement ColorPickerDialogListener");
+                                }
                             }
                         })
                         .setNegativeButton(android.R.string.no, null)
