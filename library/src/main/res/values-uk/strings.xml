@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default title for color picker dialog [CHAR LIMIT=30] -->
+    <string name="cpv_default_title">Обрати колір</string>
+    <string name="cpv_presets">Стандартні</string>
+    <string name="cpv_custom">Інший</string>
+    <string name="cpv_select">Обрати</string>
+    <string name="cpv_transparency">Прозорість</string>
+</resources>
