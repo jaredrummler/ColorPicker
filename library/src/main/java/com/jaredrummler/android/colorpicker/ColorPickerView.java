@@ -135,7 +135,7 @@ public class ColorPickerView extends View {
    * Trackers can extend outside slightly,
    * due to the required padding we have set.
    */
-  private Rect drawingRect;
+  private Rect drawingRect=new Rect();
 
   private Rect satValRect;
   private Rect hueRect;
@@ -729,10 +729,37 @@ public class ColorPickerView extends View {
     return Math.max(super.getPaddingRight(), mRequiredPadding);
   }
 
-  @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+  /*@Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
 
     drawingRect = new Rect();
+    drawingRect.left = getPaddingLeft();
+    drawingRect.right = w - getPaddingRight();
+    drawingRect.top = getPaddingTop();
+    drawingRect.bottom = h - getPaddingBottom();
+
+    //The need to be recreated because they depend on the size of the view.
+    valShader = null;
+    satShader = null;
+    alphaShader = null;
+
+    // Clear those bitmap caches since the size may have changed.
+    satValBackgroundCache = null;
+    hueBackgroundCache = null;
+
+    setUpSatValRect();
+    setUpHueRect();
+    setUpAlphaRect();
+  }*/
+
+  @Override
+  protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+    super.onLayout(changed, left, top, right, bottom);
+
+    int w=getWidth();
+    int h=getHeight();
+
+//    drawingRect = new Rect();
     drawingRect.left = getPaddingLeft();
     drawingRect.right = w - getPaddingRight();
     drawingRect.top = getPaddingTop();
@@ -876,6 +903,10 @@ public class ColorPickerView extends View {
 
       requestLayout();
     }
+  }
+
+  public boolean getAlphaSliderVisible(){
+    return showAlphaPanel;
   }
 
   /**
