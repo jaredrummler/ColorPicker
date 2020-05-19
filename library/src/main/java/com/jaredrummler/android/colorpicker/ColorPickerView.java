@@ -207,7 +207,7 @@ public class ColorPickerView extends View {
     sliderTrackerSizePx = DrawingUtils.dpToPx(getContext(), SLIDER_TRACKER_SIZE_DP);
     sliderTrackerOffsetPx = DrawingUtils.dpToPx(getContext(), SLIDER_TRACKER_OFFSET_DP);
 
-    mRequiredPadding = getResources().getDimensionPixelSize(R.dimen.cpv_required_padding);
+    mRequiredPadding = 0;
 
     initPaintTools();
 

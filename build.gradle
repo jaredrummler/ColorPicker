@@ -2,8 +2,8 @@ buildscript {
 
   // @formatter:off
   ext.buildConfig = [
-      compileSdk   : 28,
-      targetSdk    : 28,
+      compileSdk   : 29,
+      targetSdk    : 29,
       minSdk       : 14,
       gradlePlugin : '3.3.0'
   ]
