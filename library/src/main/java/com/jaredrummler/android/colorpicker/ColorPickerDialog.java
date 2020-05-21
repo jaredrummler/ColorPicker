@@ -1085,7 +1085,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         }
 
         public Builder setSelectButtonTextColor(int color) {
-            this.selectButtonColor = color;
+            this.selectButtonTextColor = color;
             return this;
         }
 
