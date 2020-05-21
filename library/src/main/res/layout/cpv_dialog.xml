@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:textSize="16sp"
-        tools:text="Role Color" />
+        tools:text="@string/cpv_default_title" />
 
     <FrameLayout
         android:id="@+id/cpv_color_picker_content"

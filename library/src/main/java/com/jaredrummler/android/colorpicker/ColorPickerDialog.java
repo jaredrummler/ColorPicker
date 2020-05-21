@@ -113,18 +113,18 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     private static final String ARG_ALLOW_PRESETS = "allowPresets";
     private static final String ARG_ALLOW_CUSTOM = "allowCustom";
     private static final String ARG_DIALOG_TITLE = "dialogTitle";
+    private static final String ARG_TITLE_TEXT_COLOR = "titleTextColor";
+    private static final String ARG_TITLE_FONT = "titleFont";
     private static final String ARG_SHOW_COLOR_SHADES = "showColorShades";
     private static final String ARG_COLOR_SHAPE = "colorShape";
     private static final String ARG_PRESETS_BUTTON_TEXT = "presetsButtonText";
     private static final String ARG_CUSTOM_BUTTON_TEXT = "customButtonText";
-    private static final String ARG_SELECTED_BUTTON_TEXT = "selectedButtonText";
     private static final String ARG_CUSTOM_BUTTON_COLOR = "customButtonColor";
     private static final String ARG_CUSTOM_BUTTON_TEXT_COLOR = "customButtonTextColor";
+    private static final String ARG_SELECTED_BUTTON_TEXT = "selectedButtonText";
     private static final String ARG_SELECTED_BUTTON_COLOR = "selectedButtonColor";
-    private static final String ARG_SELECTED_BUTTON_TEXT_COLOR = "selectedButtonColor";
+    private static final String ARG_SELECTED_BUTTON_TEXT_COLOR = "selectedButtonTextColor";
     private static final String ARG_BUTTON_FONT = "buttonFont";
-    private static final String ARG_TITLE_TEXT_COLOR = "titleTextColor";
-    private static final String ARG_TITLE_FONT = "titleFont";
     private static final String ARG_DIVIDER_COLOR = "dividerColor";
     private static final String ARG_BACKGROUND_COLOR = "backgroundColor";
     private static final String ARG_INPUT_TEXT_COLOR = "inputTextColor";
@@ -406,7 +406,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         if (inputBackground != 0) {
             hexEditText.setBackgroundResource(inputBackground);
         }
-        
+
         int inputFont = getArguments().getInt(ARG_INPUT_FONT, 0);
         if (inputFont != 0) {
             hexEditText.setTypeface(ResourcesCompat.getFont(requireContext(), inputFont));
