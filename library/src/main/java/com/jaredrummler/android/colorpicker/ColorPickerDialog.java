@@ -151,7 +151,9 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     // -- CUSTOM ---------------------------
     ColorPickerView colorPicker;
     ColorPanelView newColorPanel;
+    EditText hexPrefix;
     EditText hexEditText;
+    View hexContainer;
     TextView titleTextView;
     Button customButton;
     Button selectButton;
@@ -363,6 +365,8 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         colorPicker = contentView.findViewById(R.id.cpv_color_picker_view);
         newColorPanel = contentView.findViewById(R.id.cpv_color_panel_new);
         hexEditText = contentView.findViewById(R.id.cpv_hex);
+        hexPrefix = contentView.findViewById(R.id.cpv_hex_prefix);
+        hexContainer = contentView.findViewById(R.id.cpv_hex_container);
 
         colorPicker.setAlphaSliderVisible(showAlphaSlider);
         colorPicker.setColor(color, true);
@@ -370,7 +374,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         setHex(color);
 
         if (!showAlphaSlider) {
-            hexEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(7)});
+            hexEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
         }
 
         newColorPanel.setOnClickListener(new View.OnClickListener() {
@@ -400,16 +404,18 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         int inputTextColor = getArguments().getInt(ARG_INPUT_TEXT_COLOR, 0);
         if (inputTextColor != 0) {
             hexEditText.setTextColor(inputTextColor);
+            hexPrefix.setTextColor(inputTextColor);
         }
 
         int inputBackground = getArguments().getInt(ARG_INPUT_BACKGROUND, 0);
         if (inputBackground != 0) {
-            hexEditText.setBackgroundResource(inputBackground);
+            hexContainer.setBackgroundResource(inputBackground);
         }
 
         int inputFont = getArguments().getInt(ARG_INPUT_FONT, 0);
         if (inputFont != 0) {
             hexEditText.setTypeface(ResourcesCompat.getFont(requireContext(), inputFont));
+            hexPrefix.setTypeface(ResourcesCompat.getFont(requireContext(), inputFont));
         }
 
         return contentView;
@@ -455,9 +461,9 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
 
     private void setHex(int color) {
         if (showAlphaSlider) {
-            hexEditText.setText(String.format("#%08X", (color)));
+            hexEditText.setText(String.format("%08X", (color)));
         } else {
-            hexEditText.setText(String.format("#%06X", (0xFFFFFF & color)));
+            hexEditText.setText(String.format("%06X", (0xFFFFFF & color)));
         }
     }
 
