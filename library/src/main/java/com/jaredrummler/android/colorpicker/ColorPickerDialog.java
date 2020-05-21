@@ -45,6 +45,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -117,9 +118,11 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     private static final String ARG_SELECTED_BUTTON_TEXT = "selectedButtonText";
     private static final String ARG_CUSTOM_BUTTON_COLOR = "customButtonColor";
     private static final String ARG_SELECTED_BUTTON_COLOR = "selectedButtonColor";
-    private static final String ARG_TEXT_COLOR = "textColor";
+    private static final String ARG_HEADER_TEXT_COLOR = "headerTextColor";
     private static final String ARG_DIVIDER_COLOR = "dividerColor";
-
+    private static final String ARG_BACKGROUND_COLOR = "backgroundColor";
+    private static final String ARG_INPUT_TEXT_COLOR = "inputTextColor";
+    private static final String ARG_INPUT_BACKGROUND = "inputBackground";
 
     ColorPickerDialogListener colorPickerDialogListener;
     View rootView;
@@ -211,9 +214,19 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         customButton = view.findViewById(R.id.cpv_color_picker_custom_button);
         selectButton = view.findViewById(R.id.cpv_color_picker_select_button);
 
+        int backgroundColor = getArguments().getInt(ARG_BACKGROUND_COLOR, 0);
+        if (backgroundColor != 0) {
+            view.setBackgroundColor(backgroundColor);
+        }
+
         final int dialogTitleStringRes = getArguments().getInt(ARG_DIALOG_TITLE);
         if (dialogTitleStringRes != 0) {
             titleTextView.setText(dialogTitleStringRes);
+        }
+
+        int textColor = getArguments().getInt(ARG_HEADER_TEXT_COLOR, 0);
+        if (textColor != 0) {
+            titleTextView.setTextColor(textColor);
         }
 
         int selectedButtonStringRes = getArguments().getInt(ARG_SELECTED_BUTTON_TEXT);
@@ -256,11 +269,6 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         int selectButtonColor = getArguments().getInt(ARG_SELECTED_BUTTON_COLOR, 0);
         if (selectButtonColor != 0) {
             selectButton.setBackgroundTintList(ColorStateList.valueOf(selectButtonColor));
-        }
-
-        int textColor = getArguments().getInt(ARG_TEXT_COLOR, 0);
-        if (textColor != 0) {
-            titleTextView.setTextColor(textColor);
         }
 
         // Do not dismiss the dialog when clicking the neutral button.
@@ -360,6 +368,16 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
                 }
             }
         });
+
+        int inputTextColor = getArguments().getInt(ARG_INPUT_TEXT_COLOR, 0);
+        if (inputTextColor != 0) {
+            hexEditText.setTextColor(inputTextColor);
+        }
+
+        int inputBackground = getArguments().getInt(ARG_INPUT_BACKGROUND, 0);
+        if (inputBackground != 0) {
+            hexEditText.setBackgroundResource(inputBackground);
+        }
 
         return contentView;
     }
@@ -826,7 +844,13 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         @ColorInt
         int dividerColor = 0;
         @ColorInt
-        int textColor = 0;
+        int headerTextColor = 0;
+        @ColorInt
+        int backgroundColor = 0;
+        @ColorInt
+        int inputTextColor = 0;
+        @DrawableRes
+        int inputBackground = 0;
 
         /*package*/ Builder() {
 
@@ -976,47 +1000,38 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
             return this;
         }
 
-        /**
-         * Set the Custom Button's color
-         *
-         * @param color The color for the custom button
-         * @return This builder object for chaining method calls
-         */
         public Builder setCustomButtonColor(int color) {
             this.customButtonColor = color;
             return this;
         }
 
-        /**
-         * Set the Select Button's color
-         *
-         * @param color The color for the select button
-         * @return This builder object for chaining method calls
-         */
         public Builder setSelectButtonColor(int color) {
             this.selectButtonColor = color;
             return this;
         }
 
-        /**
-         * Set the text color
-         *
-         * @param color The color for the text
-         * @return This builder object for chaining method calls
-         */
-        public Builder setTextColor(int color) {
+        public Builder setHeaderTextColor(int color) {
             this.customButtonColor = color;
             return this;
         }
 
-        /**
-         * Set the divider color
-         *
-         * @param color The default color for the color picker
-         * @return This builder object for chaining method calls
-         */
         public Builder setDividerColor(int color) {
             this.dividerColor = color;
+            return this;
+        }
+
+        public Builder setBackgroundColor(int color) {
+            this.backgroundColor = color;
+            return this;
+        }
+
+        public Builder setInputTextColor(int color) {
+            this.inputTextColor = color;
+            return this;
+        }
+
+        public Builder setInputBackground(int resId) {
+            this.inputBackground = resId;
             return this;
         }
 
@@ -1044,8 +1059,11 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
             args.putInt(ARG_SELECTED_BUTTON_TEXT, selectedButtonText);
             args.putInt(ARG_CUSTOM_BUTTON_COLOR, customButtonColor);
             args.putInt(ARG_SELECTED_BUTTON_COLOR, selectButtonColor);
-            args.putInt(ARG_TEXT_COLOR, textColor);
+            args.putInt(ARG_HEADER_TEXT_COLOR, headerTextColor);
             args.putInt(ARG_DIVIDER_COLOR, dividerColor);
+            args.putInt(ARG_BACKGROUND_COLOR, backgroundColor);
+            args.putInt(ARG_INPUT_TEXT_COLOR, inputTextColor);
+            args.putInt(ARG_INPUT_BACKGROUND, inputBackground);
             dialog.setArguments(args);
             return dialog;
         }
