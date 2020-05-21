@@ -122,7 +122,7 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
 
   @Override public void onBindViewHolder(PreferenceViewHolder holder) {
     super.onBindViewHolder(holder);
-    ColorPanelView preview = (ColorPanelView) holder.itemView.findViewById(R.id.cpv_preference_preview_color_panel);
+    ColorPanelView preview = holder.itemView.findViewById(R.id.cpv_preference_preview_color_panel);
     if (preview != null) {
       preview.setColor(color);
     }

@@ -127,7 +127,7 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
 
   @Override protected void onBindView(View view) {
     super.onBindView(view);
-    ColorPanelView preview = (ColorPanelView) view.findViewById(R.id.cpv_preference_preview_color_panel);
+    ColorPanelView preview = view.findViewById(R.id.cpv_preference_preview_color_panel);
     if (preview != null) {
       preview.setColor(color);
     }

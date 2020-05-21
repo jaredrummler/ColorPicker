@@ -89,8 +89,8 @@ class ColorPaletteAdapter extends BaseAdapter {
         layoutResId = R.layout.cpv_color_item_circle;
       }
       view = View.inflate(context, layoutResId, null);
-      colorPanelView = (ColorPanelView) view.findViewById(R.id.cpv_color_panel_view);
-      imageView = (ImageView) view.findViewById(R.id.cpv_color_image_view);
+      colorPanelView = view.findViewById(R.id.cpv_color_panel_view);
+      imageView = view.findViewById(R.id.cpv_color_image_view);
       originalBorderColor = colorPanelView.getBorderColor();
       view.setTag(this);
     }
