@@ -8,8 +8,8 @@ buildscript {
       gradlePlugin : '4.0.0'
   ]
   ext.versions = [
-      androidx      : '1.0.2',
-      preferences   : '1.0.0'
+      androidx      : '1.1.0',
+      preferences   : '1.1.1'
   ]
   ext.deps = [
     'androidx' : [
