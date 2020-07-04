@@ -2,14 +2,14 @@ buildscript {
 
   // @formatter:off
   ext.buildConfig = [
-      compileSdk   : 28,
-      targetSdk    : 28,
+      compileSdk   : 30,
+      targetSdk    : 30,
       minSdk       : 14,
-      gradlePlugin : '3.3.0'
+      gradlePlugin : '4.0.0'
   ]
   ext.versions = [
-      androidx      : '1.0.2',
-      preferences   : '1.0.0'
+      androidx      : '1.1.0',
+      preferences   : '1.1.1'
   ]
   ext.deps = [
     'androidx' : [
