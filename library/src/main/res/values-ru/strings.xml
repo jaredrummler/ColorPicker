@@ -17,7 +17,7 @@
   <!-- Default title for color picker dialog [CHAR LIMIT=30] -->
   <string name="cpv_default_title">Выберите цвет</string>
   <string name="cpv_presets">Предустановки</string>
-  <string name="cpv_custom">Особый</string>
+  <string name="cpv_custom">Пользовательский</string>
   <string name="cpv_select">Выбрать</string>
   <string name="cpv_transparency">Прозрачность</string>
 </resources>
