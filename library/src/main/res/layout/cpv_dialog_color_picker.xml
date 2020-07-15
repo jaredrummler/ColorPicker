@@ -87,7 +87,7 @@
             android:imeOptions="actionGo"
             android:inputType="textNoSuggestions"
             android:maxLength="8"
-            android:maxLines="1"
+             android:singleLine="true"
             android:typeface="monospace"
             />
 
