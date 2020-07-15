@@ -131,8 +131,7 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
   @Override protected void onSetInitialValue(Object defaultValue) {
     super.onSetInitialValue(defaultValue);
     if (defaultValue instanceof Integer) {
-      color = (Integer) defaultValue;
-      persistInt(color);
+      color = getPersistedInt((Integer) defaultValue);
     } else {
       color = getPersistedInt(0xFF000000);
     }
