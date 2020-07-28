@@ -112,6 +112,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
   private static final String ARG_PRESETS_BUTTON_TEXT = "presetsButtonText";
   private static final String ARG_CUSTOM_BUTTON_TEXT = "customButtonText";
   private static final String ARG_SELECTED_BUTTON_TEXT = "selectedButtonText";
+  private static final String ARG_COLOR_DEFAULT = "colorDefault";
 
   ColorPickerDialogListener colorPickerDialogListener;
   FrameLayout rootView;
@@ -121,6 +122,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
   int dialogId;
   boolean showColorShades;
   int colorShape;
+  @ColorInt int colorDefault;
 
   // -- PRESETS --------------------------
   ColorPaletteAdapter adapter;
@@ -171,6 +173,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
       color = savedInstanceState.getInt(ARG_COLOR);
       dialogType = savedInstanceState.getInt(ARG_TYPE);
     }
+    colorDefault = getArguments().getInt(ARG_COLOR_DEFAULT);
 
     rootView = new FrameLayout(requireActivity());
     if (dialogType == TYPE_CUSTOM) {
@@ -185,11 +188,17 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     }
 
     AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity()).setView(rootView)
-        .setPositiveButton(selectedButtonStringRes, new DialogInterface.OnClickListener() {
-          @Override public void onClick(DialogInterface dialog, int which) {
-            onColorSelected(color);
-          }
-        });
+      .setPositiveButton(selectedButtonStringRes, new DialogInterface.OnClickListener() {
+        @Override public void onClick(DialogInterface dialog, int which) {
+          onColorSelected(color);
+        }
+      })
+      .setNegativeButton(R.string.cpv_reset, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+          onColorSelected(colorDefault);
+        }
+      });
 
     int dialogTitleStringRes = getArguments().getInt(ARG_DIALOG_TITLE);
     if (dialogTitleStringRes != 0) {
@@ -747,6 +756,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     @DialogType int dialogType = TYPE_PRESETS;
     int[] presets = MATERIAL_COLORS;
     @ColorInt int color = Color.BLACK;
+    @ColorInt int colorDefault = Color.BLACK;
     int dialogId = 0;
     boolean showAlphaSlider = false;
     boolean allowPresets = true;
@@ -902,6 +912,11 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
       return this;
     }
 
+    public Builder setDefaultColor(int color){
+      this.colorDefault = color;
+      return this;
+    }
+
     /**
      * Create the {@link ColorPickerDialog} instance.
      *
@@ -924,6 +939,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
       args.putInt(ARG_PRESETS_BUTTON_TEXT, presetsButtonText);
       args.putInt(ARG_CUSTOM_BUTTON_TEXT, customButtonText);
       args.putInt(ARG_SELECTED_BUTTON_TEXT, selectedButtonText);
+      args.putInt(ARG_COLOR_DEFAULT, colorDefault);
       dialog.setArguments(args);
       return dialog;
     }
