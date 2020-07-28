@@ -20,4 +20,5 @@
   <string name="cpv_custom">Особый</string>
   <string name="cpv_select">Выбрать</string>
   <string name="cpv_transparency">Прозрачность</string>
+  <string name="cpv_reset">Сбросить</string>
 </resources>

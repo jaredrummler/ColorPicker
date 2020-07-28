@@ -20,4 +20,5 @@
   <string name="cpv_custom">Custom</string>
   <string name="cpv_select">Select</string>
   <string name="cpv_transparency">Transparency</string>
+  <string name="cpv_reset">Reset</string>
 </resources>

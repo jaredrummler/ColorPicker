@@ -31,6 +31,7 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
   private int previewSize;
   private int[] presets;
   private int dialogTitle;
+  private int defaultColor;
 
   public ColorPreferenceCompat(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -86,6 +87,7 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
           .setShowAlphaSlider(showAlphaSlider)
           .setShowColorShades(showColorShades)
           .setColor(color)
+          .setDefaultColor(defaultColor)
           .create();
       dialog.setColorPickerDialogListener(this);
       getActivity().getSupportFragmentManager()
@@ -139,7 +141,8 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
   }
 
   @Override protected Object onGetDefaultValue(TypedArray a, int index) {
-    return a.getInteger(index, Color.BLACK);
+    defaultColor = a.getInteger(index, Color.BLACK);
+    return defaultColor;
   }
 
   @Override public void onColorSelected(int dialogId, @ColorInt int color) {
