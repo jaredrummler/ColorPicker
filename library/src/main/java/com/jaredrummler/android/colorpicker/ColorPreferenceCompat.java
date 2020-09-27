@@ -43,7 +43,6 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
   }
 
   private void init(AttributeSet attrs) {
-    setPersistent(true);
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ColorPreference);
     showDialog = a.getBoolean(R.styleable.ColorPreference_cpv_showDialog, true);
     //noinspection WrongConstant
