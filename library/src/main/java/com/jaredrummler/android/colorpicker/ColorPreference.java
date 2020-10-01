@@ -203,6 +203,24 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
     return "color_" + getKey();
   }
 
+  /**
+   * Get the color of the key. This should be one of the entries in {@link #getPresets()}.
+   *
+   * @return The color of the key
+   */
+  public int getColor() {
+    return color;
+  }
+
+  /**
+   * Sets the color selected. This should be one of the entries in {@link #getPresets()}.
+   *
+   * @param color The color to set for the key
+   */
+  public void setColor(@ColorInt int color) {
+    this.color = color;
+  }
+
   public interface OnShowDialogListener {
 
     void onShowColorPickerDialog(String title, int currentColor);
