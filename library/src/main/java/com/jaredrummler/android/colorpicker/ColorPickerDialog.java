@@ -43,6 +43,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
@@ -51,6 +52,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -108,6 +110,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
   private static final String ARG_ALLOW_CUSTOM = "allowCustom";
   private static final String ARG_DIALOG_TITLE = "dialogTitle";
   private static final String ARG_SHOW_COLOR_SHADES = "showColorShades";
+  private static final String ARG_SELECT_ON_CLICK = "selectOnClick";
   private static final String ARG_COLOR_SHAPE = "colorShape";
   private static final String ARG_PRESETS_BUTTON_TEXT = "presetsButtonText";
   private static final String ARG_CUSTOM_BUTTON_TEXT = "customButtonText";
@@ -121,6 +124,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
   int dialogId;
   boolean showColorShades;
   int colorShape;
+  boolean selectOnClick;
 
   // -- PRESETS --------------------------
   ColorPaletteAdapter adapter;
@@ -163,6 +167,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     dialogId = getArguments().getInt(ARG_ID);
     showAlphaSlider = getArguments().getBoolean(ARG_ALPHA);
     showColorShades = getArguments().getBoolean(ARG_SHOW_COLOR_SHADES);
+    selectOnClick = getArguments().getBoolean(ARG_SELECT_ON_CLICK);
     colorShape = getArguments().getInt(ARG_COLOR_SHAPE);
     if (savedInstanceState == null) {
       color = getArguments().getInt(ARG_COLOR);
@@ -179,17 +184,22 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
       rootView.addView(createPresetsView());
     }
 
-    int selectedButtonStringRes = getArguments().getInt(ARG_SELECTED_BUTTON_TEXT);
-    if (selectedButtonStringRes == 0) {
-      selectedButtonStringRes = R.string.cpv_select;
-    }
+    AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity()).setView(rootView);
 
-    AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity()).setView(rootView)
-        .setPositiveButton(selectedButtonStringRes, new DialogInterface.OnClickListener() {
-          @Override public void onClick(DialogInterface dialog, int which) {
-            onColorSelected(color);
-          }
-        });
+    if (!selectOnClick) {
+      // Show a SELECT button to confirm selection and close the dialog. Otherwise,
+      // just tap the colour to select and close the dialog
+      int selectedButtonStringRes = getArguments().getInt(ARG_SELECTED_BUTTON_TEXT);
+      if (selectedButtonStringRes == 0) {
+        selectedButtonStringRes = R.string.cpv_select;
+      }
+      builder.setPositiveButton(selectedButtonStringRes, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          onColorSelected(color);
+        }
+      });
+    }
 
     int dialogTitleStringRes = getArguments().getInt(ARG_DIALOG_TITLE);
     if (dialogTitleStringRes != 0) {
@@ -443,9 +453,9 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
 
     adapter = new ColorPaletteAdapter(new ColorPaletteAdapter.OnColorSelectedListener() {
       @Override public void onColorSelected(int newColor) {
-        if (color == newColor) {
-          // Double tab selects the color
-          ColorPickerDialog.this.onColorSelected(color);
+        if (selectOnClick || color == newColor) {
+          // Double tap selects the color, unless cpv_selectOnClick is enabled in the XML (in which case it's single tap)
+          ColorPickerDialog.this.onColorSelected(newColor);
           dismiss();
           return;
         }
@@ -752,6 +762,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     boolean allowPresets = true;
     boolean allowCustom = true;
     boolean showColorShades = true;
+    boolean selectOnClick = false;
     @ColorShape int colorShape = ColorShape.CIRCLE;
 
     /*package*/ Builder() {
@@ -892,6 +903,18 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     }
 
     /**
+     * Enable/disable quicker selection of preset colours.
+     * Don't use this unless {@link Builder#allowPresets} is true and {@link Builder#setAllowCustom} is false.
+     *
+     * @param selectOnClick {@code false} to immediately select the colour and close the dialog when clicked.
+     * @return This builder object for chaining method calls
+     */
+    public Builder setSelectOnClick(boolean selectOnClick) {
+      this.selectOnClick = selectOnClick;
+      return this;
+    }
+
+    /**
      * Set the shape of the color panel view.
      *
      * @param colorShape Either {@link ColorShape#CIRCLE} or {@link ColorShape#SQUARE}.
@@ -920,6 +943,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
       args.putBoolean(ARG_ALLOW_PRESETS, allowPresets);
       args.putInt(ARG_DIALOG_TITLE, dialogTitle);
       args.putBoolean(ARG_SHOW_COLOR_SHADES, showColorShades);
+      args.putBoolean(ARG_SELECT_ON_CLICK, selectOnClick);
       args.putInt(ARG_COLOR_SHAPE, colorShape);
       args.putInt(ARG_PRESETS_BUTTON_TEXT, presetsButtonText);
       args.putInt(ARG_CUSTOM_BUTTON_TEXT, customButtonText);
