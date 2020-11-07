@@ -55,6 +55,7 @@ You can add attributes to customize the `ColorPreference`:
 | cpv_allowPresets    | boolean   | true to add a button to toggle to the custom color picker                             |
 | cpv_allowCustom     | boolean   | true to add a button to toggle to the presets color picker                            |
 | cpv_showDialog      | boolean   | true to let the ColorPreference handle showing the dialog                             |
+| cpv_selectOnClick   | boolean   | true to close the dialog when a preset is selected. Only use when cpv_allowCustom=false and cpv_allowPresets=true. |
 
 You can also show a `ColorPickerDialog` without using the `ColorPreference`:
 

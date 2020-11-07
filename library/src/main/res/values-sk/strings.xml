@@ -19,5 +19,6 @@
   <string name="cpv_presets">Prednastavené</string>
   <string name="cpv_custom">Vlastné</string>
   <string name="cpv_select">Vybrať</string>
+  <string name="cpv_cancel">Zrušiť</string>
   <string name="cpv_transparency">Priehľadnosť</string>
 </resources>

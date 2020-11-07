@@ -19,5 +19,6 @@
     <string name="cpv_presets">Перадусталёўкі</string>
     <string name="cpv_custom">Асаблівы</string>
     <string name="cpv_select">Выбраць</string>
+    <string name="cpv_cancel">адмяніць</string>
     <string name="cpv_transparency">Празрыстасць</string>
 </resources>

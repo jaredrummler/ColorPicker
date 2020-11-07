@@ -33,6 +33,7 @@
     <attr format="boolean|reference" name="cpv_allowPresets"/>
     <attr format="boolean|reference" name="cpv_allowCustom"/>
     <attr format="boolean|reference" name="cpv_showDialog"/>
+    <attr format="boolean|reference" name="cpv_selectOnClick"/>
   </declare-styleable>
 
 </resources>

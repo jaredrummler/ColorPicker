@@ -28,6 +28,7 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
   private boolean allowCustom;
   private boolean showAlphaSlider;
   private boolean showColorShades;
+  private boolean selectOnClick;
   private int previewSize;
   private int[] presets;
   private int dialogTitle;
@@ -51,6 +52,7 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
     colorShape = a.getInt(R.styleable.ColorPreference_cpv_colorShape, ColorShape.CIRCLE);
     allowPresets = a.getBoolean(R.styleable.ColorPreference_cpv_allowPresets, true);
     allowCustom = a.getBoolean(R.styleable.ColorPreference_cpv_allowCustom, true);
+    selectOnClick = a.getBoolean(R.styleable.ColorPreference_cpv_selectOnClick, false);
     showAlphaSlider = a.getBoolean(R.styleable.ColorPreference_cpv_showAlphaSlider, false);
     showColorShades = a.getBoolean(R.styleable.ColorPreference_cpv_showColorShades, true);
     previewSize = a.getInt(R.styleable.ColorPreference_cpv_previewSize, SIZE_NORMAL);
@@ -85,6 +87,7 @@ public class ColorPreferenceCompat extends Preference implements ColorPickerDial
           .setAllowCustom(allowCustom)
           .setShowAlphaSlider(showAlphaSlider)
           .setShowColorShades(showColorShades)
+          .setSelectOnClick(selectOnClick)
           .setColor(color)
           .create();
       dialog.setColorPickerDialogListener(this);

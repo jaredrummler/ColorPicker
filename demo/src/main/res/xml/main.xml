@@ -62,12 +62,24 @@
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         android:defaultValue="0xFFCDDC39"
         android:key="my_presets"
-        android:summary="A picker with presets different presets"
+        android:summary="A picker with different presets"
         android:title="Custom presets"
         app:cpv_allowCustom="false"
         app:cpv_colorPresets="@array/demo_colors"
         app:cpv_previewSize="large"
         app:cpv_showColorShades="false"
+        app:iconSpaceReserved="false"/>
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="0xFF607D8B"
+        android:key="quick_select_presets"
+        android:summary="Same as above, but tapping a color will immediately select the color and close the dialog."
+        android:title="Quick-selection custom presets"
+        app:cpv_allowCustom="false"
+        app:cpv_colorPresets="@array/demo_colors"
+        app:cpv_previewSize="large"
+        app:cpv_showColorShades="false"
+        app:cpv_selectOnClick="true"
         app:iconSpaceReserved="false"/>
 
     <Preference

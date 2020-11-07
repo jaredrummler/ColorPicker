@@ -19,5 +19,6 @@
   <string name="cpv_presets">Kolory domyślne</string>
   <string name="cpv_custom">Dostosuj</string>
   <string name="cpv_select">Wybierz</string>
+  <string name="cpv_cancel">Anulować</string>
   <string name="cpv_transparency">Przezroczystość</string>
 </resources>
