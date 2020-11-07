@@ -115,6 +115,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
   private static final String ARG_PRESETS_BUTTON_TEXT = "presetsButtonText";
   private static final String ARG_CUSTOM_BUTTON_TEXT = "customButtonText";
   private static final String ARG_SELECTED_BUTTON_TEXT = "selectedButtonText";
+  private static final String ARG_CANCEL_BUTTON_TEXT = "cancelButtonText";
 
   ColorPickerDialogListener colorPickerDialogListener;
   FrameLayout rootView;
@@ -186,7 +187,19 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
 
     AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity()).setView(rootView);
 
-    if (!selectOnClick) {
+    if (selectOnClick) {
+      // Only show a "CANCEL" button to dismiss the window, since no other buttons will be visible
+      int cancelButtonStringRes = getArguments().getInt(ARG_CANCEL_BUTTON_TEXT);
+      if (cancelButtonStringRes == 0) {
+        cancelButtonStringRes = R.string.cpv_cancel;
+      }
+      builder.setNegativeButton(cancelButtonStringRes, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          dialog.dismiss();
+        }
+      });
+    } else {
       // Show a SELECT button to confirm selection and close the dialog. Otherwise,
       // just tap the colour to select and close the dialog
       int selectedButtonStringRes = getArguments().getInt(ARG_SELECTED_BUTTON_TEXT);
@@ -754,6 +767,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     @StringRes int presetsButtonText = R.string.cpv_presets;
     @StringRes int customButtonText = R.string.cpv_custom;
     @StringRes int selectedButtonText = R.string.cpv_select;
+    @StringRes int cancelButtonText = R.string.cpv_cancel;
     @DialogType int dialogType = TYPE_PRESETS;
     int[] presets = MATERIAL_COLORS;
     @ColorInt int color = Color.BLACK;
@@ -788,6 +802,17 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
      */
     public Builder setSelectedButtonText(@StringRes int selectedButtonText) {
       this.selectedButtonText = selectedButtonText;
+      return this;
+    }
+
+    /**
+     * Set the cancel button text string resource id
+     *
+     * @param cancelButtonText The string resource used for the cancel button text
+     * @return This builder object for chaining method calls
+     */
+    public Builder setCancelButtonText(@StringRes int cancelButtonText) {
+      this.cancelButtonText = cancelButtonText;
       return this;
     }
 
@@ -948,6 +973,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
       args.putInt(ARG_PRESETS_BUTTON_TEXT, presetsButtonText);
       args.putInt(ARG_CUSTOM_BUTTON_TEXT, customButtonText);
       args.putInt(ARG_SELECTED_BUTTON_TEXT, selectedButtonText);
+      args.putInt(ARG_CANCEL_BUTTON_TEXT, cancelButtonText);
       dialog.setArguments(args);
       return dialog;
     }

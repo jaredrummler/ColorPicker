@@ -16,5 +16,6 @@
   <string name="cpv_presets">Vooraf ingesteld</string>
   <string name="cpv_custom">Aangepast</string>
   <string name="cpv_select">Kiezen</string>
+  <string name="cpv_cancel">Annuleren</string>
   <string name="cpv_transparency">Transparantie</string>
 </resources>

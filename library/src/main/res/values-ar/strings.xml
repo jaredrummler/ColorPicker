@@ -19,5 +19,6 @@
   <string name="cpv_presets">ألوان جاهزة</string>
   <string name="cpv_custom">ألوان معدلة</string>
   <string name="cpv_select">اختر</string>
+  <string name="cpv_cancel">إلغاء</string>
   <string name="cpv_transparency">الشفافية</string>
 </resources>

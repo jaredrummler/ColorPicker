@@ -16,5 +16,6 @@
   <string name="cpv_presets">Ön Ayarlar</string>
   <string name="cpv_custom">Özel</string>
   <string name="cpv_select">Seç</string>
+  <string name="cpv_cancel">İptal etmek</string>
   <string name="cpv_transparency">Şeffaflık</string>
 </resources>

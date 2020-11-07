@@ -4,5 +4,6 @@
     <string name="cpv_presets">קבוע מראש</string>
     <string name="cpv_custom">מותאם אישית</string>
     <string name="cpv_select">בחירה</string>
+    <string name="cpv_cancel">לְבַטֵל</string>
     <string name="cpv_transparency">שקיפות</string>
 </resources>
