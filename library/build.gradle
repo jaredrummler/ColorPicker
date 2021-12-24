@@ -16,6 +16,19 @@ android {
     }
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.zacharee.github.colorpicker'
+                artifactId = 'library'
+            }
+        }
+    }
+}
+
 dependencies {
     implementation deps.androidx.appCompat
     implementation deps.androidx.preferences
