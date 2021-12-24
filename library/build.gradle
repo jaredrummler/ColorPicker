@@ -1,25 +1,25 @@
 apply plugin: 'com.android.library'
 
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
 
-group='com.github.zacharee'
+group = 'com.github.zacharee'
 
 android {
-  compileSdkVersion buildConfig.compileSdk
-  resourcePrefix "cpv_"
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-  lintOptions {
-    abortOnError false
-  }
+    compileSdkVersion buildConfig.compileSdk
+    resourcePrefix "cpv_"
+    defaultConfig {
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-  implementation deps.androidx.appCompat
-  implementation deps.androidx.preferences
-  implementation deps.androidx.material
+    implementation deps.androidx.appCompat
+    implementation deps.androidx.preferences
+    implementation deps.androidx.material
 }
 
 apply from: rootProject.file('gradle/maven-push.gradle')

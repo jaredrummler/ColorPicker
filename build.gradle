@@ -1,46 +1,43 @@
 buildscript {
 
-  // @formatter:off
-  ext.buildConfig = [
-      compileSdk   : 28,
-      targetSdk    : 28,
-      minSdk       : 14,
-      gradlePlugin : '3.5.0'
-  ]
-  ext.versions = [
-      androidx      : '1.1.0-alpha03',
-      preferences   : '1.1.0-alpha04',
-      material      : '1.1.0-alpha09'
-  ]
-  ext.deps = [
-    'androidx' : [
-      'appCompat'   : "androidx.appcompat:appcompat:${versions.androidx}",
-      'preferences' : "androidx.preference:preference:${versions.preferences}",
-      'material'    : "com.google.android.material:material:${versions.material}"
+    // @formatter:off
+    ext.buildConfig = [
+            compileSdk  : 31,
+            targetSdk   : 31,
+            minSdk      : 16,
+            gradlePlugin: '7.2.0-alpha06'
     ]
-  ]
-  // @formatter:on
+    ext.versions = [
+            androidx   : '1.4.0',
+            preferences: '1.2.0-rc01',
+            material   : '1.6.0-alpha01'
+    ]
+    ext.deps = [
+            'androidx': [
+                    'appCompat'  : "androidx.appcompat:appcompat:${versions.androidx}",
+                    'preferences': "androidx.preference:preference:${versions.preferences}",
+                    'material'   : "com.google.android.material:material:${versions.material}"
+            ]
+    ]
+    // @formatter:on
 
-  repositories {
-    google()
-    jcenter()
-    mavenCentral()
-  }
-  dependencies {
-    classpath "com.android.tools.build:gradle:${buildConfig.gradlePlugin}"
-    classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.4'
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-  }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$buildConfig.gradlePlugin"
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.4'
+    }
 }
 
 allprojects {
-  repositories {
-    google()
-    mavenCentral()
-    jcenter()
-  }
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 task clean(type: Delete) {
-  delete rootProject.buildDir
+    delete rootProject.buildDir
 }

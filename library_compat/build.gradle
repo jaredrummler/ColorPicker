@@ -1,42 +1,42 @@
 apply plugin: 'com.android.library'
 
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
 
-group='com.github.zacharee'
+group = 'com.github.zacharee'
 
 android {
-  compileSdkVersion 28
+    compileSdkVersion 31
 
-  defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
-    versionCode 1
-    versionName "1.0"
-  }
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+    }
 }
 
 dependencies {
-  implementation project(':library')
-  implementation deps.androidx.preferences
-  implementation deps.androidx.material
+    implementation project(':library')
+    implementation deps.androidx.preferences
+    implementation deps.androidx.material
 }
 
 afterEvaluate { project ->
-  uploadArchives {
-    repositories {
-      mavenDeployer {
-        pom.whenConfigured { pom ->
-          pom.dependencies.forEach { dep ->
-            println "Processing ${dep}"
-            if (dep.getVersion() == "unspecified") {
-              dep.setGroupId(GROUP)
-              dep.setVersion(VERSION_NAME)
-            }
-          }
-        }
-      }
-    }
-  }
+//  uploadArchives {
+//    repositories {
+//      mavenDeployer {
+//        pom.whenConfigured { pom ->
+//          pom.dependencies.forEach { dep ->
+//            println "Processing ${dep}"
+//            if (dep.getVersion() == "unspecified") {
+//              dep.setGroupId(GROUP)
+//              dep.setVersion(VERSION_NAME)
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
 }
 
 apply plugin: 'com.getkeepsafe.dexcount'
