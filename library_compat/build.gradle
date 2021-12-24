@@ -39,6 +39,6 @@ afterEvaluate { project ->
 //  }
 }
 
-apply plugin: 'com.getkeepsafe.dexcount'
+//apply plugin: 'com.getkeepsafe.dexcount'
 
 apply from: rootProject.file('gradle/maven-push.gradle')
