@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'maven-publish'
 
-group = 'com.github.zacharee'
+group = 'com.github.zacharee.colorpicker'
 
 android {
     compileSdkVersion buildConfig.compileSdk
