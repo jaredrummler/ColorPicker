@@ -22,7 +22,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.zacharee.github.colorpicker'
+                groupId = 'com.github.zacharee.colorpicker'
                 artifactId = 'library'
             }
         }
