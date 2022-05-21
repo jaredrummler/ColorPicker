@@ -5,12 +5,12 @@ buildscript {
             compileSdk  : 31,
             targetSdk   : 31,
             minSdk      : 16,
-            gradlePlugin: '7.2.0-alpha06'
+            gradlePlugin: '7.3.0-beta01'
     ]
     ext.versions = [
-            androidx   : '1.4.0',
-            preferences: '1.2.0-rc01',
-            material   : '1.6.0-alpha01'
+            androidx   : '1.4.1',
+            preferences: '1.2.0',
+            material   : '1.7.0-alpha01'
     ]
     ext.deps = [
             'androidx': [

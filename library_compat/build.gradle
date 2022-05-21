@@ -16,7 +16,7 @@ android {
 }
 
 dependencies {
-    implementation project(':library')
+    api project(':library')
     implementation deps.androidx.preferences
     implementation deps.androidx.material
 }
