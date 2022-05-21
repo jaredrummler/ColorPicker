@@ -26,7 +26,6 @@ android {
 }
 
 dependencies {
-    implementation project(':library_compat')
     implementation deps.androidx.appCompat
     implementation deps.androidx.preferences
     implementation project(':library')
