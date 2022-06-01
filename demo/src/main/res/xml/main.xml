@@ -18,67 +18,46 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <!-- https://stackoverflow.com/questions/18509369 -->
-  <!-- https://issuetracker.google.com/issues/111907042 -->
+    <!-- https://stackoverflow.com/questions/18509369 -->
+    <!-- https://issuetracker.google.com/issues/111907042 -->
 
-  <PreferenceCategory
-      android:title="Demo"
-      app:iconSpaceReserved="false">
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="0xFF3F51B5"
-        android:key="default_color"
-        android:summary="This is the default ColorPreferenceCompat"
-        android:title="Default color picker"
-        app:iconSpaceReserved="false"/>
+    <PreferenceCategory
+        android:title="Demo" app:iconSpaceReserved="false">
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="0xFF3F51B5" android:key="default_color"
+            android:summary="This is the default ColorPreferenceCompat" android:title="Default color picker"
+            app:iconSpaceReserved="false" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="0xFF009688"
-        android:key="square_color"
-        android:summary="A square shaped color picker"
-        android:title="Square color picker"
-        app:cpv_colorShape="square"
-        app:iconSpaceReserved="false"/>
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="0xFF009688" android:key="square_color" android:summary="A square shaped color picker"
+            android:title="Square color picker" app:cpv_colorShape="square" app:iconSpaceReserved="false" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="0xFFEC407A"
-        android:key="custom_only_color"
-        android:summary="A picker that doesn't show the presets"
-        android:title="Custom color"
-        app:cpv_allowPresets="false"
-        app:cpv_dialogTitle="@string/app_name"
-        app:cpv_dialogType="custom"
-        app:iconSpaceReserved="false"/>
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="0xFFEC407A" android:key="custom_only_color"
+            android:summary="A picker that doesn't show the presets" android:title="Custom color"
+            app:cpv_allowPresets="false" app:cpv_dialogTitle="@string/app_name" app:cpv_dialogType="custom"
+            app:iconSpaceReserved="false" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="0x890099CC"
-        android:key="color_with_alpha"
-        android:summary="A picker with alpha slider"
-        android:title="Color picker with alpha"
-        app:cpv_previewSize="large"
-        app:cpv_showAlphaSlider="true"
-        app:cpv_showColorShades="false"
-        app:iconSpaceReserved="false"/>
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="0x890099CC" android:key="color_with_alpha"
+            android:summary="A picker with alpha slider" android:title="Color picker with alpha"
+            app:cpv_previewSize="large" app:cpv_showAlphaSlider="true" app:cpv_showColorShades="false"
+            app:iconSpaceReserved="false" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="0xFFCDDC39"
-        android:key="my_presets"
-        android:summary="A picker with presets different presets"
-        android:title="Custom presets"
-        app:cpv_allowCustom="false"
-        app:cpv_colorPresets="@array/demo_colors"
-        app:cpv_previewSize="large"
-        app:cpv_showColorShades="false"
-        app:iconSpaceReserved="false"/>
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="0xFFCDDC39" android:key="my_presets"
+            android:summary="A picker with presets different presets" android:title="Custom presets"
+            app:cpv_allowCustom="false" app:cpv_colorPresets="@array/demo_colors" app:cpv_previewSize="large"
+            app:cpv_showColorShades="false" app:iconSpaceReserved="false" />
 
-    <Preference
-        android:summary="Show how the custom color picker can be used in a standard activity."
-        android:title="Show activity"
-        app:iconSpaceReserved="false">
-      <intent
-          android:action="android.intent.action.VIEW"
-          android:targetClass="com.jaredrummler.android.colorpicker.demo.ColorPickerActivity"
-          android:targetPackage="com.jaredrummler.android.colorpicker.demo"/>
-    </Preference>
-  </PreferenceCategory>
+        <Preference
+            android:summary="Show how the custom color picker can be used in a standard activity."
+            android:title="Show activity" app:iconSpaceReserved="false">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="com.jaredrummler.android.colorpicker.demo.ColorPickerActivity"
+                android:targetPackage="com.jaredrummler.android.colorpicker.demo" />
+        </Preference>
+    </PreferenceCategory>
 
 </PreferenceScreen>

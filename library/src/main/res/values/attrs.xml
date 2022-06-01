@@ -24,6 +24,11 @@
     </attr>
     <attr name="cpv_colorShape"/>
     <attr format="reference" name="cpv_dialogTitle"/>
+    <attr format="reference" name="cpv_dialogPresetsActionText"/>
+    <attr format="reference" name="cpv_dialogSelectActionText"/>
+    <attr format="reference" name="cpv_dialogCustomActionText"/>
+    <attr format="reference" name="cpv_dialogTransparencyActionText"/>
+
     <attr format="reference" name="cpv_colorPresets"/>
     <attr format="enum" name="cpv_dialogType">
       <enum name="custom" value="0"/>
